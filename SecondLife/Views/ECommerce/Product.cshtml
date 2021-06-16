@@ -15,9 +15,6 @@
             @Html.DisplayNameFor(model => model.id_prod)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.codigo)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.id_categ)
         </th>
         <th>
@@ -30,12 +27,6 @@
             @Html.DisplayNameFor(model => model.descripcion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.observacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fec_compra)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.stock)
         </th>
         <th>
@@ -44,12 +35,6 @@
         <th>
             @Html.DisplayNameFor(model => model.imagen)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.calidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
         <th></th>
     </tr>
 
@@ -57,9 +42,6 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.id_prod)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.codigo)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.id_categ)
@@ -74,12 +56,6 @@
             @Html.DisplayFor(modelItem => item.descripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.observacion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fec_compra)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.stock)
         </td>
         <td>
@@ -89,12 +65,7 @@
             @Html.DisplayFor(modelItem => item.imagen)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.calidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
+            @Html.TextBox("cant", "1")
             @Html.ActionLink("Agregar", "Add", new { id = item.id_prod }, new { @class = "btn btn-default" })
         </td>
     </tr>

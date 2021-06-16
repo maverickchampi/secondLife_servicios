@@ -48,5 +48,9 @@ namespace SecondLife.Controllers
         {
             return View(producto());
         }
+        public ActionResult Add(string id)
+        {
+            return View();
+        }
     }
 }
