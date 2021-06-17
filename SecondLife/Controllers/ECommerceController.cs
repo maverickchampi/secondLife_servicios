@@ -72,6 +72,36 @@ namespace SecondLife.Controllers
             dr.Close(); cn.Close();
             return reg;
         }
+        IEnumerable<Producto> producto_categ( IDataAdapter cat)
+        {
+            List<Producto> temporal = new List<Producto>();
+            SqlConnection cn = new SqlConnection(cadena);
+            SqlCommand cmd = new SqlCommand("sp_listado_producto_cat", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@cat", cat);
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                Producto reg = new Producto();
+                reg.id_prod = dr.GetString(0);
+                reg.codigo = dr.GetString(1);
+                reg.id_categ = dr.GetInt32(2);
+                reg.marca = dr.GetString(3);
+                reg.modelo = dr.GetString(4);
+                reg.descripcion = dr.GetString(5);
+                reg.observacion = dr.GetString(6);
+                reg.fec_compra = dr.GetDateTime(7);
+                reg.stock = dr.GetInt32(8);
+                reg.precio = dr.GetDecimal(9);
+                reg.imagen = dr.GetString(10);
+                reg.calidad = dr.GetDecimal(11);
+                reg.estado = dr.GetInt32(12);
+                temporal.Add(reg);
+            }
+            dr.Close(); cn.Close();
+            return temporal;
+        }
         public ActionResult Product()
         {
             return View(producto());
@@ -89,6 +119,7 @@ namespace SecondLife.Controllers
             List<Producto> temporal = (List<Producto>)Session["carrito"];
             temporal.Add(reg);
             return View();*/
+            return null;
         }
     }
 }

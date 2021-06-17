@@ -501,6 +501,7 @@ create table tb_detalle_boleta(
 	num_bol  CHAR(8) not null,
 	id_prod char(5) not null,
 	cant_prod  int not null,
+	precio_prod  decimal(8,2) not null,
 	sub_tot  decimal(8,2) not null
 )
 go
@@ -517,7 +518,7 @@ alter table tb_detalle_boleta
 add constraint CKdetalbol_cant check (cant_prod>=1 and cant_prod<=5)
 go
 alter table tb_detalle_boleta
-add constraint CKdetalbol_sub check (sub_tot>=5.0 and sub_tot<=5000)
+add constraint CKdetalbol_sub check (sub_tot>=1.0 and sub_tot<=5000)
 go
 
 create function sigNumDetBol() 

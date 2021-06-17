@@ -5,8 +5,9 @@ using System.Web;
 
 namespace SecondLife.Models
 {
-    public class Project
+    public class Rol
     {
-
+        public int id_rol { get; set; }
+        public string nom_rol { get; set; }
     }
 }
