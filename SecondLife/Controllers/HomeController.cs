@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using SecondLife.Models;
 
 namespace SecondLife.Controllers
 {
@@ -26,6 +30,16 @@ namespace SecondLife.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Login(string user, string clave)
+        {
+            return null;
+        }
+
+        public ActionResult Register(Usuario reg) 
+        {
+            return null;
         }
     }
 }

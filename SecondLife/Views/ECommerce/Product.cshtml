@@ -65,8 +65,12 @@
             @Html.DisplayFor(modelItem => item.imagen)
         </td>
         <td>
-            @Html.TextBox("cant", "1")
-            @Html.ActionLink("Agregar", "Add", new { id = item.id_prod }, new { @class = "btn btn-default" })
+            @using (Html.BeginForm("Product", "ECommerce", FormMethod.Post))
+            {
+                @Html.Hidden("stock", item.stock)
+                @Html.TextBox("cant", 1)
+                @Html.ActionLink("Agregar", "Add", new { id = item.id_prod }, new { @class = "btn btn-default" })
+            }
         </td>
     </tr>
 }
