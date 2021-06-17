@@ -11,6 +11,7 @@ namespace SecondLife.Models
         public string num_bol { get; set; }
         public string id_prod { get; set; }
         public int cant_prod { get; set; }
+        public decimal precio { get; set; }
         public decimal sub_tot { get; set; }
         public string boleta_num_bol { set; get; }
     }

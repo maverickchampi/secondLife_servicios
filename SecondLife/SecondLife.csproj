@@ -125,8 +125,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Boleta.cs" />
     <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Departamento.cs" />
+    <Compile Include="Models\DetalleBoleta.cs" />
+    <Compile Include="Models\Direccion.cs" />
+    <Compile Include="Models\Distrito.cs" />
     <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Provincia.cs" />
+    <Compile Include="Models\Registro.cs" />
+    <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\Tarjeta.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
