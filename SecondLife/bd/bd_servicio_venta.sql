@@ -501,7 +501,6 @@ create table tb_detalle_boleta(
 	num_bol  CHAR(8) not null,
 	id_prod char(5) not null,
 	cant_prod  int not null,
-	precio_prod  decimal(8,2) not null,
 	sub_tot  decimal(8,2) not null
 )
 go
@@ -518,7 +517,7 @@ alter table tb_detalle_boleta
 add constraint CKdetalbol_cant check (cant_prod>=1 and cant_prod<=5)
 go
 alter table tb_detalle_boleta
-add constraint CKdetalbol_sub check (sub_tot>=1.0 and sub_tot<=5000)
+add constraint CKdetalbol_sub check (sub_tot>=5.0 and sub_tot<=5000)
 go
 
 create function sigNumDetBol() 
@@ -777,9 +776,40 @@ go
 
 /*----------------------AUDIO-------------------------*/
 
+/*-------------------------------------------------------------------------------*/
+/*---------------------------procedimiento almacenado----------------------------*/
+/*-------------------------------------------------------------------------------*/
+create or alter proc sp_listado_producto
+as
+	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
+	fec_comp_prod, stock, precio, p.image, calidad, p.estado from tb_producto p
+	inner join  tb_categoria c
+	on p.id_categ=c.id_categ
+go
 
+exec sp_listado_producto
+go
 
+create or alter proc sp_listado_producto_id
+@id varchar(5)
+as
+	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
+	fec_comp_prod, stock, precio, p.image, calidad, p.estado from tb_producto p
+	inner join  tb_categoria c
+	on p.id_categ=c.id_categ
+	where p.id_prod=@id
+go
 
+create or alter proc sp_listado_producto_cat
+@cat int
+as
+	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
+	fec_comp_prod, stock, precio, p.image, calidad, p.estado from tb_producto p
+	inner join  tb_categoria c
+	on p.id_categ=c.id_categ
+	where p.id_categ=@cat
+go
+/*-------------------------------------------------------------------------------*/
 /*
 select*from tb_boleta;
 select*from tb_categoria;

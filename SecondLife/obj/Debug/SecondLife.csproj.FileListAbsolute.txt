@@ -79,7 +79,6 @@ D:\madel\OneDrive-Personal\OneDrive\Escritorio\Proyecto\servicios web\SecondLife
 D:\madel\OneDrive-Personal\OneDrive\Escritorio\Proyecto\servicios web\SecondLife\SecondLife\bin\es\System.Web.WebPages.resources.dll
 D:\madel\OneDrive-Personal\OneDrive\Escritorio\Proyecto\servicios web\SecondLife\SecondLife\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\madel\OneDrive-Personal\OneDrive\Escritorio\Proyecto\servicios web\SecondLife\SecondLife\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\madel\OneDrive-Personal\OneDrive\Escritorio\Proyecto\servicios web\SecondLife\SecondLife\obj\Debug\SecondLife.csproj.AssemblyReference.cache
 D:\madel\OneDrive-Personal\OneDrive\Escritorio\Proyecto\servicios web\SecondLife\SecondLife\obj\Debug\SecondLife.csproj.CoreCompileInputs.cache
 D:\madel\OneDrive-Personal\OneDrive\Escritorio\Proyecto\servicios web\SecondLife\SecondLife\obj\Debug\SecondLife.csproj.CopyComplete
 D:\madel\OneDrive-Personal\OneDrive\Escritorio\Proyecto\servicios web\SecondLife\SecondLife\obj\Debug\SecondLife.dll
@@ -170,3 +169,4 @@ C:\Users\maver\Documents\SecondLife_web\SecondLife\bin\roslyn\vbc.exe.config
 C:\Users\maver\Documents\SecondLife_web\SecondLife\bin\roslyn\vbc.rsp
 C:\Users\maver\Documents\SecondLife_web\SecondLife\bin\roslyn\VBCSCompiler.exe
 C:\Users\maver\Documents\SecondLife_web\SecondLife\bin\roslyn\VBCSCompiler.exe.config
+D:\madel\OneDrive-Personal\OneDrive\Escritorio\Proyecto\servicios web\SecondLife\SecondLife\obj\Debug\SecondLife.csproj.AssemblyReference.cache

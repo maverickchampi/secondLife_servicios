@@ -7,8 +7,6 @@ namespace SecondLife.Models
 {
     public class Usuario
     {
-<<<<<<< HEAD
-=======
         public string id_usua { get; set; }
         public string dni_usua { get; set; }
         public int id_rol { get; set; }
@@ -20,6 +18,6 @@ namespace SecondLife.Models
         public string pass { get; set; }
         public string email_log { get; set; }
         public int estado { get; set; }
->>>>>>> dbc8b60eb1e2ce814c2c40169629b30169d299c4
+
     }
 }
