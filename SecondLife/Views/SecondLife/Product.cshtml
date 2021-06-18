@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SecondLife.Models.Producto>
+@using SecondLife.Models
+
+@{
+    ViewBag.Title = "Product";
+}
+
+<h2>Producto</h2>
+<style>
+    .product{
+        height:400px;
+    }
+</style>
+<div class="">
+    @using (Html.BeginForm())
+    {
+        @Html.RadioButton("id_categ", 0, "Todos los productos")
+        <label>Todos los productos</label>
+        <br />
+        foreach (var lista in ViewBag.categoria as List<Categoria>)
+        {
+            @Html.RadioButton("id_categ", lista.id_categ, lista.nombre)
+            @lista.nombre
+            <br />
+        }
+        @Html.TextBox("marca")
+        <button>Buscar</button>
+    }
+</div>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 ">
+        @foreach (var item in Model)
+        {
+            <div class="col col-sm-4 mb-4 bg-danger product rounded" >
+                <div class="card card-sm-3 h-100">
+                    <img class="card-img-top" src="@Url.Content(item.imagen)" width="200px" />
+                    <div class="card-body">
+                        @Html.ActionLink(item.marca + item.modelo, "Detail_Product", new { id = item.id_prod }, new { @class = "card-title" })
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.descripcion)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.precio)</p>
+                        @Html.TextBox("cant", 1)
+                        @Html.ActionLink("Agregar", "Add", new { id = item.id_prod }, new { @class = "btn btn-default" })
+                    </div>
+                 </div>
+            </div>
+        }
+    </div>
+</div>
+@if (Model.Count() > 11)
+{
+    @Html.ActionLink("|<",
+  "Product", "SecondLife",
+  new { p = (int)ViewBag.p, flecha = "ini" },
+  new { @class = "btn btn-primary" })
+
+    @Html.ActionLink("<<",
+        "Product", "SecondLife",
+      new { p = (int)ViewBag.p, flecha = "i" },
+      new { @class = "btn btn-primary" })
+
+    @Html.Label(((int)ViewBag.p + 1).ToString())
+
+    @Html.ActionLink(">>",
+        "Product", "SecondLife",
+      new { p = (int)ViewBag.p, flecha = "d" },
+      new { @class = "btn btn-primary" })
+
+    @Html.ActionLink(">|",
+        "Product", "SecondLife",
+      new { p = (int)ViewBag.p, flecha = "fin" },
+      new { @class = "btn btn-primary" })
+}
