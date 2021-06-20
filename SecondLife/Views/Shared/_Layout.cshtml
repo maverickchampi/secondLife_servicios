@@ -18,42 +18,38 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SL", "Index", "SecondLife", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                </ul>
+                    <li>@Html.ActionLink("Inicio", "Index", "SecondLife")</li>
+                    <li>@Html.ActionLink("Producto", "Product", "SecondLife")</li>
+
+                    <!--en esta seccion visualizamos al usuario-->
+                    @{
+                        Usuario u = TempData["usuario"] as Usuario;
+
+                    }
+
+                <li> @Html.ActionLink("Carrito de compra", "Shopping_Cart", "SecondLife")</li>
+
+                    @if (@u == null)
+                    {
+                <li> @Html.ActionLink("Inicio de Sesion", "Login", "SecondLife")</li>
+                    }
+                    else
+                    {
+                <li style="display:flex">
+                    <em style="padding-top: 15px; padding-bottom: 15px; color:#fff">Bienvenido @u.usuario</em>
+                    @Html.ActionLink("Ver perfil", "Profile", "SecondLife", new { id = u.id_usua }, null)
+                    @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife")
+                </li>
+                    }
+                </ul>             
             </div>
         </div>
     </div>
 
-    <!--vista de usuario-->
-    <div>
-        <div style="width:80%;display:inline-block; float:right;"></div>
-        <div style="width:20%;display:inline-block;float:right; text-align:center">
-            <!--en esta seccion visualizamos al usuario-->
-            @{
-                Usuario u = TempData["usuario"] as Usuario;
-
-            }
-            <br />
-            @Html.ActionLink("Carrito de compra", "Shopping_Cart", "SecondLife")
-            <br />
-            @if (@u == null)
-            {
-                @Html.ActionLink("Inicio de Sesion", "Login", "SecondLife")<br />
-            }
-            else
-            {
-                <em>Bienvenido @u.usuario</em><br />
-                @Html.ActionLink("Ver perfil", "Profile", "SecondLife", new { id = u.id_usua }, null) <br />
-                @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife")
-            }
-        </div>
-    </div>
 
     <div class="container body-content">
         @RenderBody()

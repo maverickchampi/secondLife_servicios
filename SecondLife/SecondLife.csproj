@@ -122,7 +122,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\SecondLifeController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -171,20 +170,16 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SecondLife\Product.cshtml" />
     <Content Include="Views\SecondLife\Detail_Product.cshtml" />
-    <Content Include="Views\SecondLife\RegisterUser.cshtml" />
     <Content Include="Views\SecondLife\Login.cshtml" />
     <Content Include="Views\SecondLife\Profile.cshtml" />
     <Content Include="Views\SecondLife\Shopping_cart.cshtml" />
+    <Content Include="Views\SecondLife\RegisterUser.cshtml" />
+    <Content Include="Views\SecondLife\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

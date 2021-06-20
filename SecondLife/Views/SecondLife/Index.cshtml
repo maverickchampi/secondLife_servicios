@@ -1,0 +1,44 @@
+﻿@using SecondLife.Models 
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h1>
+   SecondLife
+</h1>
+<p>@ViewBag.mensaje</p>
+<div class="container">
+    <div>
+        <ul >
+            @foreach (var item in ViewBag.categoria as List<Categoria>)
+            {
+                @Html.ActionLink(item.nombre, "Product", new { id_categ=item.id_categ})
+                <br />
+            }
+        </ul>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 ">
+        @foreach (var item in ViewBag.producto as List<Producto>)
+        {
+            <div class="col col-sm-4 mb-4 bg-danger product rounded">
+                <div class="card card-sm-3 h-100">
+                    <img class="card-img-top" src="@Url.Content(item.imagen)" width="200px" />
+                    <div class="card-body">
+                        @Html.ActionLink(item.marca + item.modelo, "Detail_Product", new { id = item.id_prod }, new { @class = "card-title" })
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.descripcion)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.precio)</p>
+                        @using (Html.BeginForm("Index", "SecondLife", FormMethod.Post))
+                        {
+                            @Html.Hidden("id", item.id_prod)
+                            @Html.Hidden("stock", item.stock)
+                            @Html.TextBox("cant", item.stock)
+                            <input type="submit" value="Procesar" class="btn btn-primary" />
+                        }
+                    </div>
+                </div>
+            </div>      
+        }
+    </div>
+</div>

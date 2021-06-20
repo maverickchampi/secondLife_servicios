@@ -50,7 +50,7 @@ create table tb_usuario (
 	id_rol int not null,
 	nom_usua  varchar(100) not null,
 	ape_usua varchar(100) not null,
-	tel_usua char(9),
+	tel_usua char(9)not null,
 	fec_nac_usua date not null,
 	usuario varchar(15) not null, 
 	pass varchar(100) not null,  
@@ -529,19 +529,19 @@ insert into tb_producto values (dbo.sigIdProd(), '632541-002', 1, 'HP', '15-dw10
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una laptop ...', 'El equipo muestra placa base destruida, pantalla inservible y teclado con falta de teclas', '2021-05-10', 1, 200.0, 'no imagen', 2.7, 1)     
 go
 insert into tb_producto values (dbo.sigIdProd(), '632541-003', 1, 'HP', '67-dw1085la', 'Procesador: i5-10110U; RAM: 4GB DDR4; ROM: 256GB SSD; Pantalla: 15,6" FHD',
-								 'Equipo en buen estado, completamente restaurado','2021-05-25', 1, 800.0, 'https://i.ibb.co/Bfc83F3/laptop3.png', 7.0, 1)
+								 'Equipo en buen estado, completamente restaurado','2021-05-25', 10, 800.0, 'https://i.ibb.co/Bfc83F3/laptop3.png', 7.0, 1)
   go                        
 						  
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una laptop ...', 'El equipo muestra ligero rapones en la pintura de la parte frontal, software y componentes en buen estado.', '2021-05-10', 1, 2800.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '732685-001', 1, 'Apple', 'Macbook Air 11', 'Procesador: M1; RAM: 8GB; ROM: 256GB; Pantalla: 13" FHD',
-								'Equipo en buen estado, pintura refaccionada','2020-07-07', 1, 4000.0, 'https://i.ibb.co/dbJnhfR/laptop4.png', 8.5, 1)
+								'Equipo en buen estado, pintura refaccionada','2020-07-07', 10, 4000.0, 'https://i.ibb.co/dbJnhfR/laptop4.png', 8.5, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una laptop ...', 'El equipo se muestra sin sistema operativo, y daño en uno de los puertos USB', '2021-05-10', 1, 2000.0, 'no imagen', 4.5, 1)                                      
 go
 insert into tb_producto values (dbo.sigIdProd(), '732685-002', 1, 'Apple', 'Macbook Air 12', 'Procesador: M1; RAM: 8GB; ROM: 256GB; Pantalla: 13" FHD',
-								 'Equipo en buen estado, sistema instalado y puerto usb reparado', '2020-07-15', 1,  2700.0, 'https://i.ibb.co/kqzq1yW/laptop5.png', 7.5, 1)
+								 'Equipo en buen estado, sistema instalado y puerto usb reparado', '2020-07-15', 10,  2700.0, 'https://i.ibb.co/kqzq1yW/laptop5.png', 7.5, 1)
 								 go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una laptop ...', 'El equipo muestra placa base destruida, pantalla inservible y teclado con falta de teclas', '2021-05-10', 1,  1200.0, 'no imagen', 2.7, 1)                                     
@@ -609,31 +609,31 @@ insert into tb_producto values (dbo.sigIdProd(), '374905-002', 2, 'CANON', 'Mult
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo muestra sistema de impresion dañado, partes del cuerpo rotas y sin deposito de tinta', '2021-05-10', 1, 150.0, 'no imagen', 2.7, 1)                                    
 go
 insert into tb_producto values (dbo.sigIdProd(), '374905-003', 2, 'CANON', 'Multifuncional Color G2118', 'Capacidad: 100 hojas; Wi-Fi: No; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, completamente restaurado y tinta al 100%', '2020-07-25', 1, 400.0, 'https://i.ibb.co/hBg8Y9L/impresora6.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado y tinta al 100%', '2020-07-25', 10, 400.0, 'https://i.ibb.co/hBg8Y9L/impresora6.png', 7.0, 1)
   go
   
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo muestra ligeros raspones en el cuerpo y nivel de tinta al 50%', '2021-05-10', 1, 700.0, 'no imagen', 6.0, 1)                                   
 go
 insert into tb_producto values (dbo.sigIdProd(), '842364-001', 2, 'Epson', 'Multifuncional Wifi EcoTank L4161', 'Capacidad: 100 hojas; Wi-Fi: Si; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, pintura refaccionada y tinta al 100%', '2020-07-07', 1, 1000.0, 'https://i.ibb.co/0cqnMQv/impresora7.png', 8.5, 1)
+								'Equipo en buen estado, pintura refaccionada y tinta al 100%', '2020-07-07', 10, 1000.0, 'https://i.ibb.co/0cqnMQv/impresora7.png', 8.5, 1)
   go
   
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo se muestra con daños en la bandeja y sin deposito de tinta', '2021-05-10', 1, 650.0, 'no imagen', 4.5, 1)                                    
 go
 insert into tb_producto values (dbo.sigIdProd(), '842364-002', 2, 'Epson', 'Multifuncional Wifi EcoTank L4162', 'Capacidad: 100 hojas; Wi-Fi: Si; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, partes refaccionadas y tinta al 100%', '2020-07-15', 1, 850.0, 'https://i.ibb.co/kqxZ4VN/impresora8.png', 7.5, 1)
+								'Equipo en buen estado, partes refaccionadas y tinta al 100%', '2020-07-15', 10, 850.0, 'https://i.ibb.co/kqxZ4VN/impresora8.png', 7.5, 1)
   go  
 	
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo muestra sistema de impresion dañado, partes del cuerpo rotas y sin deposito de tinta', '2021-05-10', 1, 500.0, 'no imagen', 2.7, 1)                                    
 go
 insert into tb_producto values (dbo.sigIdProd(), '842364-003', 2, 'Epson', 'Multifuncional Wifi EcoTank L4163', 'Capacidad: 100 hojas; Wi-Fi: Si; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, completamente restaurado y tinta al 100%', '2020-07-25', 1, 700.0, 'https://i.ibb.co/P5CQdQY/impresora9.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado y tinta al 100%', '2020-07-25', 10, 700.0, 'https://i.ibb.co/P5CQdQY/impresora9.png', 7.0, 1)
   go
   
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo se muestra sin sistema de impresion, partes del cuerpo rotas y sin deposito de tinta', '2021-05-10', 1, 450.0, 'no imagen', 2.0, 1)    
 go
 insert into tb_producto values (dbo.sigIdProd(), '842364-004', 2, 'Epson', 'Multifuncional Wifi EcoTank L4164', 'Capacidad: 100 hojas; Wi-Fi: Si; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, completamente restaurado y tinta al 100%', '2020-07-25', 1, 650.0, 'https://i.ibb.co/G7SGpPd/impresora10.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado y tinta al 100%', '2020-07-25', 10, 650.0, 'https://i.ibb.co/G7SGpPd/impresora10.png', 7.0, 1)
   go   
 	 
               
@@ -641,61 +641,61 @@ insert into tb_producto values (dbo.sigIdProd(), '842364-004', 2, 'Epson', 'Mult
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo muestra ligeros raspones en el cuerpo', '2021-05-10', 1, 3500.0, 'no imagen', 6.0, 1)    
 go
 insert into tb_producto values (dbo.sigIdProd(), '125487-001', 3, 'Apple', 'iPhone XR Yellow', 'Pantalla: 6.1" FHD+; RAM: 4GB; ROM: 128GB; Procesador: A14 Bionic; Cámara posterior: 12MP; Cámara frontal: 12MP',
-								'Equipo en buen estado, pintura refaccionada', '2020-07-07', 1, 4000.0, 'https://i.ibb.co/YRzrH3S/iphonexr.png', 8.5, 1)
+								'Equipo en buen estado, pintura refaccionada', '2020-07-07', 10, 4000.0, 'https://i.ibb.co/YRzrH3S/iphonexr.png', 8.5, 1)
  go
  
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo se muestra con parte posterior quebrada', '2021-05-10', 1, 3200.0, 'no imagen', 4.5, 1)                                   
 go
 insert into tb_producto values (dbo.sigIdProd(), '125487-002', 3, 'Apple', 'iPhone 11 Pink', 'Pantalla: 6.1" FHD+; RAM: 4GB; ROM: 128GB; Procesador: A14 Bionic; Cámara posterior: 12MP; Cámara frontal: 12MP',
-								'Equipo en buen estado, vidrio reemplazado', '2020-07-15', 1, 3800.0, 'https://i.ibb.co/0rrMZt5/iphone11promax.png', 7.5, 1)
+								'Equipo en buen estado, vidrio reemplazado', '2020-07-15', 10, 3800.0, 'https://i.ibb.co/0rrMZt5/iphone11promax.png', 7.5, 1)
  go
  
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo muestra pantalla quebrada, daño en el cuerpo y sistema bloqueado', '2021-05-10', 1, 3000.0, 'no imagen', 2.7, 1)                                    
 go
 insert into tb_producto values (dbo.sigIdProd(), '125487-003', 3, 'Apple', 'iPhone 12 Morado', 'Capacidad: 60 hojas; Wi-Fi: No; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25', 1, 3500.0, 'https://i.ibb.co/sv3sC6g/iphone12.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25', 10, 3500.0, 'https://i.ibb.co/sv3sC6g/iphone12.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo muestra ligeros raspones en el cuerpo', '2021-05-10', 1, 800.0, 'no imagen', 6.0, 1)                                  
 go
 insert into tb_producto values (dbo.sigIdProd(), '524861-001', 3, 'Xiaomi', 'Poco X3 NFC PRO Azul Noche' , 'Pantalla: 6.67" FHD+; RAM: 6GB; ROM: 128GB; Procesador: Qualcomm Snapdragon 732G; Cámara posterior: 64MP; Cámara frontal: 20MP',
-								'Equipo en buen estado, pintura refaccionada', '2020-07-07', 1, 1000.0, 'https://i.ibb.co/dMSH8kR/pocox3pro.png', 8.5, 1)
+								'Equipo en buen estado, pintura refaccionada', '2020-07-07', 10, 1000.0, 'https://i.ibb.co/dMSH8kR/pocox3pro.png', 8.5, 1)
   go 
    
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo se muestra con pantalla quebrada', '2021-05-10', 1, 600.0, 'no imagen', 4.5, 1)                                   
 go
 insert into tb_producto values (dbo.sigIdProd(), '524861-002', 3, 'Xiaomi', 'Poco X3 NFC Azul', 'Pantalla: 6.67" FHD+; RAM: 6GB; ROM: 128GB; Procesador: Qualcomm Snapdragon 732G; Cámara posterior: 64MP; Cámara frontal: 20MP',
-								'Equipo en buen estado, vidrio reemplazado', '2020-07-15', 1, 800.0, 'https://i.ibb.co/nf1bCP2/pocox3nfc.png', 7.5, 1)
+								'Equipo en buen estado, vidrio reemplazado', '2020-07-15', 10, 800.0, 'https://i.ibb.co/nf1bCP2/pocox3nfc.png', 7.5, 1)
   go   
 	 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo muestra pantalla quebrada, daño en el cuerpo y sistema bloqueado', '2021-05-10', 1, 450.0, 'no imagen', 2.7, 1)                                    
 go
 insert into tb_producto values (dbo.sigIdProd(), '524861-003', 3, 'Xiaomi', 'Poco X3 Negro', 'Pantalla: 6.67" FHD+; RAM: 6GB; ROM: 128GB; Procesador: Qualcomm Snapdragon 732G; Cámara posterior: 64MP; Cámara frontal: 20MP',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25', 1, 750.0, 'https://i.ibb.co/TrfXbbc/pocox3.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25', 10, 750.0, 'https://i.ibb.co/TrfXbbc/pocox3.png', 7.0, 1)
   go     
 	   
  insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo muestra ligeros raspones en el cuerpo', '2021-05-10', 1, 1200.0, 'no imagen', 6.0, 1)                                  
  go
 insert into tb_producto values (dbo.sigIdProd(), '993254-001', 3, 'Samsung', 'Galaxy A21 Azul', 'Pantalla: 6.7" FHD+; RAM: 6GB; ROM: 128GB; Procesador: Qualcomm Snapdragon 730; Cámara posterior: 40MP; Cámara frontal: 32MP',
-								'Equipo en buen estado, pintura refaccionada', '2020-07-07', 1, 1400.0, 'https://i.ibb.co/Gp7x3zx/galaxy21.png', 8.5, 1)
+								'Equipo en buen estado, pintura refaccionada', '2020-07-07', 10, 1400.0, 'https://i.ibb.co/Gp7x3zx/galaxy21.png', 8.5, 1)
     go   
 	   
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo se muestra con pantalla quebrada', '2021-05-10', 1, 1000.0, 'no imagen', 4.5, 1)                                   
 go
 insert into tb_producto values (dbo.sigIdProd(), '993254-002', 3, 'Samsung', 'Galaxy A31 Rojo', 'Pantalla: 6.7" FHD+; RAM: 6GB; ROM: 128GB; Procesador: Qualcomm Snapdragon 730; Cámara posterior: 40MP; Cámara frontal: 32MP',
-								'Equipo en buen estado, vidrio reemplazado', '2020-07-15', 1, 1200.0, 'https://i.ibb.co/mb850K5/galaxy31.png', 7.5, 1)
+								'Equipo en buen estado, vidrio reemplazado', '2020-07-15', 10, 1200.0, 'https://i.ibb.co/mb850K5/galaxy31.png', 7.5, 1)
   go        
 		  
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo muestra pantalla quebrada, daño en el cuerpo y sistema bloqueado', '2021-05-10', 1, 600.0, 'no imagen', 2.7, 1)                                   
 go
 insert into tb_producto values (dbo.sigIdProd(), '993254-003', 3, 'Samsung', 'Galaxy A31 Blanco', 'Pantalla: 6.7" FHD+; RAM: 6GB; ROM: 128GB; Procesador: Qualcomm Snapdragon 730; Cámara posterior: 40MP; Cámara frontal: 32MP',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25', 1, 800.0, 'https://i.ibb.co/0YXjPRK/galaxya51.png',  7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25', 10, 800.0, 'https://i.ibb.co/0YXjPRK/galaxya51.png',  7.0, 1)
   go          
 			
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una celular ...', 'El equipo muestra pantalla inservivble, daño en la parte posterior y sistema bloqueado', '2021-05-10', 1, 550.0, 'no imagen', 2.0, 1)                                  
 go
 insert into tb_producto values (dbo.sigIdProd(), '993254-004', 3, 'Samsung', 'Galaxy A71 Negro', 'Capacidad: 100 hojas; Wi-Fi: Si; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 750.0, 'https://i.ibb.co/fQqnpj3/galaxy71.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 750.0, 'https://i.ibb.co/fQqnpj3/galaxy71.png', 7.0, 1)
 								go
 
 
@@ -705,61 +705,61 @@ insert into tb_producto values (dbo.sigIdProd(), '993254-004', 3, 'Samsung', 'Ga
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo muestra lente dañado', '2021-05-10', 1, 7000.0, 'no imagen', 5.0, 1)                                    
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-001', 4, 'SONY', 'ILCE9M2', 'Megapixeles: 24.2MP; Wi-Fi: Si; Bluetooth: Si; Peso: 1.56; Largo(cm): 7.75',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 13000.0, 'https://i.ibb.co/Zm7jX27/CAMARA-SONY-ILCE-9-M2.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 13000.0, 'https://i.ibb.co/Zm7jX27/CAMARA-SONY-ILCE-9-M2.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo muestra agarre flojo y el software no prende', '2021-05-10', 1, 2000.0, 'no imagen', 6.0, 1)                                
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-002', 4, 'SONY', 'ILCE-7C NEGRO', 'Megapixeles: 24.2MP; Wi-Fi: Si; Bluetooth: Si; Peso: 1.56; Largo(cm): 9.97',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 5300.0, 'https://i.ibb.co/wRJtStW/SONY-ILCE-7-C-Black-1-Main.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 5300.0, 'https://i.ibb.co/wRJtStW/SONY-ILCE-7-C-Black-1-Main.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo muestra lente dañado', '2021-05-10', 1, 9000.0, 'no imagen', 6.0, 1)                                    
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-003', 4, 'CANON', 'EOS 5D MARK IV 30.4 MM', 'Megapixeles: 30.4MP; Resolucion: 1368 x 758 ; Conexion: USB+HDMU; Video: 4K',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 13000.0, 'https://i.ibb.co/qRxdNKJ/CANON-C-MARA-REFLEX-EOS-5-D-MARK-IV-30-4-MM.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 13000.0, 'https://i.ibb.co/qRxdNKJ/CANON-C-MARA-REFLEX-EOS-5-D-MARK-IV-30-4-MM.png', 8.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo no muestra daños', '2021-05-10', 1, 1000.0, 'no imagen', 7.0, 1)                                   
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-004', 4, 'CANON', 'EOS M200 24.1MP', 'Megapixeles: 24.1MP; Color: negro; Peso: 262g; Conexion: USB+HDMU',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 13000.0, 'https://i.ibb.co/xKbf8YL/CANON-C-MARA-MIRRORLESS-EOS-M200-24-1-MP.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10 , 13000.0, 'https://i.ibb.co/xKbf8YL/CANON-C-MARA-MIRRORLESS-EOS-M200-24-1-MP.png', 7.0, 1)
   go                              
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo no muestra daños', '2021-05-10', 1, 10000.0, 'no imagen', 5.0, 1)                           
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-005', 4, 'NIKON', 'D5 FX cuerpo versión XQD', 'Calidad de grabación: 4K Ultra HD; Distancia focal: Otro; Formatos de imagen: JPEG/RAW; Fuente de energía: Baterías',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 17000.0, 'https://i.ibb.co/2q6TtWW/C-mara-R-flex-D5-FX-cuerpo-versi-n-XQD.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 17000.0, 'https://i.ibb.co/2q6TtWW/C-mara-R-flex-D5-FX-cuerpo-versi-n-XQD.png', 8.0, 1)
   go                              
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo muestra lente dañado y una leve abolladura', '2021-05-10', 1, 1000.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-006', 4, 'NIKON', 'Z50 16-50 VR, 35 1.8 y FTZ', 'Alto: 9.3; Ancho: 6; Calidad de grabación: 4K Ultra HD; Formatos de imagen: JPEG/RAW; Fuente de energía: Baterías',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 3000.0, 'https://i.ibb.co/Q8tcym2/C-mara-Mirrorless-Z50-16-50-VR-35-1-8-y-FTZ.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 3000.0, 'https://i.ibb.co/Q8tcym2/C-mara-Mirrorless-Z50-16-50-VR-35-1-8-y-FTZ.png', 7.0, 1)
   go                              
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo muestra daño en el boton de la camara', '2021-05-10', 1, 300.0, 'no imagen', 3.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-007', 4, 'PANASONIC', 'DCSD-GX850KPPK', 'Megapíxeles: 16.84 MP; Tamaño de la pantalla: 3 pulgadas; Formatos de imagen: JPEG/RAW; Sensibilidad ISO: Auto, 100-25600, (102400 max)',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1200.0, 'https://i.ibb.co/hZKf4Vt/C-mara-semiprofesional-4-K-Ultra-HD-16-84-mpx-DCSD-GX850-KPPK.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1200.0, 'https://i.ibb.co/hZKf4Vt/C-mara-semiprofesional-4-K-Ultra-HD-16-84-mpx-DCSD-GX850-KPPK.png', 7.0, 1)
   go                              
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo muestra daño en el boton de la camara', '2021-05-10', 1, 300.0, 'no imagen', 4.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-008', 4, 'PANASONIC', 'DCSD-GX850KPPS', 'Megapíxeles: 16.84 MP; Tamaño de la pantalla: 3 pulgadas; Formatos de imagen: JPEG/RAW; Sensibilidad ISO: Auto, 100-25600, (102400 max)',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1700.0, 'https://i.ibb.co/3MHRqmb/C-mara-semiprofesional-16-84-mpx-4-K-Ultra-HD-DCSD-GX850-KPPS.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1700.0, 'https://i.ibb.co/3MHRqmb/C-mara-semiprofesional-16-84-mpx-4-K-Ultra-HD-DCSD-GX850-KPPS.png', 7.0, 1)
   go                              
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo muestra desgasto', '2021-05-10', 1, 500.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-009', 4, 'CANON', 'VIXIA HF W11', 'Tipo: Cámaras de video; Alto: 59.5 mm; Ancho: 60 mm; Calidad de grabación: Full HD, Memoria; 96GB',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1300.0, 'https://i.ibb.co/861vvLF/Camara-De-Video-Vixia-Hf-W11.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1300.0, 'https://i.ibb.co/861vvLF/Camara-De-Video-Vixia-Hf-W11.png', 7.0, 1)
   go                              
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una camara ...', 'El equipo muestra lente dañado', '2021-05-10', 1, 1500.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '640541-010', 4, 'SONY', 'FDR-AX43/BC UC2', 'Alto: 8.05 cm; Ancho: 7.3 cm; Calidad de grabación: 4K Ultra HD; Distancia focal: Otro; Formatos de imagen: JPEG/XAVCX/MP4',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 2500.0, 'https://i.ibb.co/23mYnwt/C-mara-de-video-FDR-AX43-sensor-CMOS-Exmor-R.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 2500.0, 'https://i.ibb.co/23mYnwt/C-mara-de-video-FDR-AX43-sensor-CMOS-Exmor-R.png', 7.0, 1)
 								go
 
 /*----------------------WEAREABLES-------------------------*/
@@ -767,43 +767,43 @@ insert into tb_producto values (dbo.sigIdProd(), '640541-010', 4, 'SONY', 'FDR-A
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una WEAREABLES ...', 'El equipo muestra lentitud de software', '2021-05-10', 1, 500.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '857701-001', 5, 'SAMSUNG', 'SM-R810NZKAPEO', 'Memoria interna: 4 GB; Tamaño de Pantalla: 1.2"; Resolución de Pantalla: 360x360 px; Bluetooth: Bluetooth v4.2',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 2500.0, 'https://i.ibb.co/PGzbZS0/pe-galaxy-watch-r810-sm-r810nzkapeo-frontblack-117616162.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 2500.0, 'https://i.ibb.co/PGzbZS0/pe-galaxy-watch-r810-sm-r810nzkapeo-frontblack-117616162.png', 8.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una WEAREABLES ...', 'El equipo muestra rajadura en la correa', '2021-05-10', 1, 400.0, 'no imagen', 4.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '857701-002', 5, 'SAMSUNG', 'SM-R830NZDAPEO', 'Carcasa: 40 mm; Correa: 20 mm; Dimensiones: 39,5 mm x 39,5 mm x 10,5 mm; Peso (sin correa): 25 g; Pantalla: OLED de 1,1 pulgadas (360 x 360); Procesador: Exynos 9110 de doble núcleo a 1,15 GHz; Almacenamiento: 4GB; RAM: 750 MB',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1100.0, 'https://i.ibb.co/XZwc7ZD/Galaxy-Watch-Active2-40mm-Pink.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1100.0, 'https://i.ibb.co/XZwc7ZD/Galaxy-Watch-Active2-40mm-Pink.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una WEAREABLES ...', 'El equipo muestra desgasto', '2021-05-10', 1, 80.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '857701-003', 5, 'SAMSUNG', 'SM-R220NZKALTA', 'Sensores: Acelerómetro, Giroscopio, Sensor óptico de frecuencia cardíaca; Memoria: 2MB(RAM); Interna 32 MB',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 300.0, 'https://i.ibb.co/f4LRNjH/Galaxy-Fit2-Black.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 300.0, 'https://i.ibb.co/f4LRNjH/Galaxy-Fit2-Black.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una WEAREABLES ...', 'El equipo muestra desgasto', '2021-05-10', 1, 50.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '857701-004', 5, 'HUAWEI', 'HUAWEI Band 6 Amber Sunrise', '96 modos de ejercicio diferentes; Medición de SpO2 día y noche;  Pantalla FullView; Duración de la batería de 2 semanas; Compatible con Android e iOS*',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 150.0, 'https://i.ibb.co/cv2STsY/orange-plp.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 150.0, 'https://i.ibb.co/cv2STsY/orange-plp.png', 8.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una WEAREABLES ...', 'El equipo muestra lentitud de software', '2021-05-10', 1, 60.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '857701-005', 5, 'HUAWEI', 'HUAWEI WATCH FIT Black', 'Pantalla AMOLED brillante de 1.64 pulgadas; Animaciones de entrenamiento rápido; Detección de saturación de oxígeno SPO2; Compatible con Android e iOS*',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 300.0, 'https://i.ibb.co/MpRfnHv/HUAWEI-WATCH-FIT-Black.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 300.0, 'https://i.ibb.co/MpRfnHv/HUAWEI-WATCH-FIT-Black.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una WEAREABLES ...', 'El equipo muestra lentitud de software', '2021-05-10', 1, 700.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '857701-006', 5, 'APPLE', 'Apple Watch Series 5', 'Sistema operativo: watchOS 6; Almacenamiento: 32GB; Sensores: Accelerometer, Altimeter, Barometer, Compass, Gyroscope, Heart Rate, Light Sensor; Rastreador: Si; Micrófono: Si; Altavoz incorporado: Si; Vibración; Si',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1300.0, 'https://i.ibb.co/Cm1Lssv/Promart-Apple-Watch-Series-5-GPS-44mm-Rose-Gold.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1300.0, 'https://i.ibb.co/Cm1Lssv/Promart-Apple-Watch-Series-5-GPS-44mm-Rose-Gold.png', 8.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una WEAREABLES ...', 'El equipo muestra desgaste en la correa', '2021-05-10', 1, 500.0, 'no imagen', 5.0, 1)                                 
 go
 insert into tb_producto values (dbo.sigIdProd(), '857701-007', 5, 'APPLE', 'SERIES 3 GPS 42MM GRIS ESPACIAL', '8 GB de capacidad; Pantalla de vidrio Ion-X; Cubierta trasera de composite; Wifi (802.11b/g/n a 2,4 GHz); Bluetooth 4.2; Hasta 18 horas de autonomía2',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 2500.0, 'https://i.ibb.co/R38hM1Q/APPLE-WATCH-SERIES-3-42-MM-GPS-COLOR-GRIS-ESPACIAL.png', 5.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 2500.0, 'https://i.ibb.co/R38hM1Q/APPLE-WATCH-SERIES-3-42-MM-GPS-COLOR-GRIS-ESPACIAL.png', 5.0, 1)
 								go
 
 
@@ -812,61 +812,61 @@ insert into tb_producto values (dbo.sigIdProd(), '857701-007', 5, 'APPLE', 'SERI
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo muestra gasto de uso', '2021-05-10', 1, 900.0, 'no imagen', 6.0, 1)                                  
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-001', 6, 'AOC', '55U6295', 'Tamaño de Pantalla: 55"; Tipo de Pantalla: LED; Smart TV:	Sí; Diseño de pantalla: Plana; Definición de Pantalla: 4K UHD; WiFi integrado: Sí',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1400.0, 'https://i.ibb.co/7CW8tQK/TV-AOC-LED-Smart-55-55-U6295.png', 7.0, 1);
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1400.0, 'https://i.ibb.co/7CW8tQK/TV-AOC-LED-Smart-55-55-U6295.png', 7.0, 1);
 	go	
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo muestra una pata de la bse rota', '2021-05-10', 1, 100.0, 'no imagen', 5.0, 1)                                
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-002', 6, 'AOC', '32S5295', 'Tamaño de Pantalla: 32"; Tipo de Pantalla: LED; Diseño de pantalla: Plana; Definición: HD; WiFi: Sí; Bluetooth: No; Cámara: No; Entradas HDMI: 3',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 700.0, 'https://i.ibb.co/R20fwBr/TV-AOC-LED-HD-Smart-32-32-S5295.png', 6.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 700.0, 'https://i.ibb.co/R20fwBr/TV-AOC-LED-HD-Smart-32-32-S5295.png', 6.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo muestra DESGASTO', '2021-05-10', 1, 1500.0, 'no imagen', 7.0, 1)                                 
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-003', 6, 'LG', '55NANO80SPA', 'Tamaño: 55"; Pantalla:	Panel IPS 4K Nano cell; Dimming: Local Dimming; Resolución: 3840x 2160 px; WiFi: Sí; Bluetooth: Sí; Sistema Operativo: webOS 6.0',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 3000.0, 'https://i.ibb.co/yYh7xwv/TV-LG-LED-4-K-Nano-Cell-Thin-Q-AI-55-55-NANO80-2021.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 3000.0, 'https://i.ibb.co/yYh7xwv/TV-LG-LED-4-K-Nano-Cell-Thin-Q-AI-55-55-NANO80-2021.png', 8.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo muestra daño en el control remoto', '2021-05-10', 1, 200.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-004', 6, 'LG', '32LM637B', 'Tamaño: 32"; Pantalla: LED; Resolución: 1280x720 px; WiFi: Sí; Bluetooth: Sí; Sistema Operativo: webOS 4.5',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 700.0, 'https://i.ibb.co/vwbW8NK/TV-LG-LED-HD-Thin-Q-AI-32-32-LM637-B.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 700.0, 'https://i.ibb.co/vwbW8NK/TV-LG-LED-HD-Thin-Q-AI-32-32-LM637-B.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo muestra pata rota', '2021-05-10', 1, 200.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-005', 6, 'MIRAY', 'MS32-T1000BT', 'Tamaño: 32"; Pantalla: LED; Resolucion: 1366x768 px; Diseño: Plana; Definición: HD; WiFi: Sí; Bluetooth: Sí; Sistema Operativo: Android 9',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1100.0, 'https://i.ibb.co/Chm5n4S/TV-Miray-LED-HD-Smart-32-MS32-T1000-BT.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1100.0, 'https://i.ibb.co/Chm5n4S/TV-Miray-LED-HD-Smart-32-MS32-T1000-BT.png', 8.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo se demora en prender', '2021-05-10', 1, 1000.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-006', 6, 'MIRAY', 'MK50-E201', 'Tamaño: 50"; Pantalla: LED; Diseño: Plana; Definición: 4K UHD; WiFi: Sí; Bluetooth: No; Sistema Operativo: Linux; Cámara: No; Entradas HDMI: 3',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1500.0, 'https://i.ibb.co/cDtzrCW/TV-Miray-LED-4-K-UHD-Smart-50-MK50-E201.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1500.0, 'https://i.ibb.co/cDtzrCW/TV-Miray-LED-4-K-UHD-Smart-50-MK50-E201.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo muestra una raya en la pantalla mas una mala conexion HDMI', '2021-05-10', 1, 1000.0, 'no imagen', 6.0, 1)                                  
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-007', 6, 'PHILIPS', '70PUD6774', 'Tamaño: 70"; Tipo: LED; Diseño: Plana; Definición: 4K UHD; WiFi: Sí; Bluetooth: No; Cámara: No; Entradas HDMI: 3; Puertos USB: 2',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 2500.0, 'https://i.ibb.co/xH5McRR/TV-Philips-4-K-UHD-LED-Smart-70-70-PUD6774.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 2500.0, 'https://i.ibb.co/xH5McRR/TV-Philips-4-K-UHD-LED-Smart-70-70-PUD6774.png', 8.0, 1)
 go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo muestra gasto de uso', '2021-05-10', 1, 900.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-008', 6, 'PHILIPS', 'PUD6654', 'Tamaño de Pantalla: 55"; Tipo de Pantalla: LED; Smart TV:	Sí; Diseño de pantalla: Plana; Definición de Pantalla: 4K UHD; WiFi integrado: Sí',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1400.0, 'https://i.ibb.co/7QVYdS5/TV-Philips-LED-4-K-UHD-Smart-50-50-PUD6654.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1400.0, 'https://i.ibb.co/7QVYdS5/TV-Philips-LED-4-K-UHD-Smart-50-50-PUD6654.png', 8.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo presenta malña conexion del HDMI', '2021-05-10', 1, 900.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-009', 6, 'SAMSUNG', 'UN43AU7000GXPE', 'Tamaño: 43"; Pantalla: LED; Definición: 4K Ultra HD; WiFi: Sí; Bluetooth: Sí; Sistema Operativo: Tizen; Cámara: No; Entradas HDMI: 3; Entradas ethernet: 1',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 1500.0, 'https://i.ibb.co/QQMjX7j/TV-Samsung-LED-4-K-UHD-Smart-43-UN43-AU7000-GXPE.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 1500.0, 'https://i.ibb.co/QQMjX7j/TV-Samsung-LED-4-K-UHD-Smart-43-UN43-AU7000-GXPE.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una SMART TVS ...', 'El equipo muestra una pata de la base rota', '2021-05-10', 1, 1000.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '260022-010', 6, 'SAMSUNG', 'QN50Q60AAGXPE', 'Tamaño: 50"; Pantalla: QLED; Definición: 4K; WiFi: Sí; Bluetooth: Sí; Sistema Operativo: Tizen: Cámara: No; Entradas HDMI: 3; Entradas ethernet: 1; Puertos USB: 2',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 2000.0, 'https://i.ibb.co/hV6fLc4/TV-Samsung-LED-4-K-QLED-Smart-50-QN50-Q60-AAGXPE.png', 8.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 2000.0, 'https://i.ibb.co/hV6fLc4/TV-Samsung-LED-4-K-QLED-Smart-50-QN50-Q60-AAGXPE.png', 8.0, 1)
 								go
 
 /*----------------------AUDIO-------------------------*/
@@ -874,61 +874,61 @@ insert into tb_producto values (dbo.sigIdProd(), '260022-010', 6, 'SAMSUNG', 'QN
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un AUDIFONO ...', 'El equipo muestra audio estatico', '2021-05-10', 1, 40.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-001', 7, 'ANTRYX', 'S. KLIPER 7.1 AGH-8000SR7', 'Audio: 7.1; Inalámbrico: No; Micrófono: Si; Control: No; Plegable: No; Cancelacion de ruido: No',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 120.0, 'https://i.ibb.co/njjJLPR/Aud-fono-Antryx-S-KLIPER-7-1-AGH-8000-SR7.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 120.0, 'https://i.ibb.co/njjJLPR/Aud-fono-Antryx-S-KLIPER-7-1-AGH-8000-SR7.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un AUDIFONO ...', 'El equipo no detecta el microfono', '2021-05-10', 1, 40.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-002', 7, 'ANTRYX', 'Enigma', 'Inalámbrico: No; Micrófono: Sí; Control de volumen: Sí; Plegable: No; Potencia: 112dB ± 3dB; Sensibilidad: -42 ± 3dB; Frecuencia: 20 Hz a 20000 Hz',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 140.0, 'https://i.ibb.co/WnWJxjz/Aud-fono-con-micr-fono-Antryx-Enigma.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 140.0, 'https://i.ibb.co/WnWJxjz/Aud-fono-con-micr-fono-Antryx-Enigma.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un AUDIFONO ...', 'El equipo muestra orejeras desgastadas', '2021-05-10', 1, 100.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-003', 7, 'HYPERX', 'HX-HSCA-RD/AM', 'Inalámbrico: No; Micrófono: Sí; Control de volumenç: Sí; Plegable: No; Sensibilidad: -43dBV (0dB=1V/Pa,1kHz); Impedencia: 65Ω; Cancelacion de ruido:	Sí',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 230.0, 'https://i.ibb.co/F3NWg1d/Aud-fono-Hyper-X-Cloud-Alpha.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 230.0, 'https://i.ibb.co/F3NWg1d/Aud-fono-Hyper-X-Cloud-Alpha.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un AUDIFONO ...', 'El equipo muestra mala conexion', '2021-05-10', 1, 100.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-004', 7, 'HYPERX', 'HX-HSCLS-BL/AM', 'Inalámbrico: No; Micrófono: Si; Control de volumen: Si; Plegable: No; Cancelacion de ruido: No; Sensibilidad: -39dBV (0dB=1V/Pa,1kHz); Impedencia: 41Ω; Cancelacion de ruido: Sí',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 230.0, 'https://i.ibb.co/JrWHQ5h/Aud-fono-Hyper-X-Cloud-for-PS4.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 230.0, 'https://i.ibb.co/JrWHQ5h/Aud-fono-Hyper-X-Cloud-for-PS4.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un AUDIFONO ...', 'El equipo muestra audio estatico', '2021-05-10', 1, 150.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-005', 7, 'CORSAIR', 'HS70 Pro', 'Peso: 330g; tipo de audifonos: Over Ear; Inalámbrico: Sí; Micrófono: Sí; Control de volumen: Sí; Plegable: Sí; Alcance: 12 Mtr; Batería: 16 horas; Sensibilidad: 111dB (+/-3dB); Frecuencia: 20 Hz a 20 kHz',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 340.0, 'https://i.ibb.co/X2hmHmM/Aud-fonos-Gamer-HS70-Pro-Wireless-Cream.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 340.0, 'https://i.ibb.co/X2hmHmM/Aud-fonos-Gamer-HS70-Pro-Wireless-Cream.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un AUDIFONO ...', 'El equipo muetra desgasto', '2021-05-10', 1, 200.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-006', 7, 'LG', 'PM7', 'Alto: 12.7 cm; Ancho: 33.3 cm; Profundidad: 16.3 cm; Inalámbrico: Sí; Potencia	30 W; Funciones destacadas: bluetooth speaker',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 340.0, 'https://i.ibb.co/4NQ73Lr/Parlante-Port-til-LG-XBOOM-Go-PM7-2020.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 340.0, 'https://i.ibb.co/4NQ73Lr/Parlante-Port-til-LG-XBOOM-Go-PM7-2020.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un PARLANTE ...', 'El equipo muestra audio estatico', '2021-05-10', 1, 150.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-007', 7, 'SONY', 'SRS-XB33/BC LA', 'Alto: 9.7 cm; Ancho: 24.6 cm; Inalámbrico: Sí; Iluminación estética: Sí; Tipo de Batería: Batería integrada; Duración de la batería: Hasta 24 horas',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 120.0, 'https://i.ibb.co/Jqb32Ft/Parlante-inal-mbrico-Sony-con-Bluetooth-y-Waterproof-SRS-XB33-Negro.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 120.0, 'https://i.ibb.co/Jqb32Ft/Parlante-inal-mbrico-Sony-con-Bluetooth-y-Waterproof-SRS-XB33-Negro.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un PARLANTE ...', 'El equipo muestra audio estatico', '2021-05-10', 1, 180.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-008', 7, 'PIONEER', 'TS-A1600C', 'Potencia: 350W - 80W RMS; Funciones destacadas: - Tamaño de Tweeter: 29 mm, - Concepto de diseño de sonido Open & Smooth: Experimenta la excelencia en sonido y rendimiento para obtener un sonido óptimo en el automóvil.',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 350.0, 'https://i.ibb.co/crjj58q/Parlante-Pioneer-TS-A1600-C.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 350.0, 'https://i.ibb.co/crjj58q/Parlante-Pioneer-TS-A1600-C.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un PARLANTE ...', 'El equipo muestra audio estatico', '2021-05-10', 1, 150.0, 'no imagen', 5.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-009', 7, 'LOGITECH', 'Z407', 'Total de vatios (pico): 80W; Total de vatios reales (RMS): 40W; Subwoofer: 20W; Altavoces satélite: 2 x 10W; Entrada de 3.5 mm: 1; Entrada micro USB: 1; Bluetooth: 5.0',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 300.0, 'https://i.ibb.co/t3s8PFt/Z407-Bluetooth-Computer-Speakers-with-Subwoofer-and-Wireless-control.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 300.0, 'https://i.ibb.co/t3s8PFt/Z407-Bluetooth-Computer-Speakers-with-Subwoofer-and-Wireless-control.png', 7.0, 1)
 								go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es un PARLANTYE ...', 'El equipo muestra audio estatico', '2021-05-10', 1, 200.0, 'no imagen', 5.0, 1)                               
 go
 insert into tb_producto values (dbo.sigIdProd(), '840188-010', 7, 'LOGITECH', 'G560', 'Total de vatios de pico: 240 W; Total de vatios reales: 120 W; Versión de Bluetooth: 4.1; Confiable radio de acción de 25 metros con línea de visión directa; Entrada USB: 1; Toma de audífonos: 1',
-								'Equipo en buen estado, completamente restaurado', '2020-07-25',  1, 600.0, 'https://i.ibb.co/pzbWbPt/G560.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-07-25',  10, 600.0, 'https://i.ibb.co/pzbWbPt/G560.png', 7.0, 1)
 								go
 
 /*-------------------------------------------------------------------------------*/
@@ -956,6 +956,15 @@ as
 	where p.id_prod=@id
 go
 
+create or alter proc sp_listado_producto_calidad
+as
+	select top 6 id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
+	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
+	inner join  tb_categoria c
+	on p.id_categ=c.id_categ
+	order by calidad
+go
+
 create or alter proc sp_listado_producto_cat
 @cat int
 as
@@ -977,7 +986,7 @@ as
 	where usuario=@user and pass=@pass
 go
 
-exec sp_buscar_user 'madezitha', '12345678'
+exec sp_buscar_user 'clientealex', '12345678'
 go
 
 create or alter proc sp_insertar_usuario
@@ -986,12 +995,13 @@ create or alter proc sp_insertar_usuario
 @apel varchar(100),
 @fec_nac_usua date,
 @usuario varchar(15),
+@tel char(9),
 @pass varchar(100),
 @email_log varchar(100)
 as
-	insert into tb_usuario(id_usua, dni_usua, id_rol, nom_usua, ape_usua, 
+	insert into tb_usuario(id_usua, dni_usua, id_rol, nom_usua, ape_usua, tel_usua,
 	fec_nac_usua, usuario, pass, email_log) values (dbo.sigIdUsua(),
-	@dni, 4, @nom, @apel,@fec_nac_usua, @usuario, @pass, @email_log)
+	@dni, 4, @nom, @apel,@tel,@fec_nac_usua, @usuario, @pass, @email_log)
 go
 
 

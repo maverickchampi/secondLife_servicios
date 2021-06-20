@@ -44,6 +44,35 @@ namespace SecondLife.Controllers
             dr.Close(); cn.Close();
             return temporal;
         }
+        IEnumerable<Producto> producto_calidad()
+        {
+            List<Producto> temporal = new List<Producto>();
+            SqlConnection cn = new SqlConnection(cadena);
+            SqlCommand cmd = new SqlCommand("sp_listado_producto_calidad", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                Producto reg = new Producto();
+                reg.id_prod = dr.GetString(0);
+                reg.codigo = dr.GetString(1);
+                reg.id_categ = dr.GetInt32(2);
+                reg.marca = dr.GetString(3);
+                reg.modelo = dr.GetString(4);
+                reg.descripcion = dr.GetString(5);
+                reg.observacion = dr.GetString(6);
+                reg.fec_compra = dr.GetDateTime(7);
+                reg.stock = dr.GetInt32(8);
+                reg.precio = dr.GetDecimal(9);
+                reg.imagen = dr.GetString(10);
+                reg.calidad = dr.GetDecimal(11);
+                reg.estado = dr.GetInt32(12);
+                temporal.Add(reg);
+            }
+            dr.Close(); cn.Close();
+            return temporal;
+        }
         IEnumerable<Producto> producto_categ(int? cat=null)
         {
             List<Producto> temporal = new List<Producto>();
@@ -225,6 +254,54 @@ namespace SecondLife.Controllers
             return reg;
         }
         /*--------------metodos de actionresult--------------------*/
+        /*--------------------------------------------------------*/
+        /*----------------------ADMIN------------------------------*/
+        public ActionResult Index(string mensaje=null)
+        {
+            //validamos la existencia de la sesion
+            if (Session["carrito"] == null)
+            {
+                Session["carrito"] = new List<Item>();
+                ViewBag.producto = producto_calidad().ToList();
+            }
+           /* else
+            {
+                Session["carrito"] = new List<Item>();
+                foreach(Producto p in producto_calidad().ToList()){
+
+                }
+            }*/
+            if (mensaje != null)
+            {
+                ViewBag.mensaje = mensaje;
+            }
+            ViewBag.producto = producto_calidad().ToList();
+            ViewBag.categoria = lista_categoria().ToList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(string id = null, int stock = 0, int cant = 0)
+        {
+            string mensaje = null;
+            if (cant >= stock)
+            {
+                mensaje = "Ingrese una cantidad menor al stock";
+            }
+            else
+            {
+                addProduct(id, cant); //agregar al carrito de compra
+                mensaje = "Producto agregado";
+            }
+
+            TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
+            ViewBag.producto = producto_calidad().ToList();
+            ViewBag.categoria = lista_categoria().ToList();
+
+            return RedirectToAction("Index", new { mensaje = mensaje });
+            //return null;
+        }
+
+        /*--------------------------------------------------------*/
         /*-----------------PROCESO DE CLIENTE------------*/
         public ActionResult Login()
         {
@@ -245,9 +322,12 @@ namespace SecondLife.Controllers
                 return RedirectToAction("Product", new { mensaje= "Ha iniciado sesion" });
             }
         }
-        public ActionResult RegisterUser()
+        public ActionResult RegisterUser(string mensaje=null)
         {
-
+            if (mensaje != null)
+            {
+                ViewBag.mensaje = mensaje;
+            }
             return View();
         }
         [HttpPost]
@@ -263,13 +343,15 @@ namespace SecondLife.Controllers
                 cmd.Parameters.AddWithValue("@dni", reg.dni_usua);
                 cmd.Parameters.AddWithValue("@nom", reg.nom_usua);
                 cmd.Parameters.AddWithValue("@apel", reg.ape_usua);
+                cmd.Parameters.AddWithValue("@tel", reg.tel_usua);
                 cmd.Parameters.AddWithValue("@fec_nac_usua", reg.fec_nac_usua);
                 cmd.Parameters.AddWithValue("@usuario", reg.usuario);
                 cmd.Parameters.AddWithValue("@pass", reg.pass);
                 cmd.Parameters.AddWithValue("@email_log", reg.email_log);
 
-                int i=cmd.ExecuteNonQuery();
-                if (i < 0)
+                int i = 0;
+                i=cmd.ExecuteNonQuery();
+                if (i > 0)
                 {
                     ViewBag.mensaje = "Te has registrado";
                 }
@@ -281,7 +363,7 @@ namespace SecondLife.Controllers
             {
                 cn.Close();
             }
-            return View();
+            return RedirectToAction("RegisterUser", new { mensaje=ViewBag.mensaje});
         }
         public ActionResult CloseSession()
         {
@@ -364,18 +446,21 @@ namespace SecondLife.Controllers
        [HttpPost]
         public ActionResult Product(string id = null, int stock = 0, int cant = 0)
         {
-            /*if (cant >= stock)
+            string mensaje = null;
+            if (cant >= stock)
             {
-                ViewBag.mensaje = "Ingrese una cantidad menor al stock";
-                return View(producto());
-            }*/
-
-            addProduct(id, cant); //agregar al carrito de compra
+                mensaje = "Ingrese una cantidad menor al stock";
+            }
+            else
+            {
+                addProduct(id, cant); //agregar al carrito de compra
+                mensaje = "Producto agregado";
+            }
 
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
             ViewBag.categoria = lista_categoria().ToList();
 
-            return RedirectToAction("Product", new { mensaje = "Producto agregado"});
+            return RedirectToAction("Product", new { mensaje = mensaje});
             //return null;
         }
        
@@ -392,16 +477,19 @@ namespace SecondLife.Controllers
         [HttpPost]
         public ActionResult Detail_Product(string id = null, int stock = 0, int cant = 0)
         {
-            /*if (cant >= stock)
+
+            string mensaje = null;
+            if (cant >= stock)
             {
-                ViewBag.mensaje = "Ingrese una cantidad menor al stock";
-                return View(producto());
-            }*/
+                mensaje = "Ingrese una cantidad menor al stock";
+            }
+            else
+            {
+                addProduct(id, cant); //agregar al carrito de compra
+                mensaje = "Producto agregado";
+            }
 
-            addProduct(id, cant); //agregar al carrito de compra
-
-            return RedirectToAction("Detail_Product", new { mensaje = "Producto agregado" });
-            //return null;
+            return RedirectToAction("Detail_Product", new { mensaje = mensaje });
         }
         public ActionResult Shopping_cart(string mensaje=null)
         {
@@ -476,8 +564,6 @@ namespace SecondLife.Controllers
             }
             return View();
         }
-        /*--------------------------------------------------------*/
-        /*----------------------ADMIN------------------------------*/
 
     }
 }
