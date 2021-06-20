@@ -327,14 +327,14 @@ namespace SecondLife.Controllers
             return View(temporal.Skip(f * p).Take(f));
         }
 
-       /*[HttpPost]
+       [HttpPost]
         public ActionResult Product(string id = null, int stock = 0, int cant = 0)
         {
-            if (cant >= stock)
+            /*if (cant >= stock)
             {
                 ViewBag.mensaje = "Ingrese una cantidad menor al stock";
                 return View(producto());
-            }
+            }*/
 
             Producto reg = buscar_producto(id);
 
@@ -369,10 +369,10 @@ namespace SecondLife.Controllers
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
             ViewBag.categoria = lista_categoria().ToList();
 
-            return RedirectToAction("RegisterUser", new { mensaje = "Producto agregado" });
+            return RedirectToAction("Product", new { mensaje = "Producto agregado"+temporal.Count() });
             //return null;
-        }*/
-
+        }
+       
         public ActionResult Detail_Product(string id)
         {
             TempData["usuario"] = InicioSesion() as Usuario;

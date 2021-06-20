@@ -547,31 +547,31 @@ insert into tb_producto values (dbo.sigIdProd(), '732685-002', 1, 'Apple', 'Macb
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una laptop ...', 'El equipo muestra placa base destruida, pantalla inservible y teclado con falta de teclas', '2021-05-10', 1,  1200.0, 'no imagen', 2.7, 1)                                     
 go
 insert into tb_producto values (dbo.sigIdProd(), '732685-003', 1, 'Apple', 'Macbook Air 13', 'Procesador: M1; RAM: 8GB; ROM: 256GB; Pantalla: 13" FHD',
-								'Equipo en buen estado, completamente restaurado','2020-07-25', 1, 2000.0, 'https://i.ibb.co/WDCYBxj/laptop6.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado','2020-07-25', 10, 2000.0, 'https://i.ibb.co/WDCYBxj/laptop6.png', 7.0, 1)
  go
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una laptop ...', 'El equipo muestra placa base destruida, pantalla inservible y teclado con falta de teclas', '2021-05-10', 1,  4000.0, 'no imagen', 2.7, 1)    
 go
 insert into tb_producto values (dbo.sigIdProd(), '852147-001', 1, 'ASUS', 'ROG Zephyrus G15', 'Procesador: Ryzen 9 4900HS; RAM: 16GB; ROM: 1TB SSD; Pantalla: 14" QHD',
-								'Equipo en buen estado, completamente restaurado', '2020-11-07', 1, 7000.0, 'https://i.ibb.co/kKcfKmm/laptop7.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2020-11-07', 10, 7000.0, 'https://i.ibb.co/kKcfKmm/laptop7.png', 7.0, 1)
   go                              
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una laptop ...', 'El equipo muestra ligero rapones en la pintura de la parte frontal, software y componentes en buen estado.', '2021-05-10', 1, 3500.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '852147-002', 1, 'ASUS', 'ROG Zephyrus G18', 'Procesador: Ryzen 9 4900HS; RAM: 16GB; ROM: 1TB SSD; Pantalla: 14" QHD',
-								'Equipo en buen estado, pintura refaccionada', '2021-11-13', 1, 6000.0, 'https://i.ibb.co/q051xyd/laptop8.png', 8.5, 1)
+								'Equipo en buen estado, pintura refaccionada', '2021-11-13', 10, 6000.0, 'https://i.ibb.co/q051xyd/laptop8.png', 8.5, 1)
   go                              
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una laptop ...', 'El equipo se muestra sin sistema operativo, y daño en uno de los puertos USB', '2021-05-10', 1, 3000.0, 'no imagen', 4.5, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '852147-003', 1, 'ASUS', 'ROG Zephyrus G20', 'Procesador:Ryzen 9 4900HS; RAM: 16GB; ROM: 1TB SSD; Pantalla: 14" QHD',
-								'Equipo en buen estado, sistema instalado y puerto usb reparado', '2021-11-25', 1, 5500.0, 'https://i.ibb.co/W3RxTMC/laptop9.png', 7.5, 1)
+								'Equipo en buen estado, sistema instalado y puerto usb reparado', '2021-11-25', 10, 5500.0, 'https://i.ibb.co/W3RxTMC/laptop9.png', 7.5, 1)
   go                              
 
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una laptop ...', 'El equipo se muestra sin placa base, pantalla inservible y teclado con falta de teclas', '2021-05-10', 1, 2500.0, 'no imagen', 2.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '852147-004', 1, 'ASUS', 'ROG Zephyrus G21', 'Procesador: Ryzen 9 4900HS; RAM: 16GB; ROM: 1TB SSD; Pantalla: 14" QHD',
-								'Equipo en buen estado, completamente restaurado', '2021-11-30', 1, 5000.0, 'https://i.ibb.co/KK66N8J/laptop10.png', 2.0, 1)
+								'Equipo en buen estado, completamente restaurado', '2021-11-30', 10, 5000.0, 'https://i.ibb.co/KK66N8J/laptop10.png', 2.0, 1)
 								go
 
 
@@ -579,31 +579,31 @@ insert into tb_producto values (dbo.sigIdProd(), '852147-004', 1, 'ASUS', 'ROG Z
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo muestra ligeros raspones en el cuerpo y nivel de tinta al 50%', '2021-05-10', 1, 450.0, 'no imagen', 6.0, 1)
 go
 insert into tb_producto values (dbo.sigIdProd(), '524786-001', 2, 'HP', 'Multifuncional Ink Tank 218', 'Capacidad: 60 hojas; Wi-Fi: No; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, pintura refaccionada y tinta al 100%', '2020-07-07', 1, 700.0, 'https://i.ibb.co/vJBbzRj/impresora1.png', 8.5, 1)
+								'Equipo en buen estado, pintura refaccionada y tinta al 100%', '2020-07-07', 10, 700.0, 'https://i.ibb.co/vJBbzRj/impresora1.png', 8.5, 1)
 go
                         
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo se muestra con daños en la bandeja y sin deposito de tinta', '2021-05-10', 1, 400.0, 'no imagen', 4.5, 1)    	                                
 go
 insert into tb_producto values (dbo.sigIdProd(), '524786-002', 2, 'HP', 'Multifuncional Ink Tank 415', 'Capacidad: 60 hojas; Wi-Fi: No; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, partes refaccionadas y tinta al 100%', '2020-07-15', 1, 650.0, 'https://i.ibb.co/5jfw7M5/impresora2.png', 7.5, 1)
+								'Equipo en buen estado, partes refaccionadas y tinta al 100%', '2020-07-15', 10, 650.0, 'https://i.ibb.co/5jfw7M5/impresora2.png', 7.5, 1)
 go
                                
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo muestra sistema de impresion dañado, partes del cuerpo rotas y sin deposito de tinta', '2021-05-10', 1, 250.0, 'no imagen', 2.7, 1)                                 
 go
 insert into tb_producto values (dbo.sigIdProd(), '524786-003', 2, 'HP', 'Multifuncional Ink Tank 625', 'Capacidad: 60 hojas; Wi-Fi: No; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, completamente restaurado y tinta al 100%','2020-07-25', 1, 550.0, 'https://i.ibb.co/k4XF5B7/impresora3.png', 7.0, 1)
+								'Equipo en buen estado, completamente restaurado y tinta al 100%','2020-07-25', 10, 550.0, 'https://i.ibb.co/k4XF5B7/impresora3.png', 7.0, 1)
  go
  
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo muestra ligeros raspones en el cuerpo y nivel de tinta al 50%', '2021-05-10', 1, 300.0, 'no imagen', 6.0, 1)                                    
 go
 insert into tb_producto values (dbo.sigIdProd(), '374905-001', 2, 'CANON', 'Multifuncional Color G2112', 'Capacidad: 100 hojas; Wi-Fi: No; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, pintura refaccionada y tinta al 100%', '2020-07-07', 1, 500.0, 'https://i.ibb.co/ZdZPpSQ/impresora4.png', 8.5, 1)
+								'Equipo en buen estado, pintura refaccionada y tinta al 100%', '2020-07-07', 10, 500.0, 'https://i.ibb.co/ZdZPpSQ/impresora4.png', 8.5, 1)
  go
  
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo se muestra con daños en la bandeja y sin deposito de tinta', '2021-05-10', 1, 250.0, 'no imagen', 4.5, 1)                                    
 go
 insert into tb_producto values (dbo.sigIdProd(), '374905-002', 2, 'CANON', 'Multifuncional Color G2114', 'Capacidad: 100 hojas; Wi-Fi: No; Bluetooth: No; NFC: No',
-								'Equipo en buen estado, partes refaccionadas y tinta al 100%', '2020-07-15', 1,  450.0, 'https://i.ibb.co/NLBT7hK/impresora5.png', 7.5, 1)
+								'Equipo en buen estado, partes refaccionadas y tinta al 100%', '2020-07-15', 10,  450.0, 'https://i.ibb.co/NLBT7hK/impresora5.png', 7.5, 1)
  go
  
 insert into tb_registro values (dbo.sigIdRegis(), 1, 'us001', 'Es una impresora ...', 'El equipo muestra sistema de impresion dañado, partes del cuerpo rotas y sin deposito de tinta', '2021-05-10', 1, 150.0, 'no imagen', 2.7, 1)                                    
@@ -977,7 +977,7 @@ as
 	where usuario=@user and pass=@pass
 go
 
-exec sp_buscar_user 'clientealex', '12345678'
+exec sp_buscar_user 'madezitha', '12345678'
 go
 
 create or alter proc sp_insertar_usuario
@@ -989,9 +989,9 @@ create or alter proc sp_insertar_usuario
 @pass varchar(100),
 @email_log varchar(100)
 as
-	insert into tb_usuario(id_usua, dni_usua, id_rol, nom_usua, ape_usua, tel_usua,
+	insert into tb_usuario(id_usua, dni_usua, id_rol, nom_usua, ape_usua, 
 	fec_nac_usua, usuario, pass, email_log) values (dbo.sigIdUsua(),
-	@dni, 4, @nom, @apel, '',@fec_nac_usua, @usuario, @pass, @email_log)
+	@dni, 4, @nom, @apel,@fec_nac_usua, @usuario, @pass, @email_log)
 go
 
 
