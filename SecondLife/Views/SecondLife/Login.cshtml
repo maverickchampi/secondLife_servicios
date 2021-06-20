@@ -1,0 +1,39 @@
+﻿@model SecondLife.Models.Usuario
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Iniciar sesión</h2>
+
+
+@using (Html.BeginForm()) 
+{ 
+<table style="margin:0 auto">
+    <tr>
+        <td>Login</td>
+        <td>@Html.TextBox("user", "")</td>
+    </tr>
+    <tr>
+        <td>Clave</td>
+        <td>@Html.TextBox("pass", "", new { @type = "password" })</td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="Aceptar" class="btn btn-default" /> |
+            @Html.ActionLink("Retornar", "Product", null, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+    @ViewBag.mensaje
+</table>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Product")
+</div>
+<div>
+    @Html.ActionLink("Registrar", "RegisterUser")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

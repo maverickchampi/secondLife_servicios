@@ -1,0 +1,105 @@
+﻿@model SecondLife.Models.Usuario
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Profile</h2>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_usua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_usua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dni_usua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dni_usua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.id_rol)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_rol)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom_usua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom_usua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ape_usua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ape_usua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tel_usua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tel_usua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fec_nac_usua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fec_nac_usua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email_log)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email_log)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Retornar a producto", "Product")
+</p>

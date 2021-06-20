@@ -12,7 +12,7 @@ namespace SecondLife.Models
         public int id_rol { get; set; }
         public string nom_usua { get; set; }
         public string ape_usua { get; set; }
-        public string tel_usua { get; set; }
+        public string  tel_usua { get; set; }
         public DateTime fec_nac_usua { get; set; }
         public string usuario { get; set; }
         public string pass { get; set; }

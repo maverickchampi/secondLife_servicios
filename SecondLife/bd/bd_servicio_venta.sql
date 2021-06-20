@@ -50,12 +50,12 @@ create table tb_usuario (
 	id_rol int not null,
 	nom_usua  varchar(100) not null,
 	ape_usua varchar(100) not null,
-	tel_usua char(9) not null,
+	tel_usua char(9),
 	fec_nac_usua date not null,
 	usuario varchar(15) not null, 
 	pass varchar(100) not null,  
 	email_log varchar(100) not null,
-    estado int not null default 1
+    estado int default 1
 )
 go
 alter table tb_usuario
@@ -978,6 +978,31 @@ as
 go
 
 exec sp_buscar_user 'clientealex', '12345678'
+go
+
+create or alter proc sp_insertar_usuario
+@dni char(8),
+@nom varchar(100),
+@apel varchar(100),
+@fec_nac_usua date,
+@usuario varchar(15),
+@pass varchar(100),
+@email_log varchar(100)
+as
+	insert into tb_usuario(id_usua, dni_usua, id_rol, nom_usua, ape_usua, tel_usua,
+	fec_nac_usua, usuario, pass, email_log) values (dbo.sigIdUsua(),
+	@dni, 4, @nom, @apel, '',@fec_nac_usua, @usuario, @pass, @email_log)
+go
+
+
+create or alter proc sp_lista_usuario
+as
+	select*from tb_usuario
+go
+
+exec sp_lista_usuario
+go
+
 
 /*-------------------------------------------------------------------------------*/
 /*

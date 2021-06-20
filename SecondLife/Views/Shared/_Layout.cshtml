@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @using SecondLife.Models
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,6 +29,31 @@
             </div>
         </div>
     </div>
+
+    <!--vista de usuario-->
+    <div>
+        <div style="width:80%;display:inline-block; float:right;"></div>
+        <div style="width:20%;display:inline-block;float:right; text-align:center">
+            <!--en esta seccion visualizamos al usuario-->
+            @{
+                Usuario u = TempData["usuario"] as Usuario;
+
+            }
+
+            <br />
+            @if (@u == null)
+            {
+                @Html.ActionLink("Inicio de Sesion", "Login", "SecondLife")
+            }
+            else
+            {
+                <em>Bienvenido @u.usuario</em><br />
+                @Html.ActionLink("Ver perfil", "Profile", "SecondLife", new { id= u.id_usua }, null) <br />
+                @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife")
+            }
+        </div>
+    </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />

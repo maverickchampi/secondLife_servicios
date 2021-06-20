@@ -10,6 +10,6 @@ namespace SecondLife.Models
         public string id_prod { get; set; }
         public decimal precio { get; set; }
         public int cant { get; set; }
-        public decimal sub_total {get; set;}
+        public decimal sub_total { get { return cant * precio; } }
     }
 }
