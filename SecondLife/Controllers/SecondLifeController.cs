@@ -407,10 +407,7 @@ namespace SecondLife.Controllers
                 temporal=temporal.Where(m => m.marca.StartsWith(marca,
                     StringComparison.CurrentCultureIgnoreCase)).ToList();
             }
-            else
-            {
-                temporal = producto_carrito().ToList();
-            }
+
 
             int f = 12;
             int c = temporal.Count();
