@@ -17,7 +17,7 @@
 
 
 <div class="">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Product", "SecondLife", FormMethod.Get))
     {
         @Html.RadioButton("id_categ", 0, "Todos los productos")<label>Todos los productos</label><br />
         if (ViewBag.categoria != null)
