@@ -6,8 +6,11 @@
 
 <h2>Detail_Product</h2>
 
+<!--mensaje-->
+<p>@ViewBag.mensaje</p>
+
 <div>
-    <h4>Producto</h4>
+    <p> @Html.ActionLink("Regresar", "Product")</p>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -116,7 +119,14 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div>
+
+    @using (Html.BeginForm("Detail_Product", "SecondLife", FormMethod.Post))
+    {
+        @Html.Hidden("id", Model.id_prod)
+        @Html.Hidden("stock", Model.stock)
+        @Html.TextBox("cant", Model.stock)
+        <input type="submit" value="Procesar" class="btn btn-primary" />
+    }
+</div>
+

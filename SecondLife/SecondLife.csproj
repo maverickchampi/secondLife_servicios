@@ -179,6 +179,7 @@
     <Content Include="Views\SecondLife\RegisterUser.cshtml" />
     <Content Include="Views\SecondLife\Login.cshtml" />
     <Content Include="Views\SecondLife\Profile.cshtml" />
+    <Content Include="Views\SecondLife\Shopping_cart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SecondLife.Models.Item>
+
+@{
+    ViewBag.Title = "Shopping_cart";
+}
+
+<h2>Carrito de compra</h2>
+
+@ViewBag.mensaje
+<br />
+<br />
+<div style="text-align:right">
+    <p>Precio de producto : PEN @ViewBag.subtotal </p>
+    <p>Descuento (10%) : PEN @ViewBag.descuento </p>
+    <p>Total : PEN @ViewBag.total</p>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Producto
+        </th>
+        <th>
+            Imagen
+        </th>
+        <th>
+            Precio
+        </th>
+        <th>
+            Cantidad
+        </th>
+        <th>
+            Subtotal
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count()>0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nom_prod)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.imagen)" width="100px" />
+                </td>
+                <td>
+                    PEN @Html.DisplayFor(modelItem => item.precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cant)
+                </td>
+                <td>
+                    PEN  @Html.DisplayFor(modelItem => item.sub_total)
+                </td>
+                <td>
+                    @Html.ActionLink("Eliminar", "Delete", new {  id=item.id_prod, nombre=item.nom_prod  })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td>
+                <p>No ha registrado ningun producto</p>
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.ActionLink("Continuar comprando", "Product")
+    <br />
+    @Html.ActionLink("Realizar pago", "Pay_Data")
+</div>

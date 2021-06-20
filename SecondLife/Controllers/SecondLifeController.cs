@@ -112,7 +112,7 @@ namespace SecondLife.Controllers
                 reg.id_rol = dr.GetInt32(2);
                 reg.nom_usua = dr.GetString(3);
                 reg.ape_usua = dr.GetString(4);
-                reg.tel_usua = dr.GetString(5)??"hhhh";
+                reg.tel_usua = dr.GetString(5);
                 reg.fec_nac_usua = dr.GetDateTime(6);
                 reg.usuario = dr.GetString(7);
                 reg.pass = dr.GetString(8);
@@ -134,7 +134,41 @@ namespace SecondLife.Controllers
                 return (Session["login"] as Usuario);
             }
         }
+        private void addProduct(string id = null, int cant = 0)
+        {
+            Producto reg = buscar_producto(id);
 
+            Item item = new Item();
+            item.imagen = reg.imagen;
+            item.nom_prod = reg.marca + " " + reg.modelo;
+            item.id_prod = reg.id_prod;
+            item.precio = reg.precio;
+            item.cant = cant;
+
+            List<Item> temporal = (List<Item>)Session["carrito"];
+
+            if (temporal.Count() > 0)
+            {
+                Boolean tag = true;
+                foreach (Item c in temporal)
+                {
+                    if (c.id_prod == item.id_prod)
+                    {
+                        c.cant += item.cant;
+                        tag = false;
+                        break;
+                    }
+                }
+                if (tag)
+                {
+                    temporal.Add(item);
+                }
+            }
+            else
+            {
+                temporal.Add(item);
+            }
+        }
         /*--------------busquedas--------------------*/
         Producto buscar_producto(string id)
         {
@@ -336,48 +370,114 @@ namespace SecondLife.Controllers
                 return View(producto());
             }*/
 
-            Producto reg = buscar_producto(id);
+            addProduct(id, cant); //agregar al carrito de compra
 
-            Item item = new Item();
-            item.id_prod = reg.id_prod;
-            item.precio = reg.precio;
-            item.cant = cant;
-
-            List<Item> temporal = (List<Item>)Session["carrito"];
-
-            if (temporal.Count()>0)
-            {
-                foreach (Item c in temporal)
-                {
-                    if (c.id_prod.Equals(item.id_prod))
-                    {
-                        c.cant += item.cant;
-                    }
-                    else
-                    {
-                        temporal.Add(item);
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                temporal.Add(item);
-            }
-            
-            ViewBag.mensaje = "Producto agregado";
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
             ViewBag.categoria = lista_categoria().ToList();
 
-            return RedirectToAction("Product", new { mensaje = "Producto agregado"+temporal.Count() });
+            return RedirectToAction("Product", new { mensaje = "Producto agregado"});
             //return null;
         }
        
-        public ActionResult Detail_Product(string id)
+        public ActionResult Detail_Product(string mensaje, string id)
         {
             TempData["usuario"] = InicioSesion() as Usuario;
-
+            if (mensaje != null)
+            {
+                ViewBag.mensaje = mensaje;
+            }
             return View(buscar_producto(id));
         }
+ 
+        [HttpPost]
+        public ActionResult Detail_Product(string id = null, int stock = 0, int cant = 0)
+        {
+            /*if (cant >= stock)
+            {
+                ViewBag.mensaje = "Ingrese una cantidad menor al stock";
+                return View(producto());
+            }*/
+
+            addProduct(id, cant); //agregar al carrito de compra
+
+            return RedirectToAction("Detail_Product", new { mensaje = "Producto agregado" });
+            //return null;
+        }
+        public ActionResult Shopping_cart(string mensaje=null)
+        {
+            if (mensaje != null)
+            {
+                ViewBag.mensaje = mensaje;
+            }
+            TempData["usuario"] = InicioSesion() as Usuario;
+            List<Item> temporal = (List<Item>)Session["carrito"];
+            Decimal total_prod = 0;
+            Decimal descuento = 0;
+            Decimal total = 0;
+            if (temporal!=null)
+            {
+                foreach (Item t in temporal)
+                {
+                    total_prod += t.sub_total;
+                }
+                if (total_prod > 10)
+                {
+                    descuento = 10 % total_prod;
+                    total = total_prod - descuento;
+                }
+            }
+
+            ViewBag.subtotal = total_prod;
+            ViewBag.descuento = descuento;
+            ViewBag.total = total;
+            return View(temporal);
+        }
+        public ActionResult Delete(string id=null, string nombre=null)
+        {
+            List<Item> temporal = (List<Item>)Session["carrito"];
+            Item reg = temporal.Find(i => i.id_prod == id);
+            temporal.Remove(reg);
+
+            return RedirectToAction("Shopping_cart", new { mensaje = "Producto (" + nombre + ") fue eliminado" });
+        }
+        /*--------------------Proceso de pago---------------------*/
+        public ActionResult Pay_Data()
+        {         
+            if (InicioSesion()==null)
+            {
+                return RedirectToAction("Login", new { pay=false });
+            }
+            else
+            {
+                TempData["usuario"] = InicioSesion() as Usuario;
+                return View();
+            }
+        }
+        public ActionResult Payment_Methods()
+        {
+            TempData["usuario"] = InicioSesion() as Usuario;
+            return View();
+        }
+        public ActionResult Make_Payment()
+        {
+            TempData["usuario"] = InicioSesion() as Usuario;
+            List<Item> temporal = (List<Item>)Session["carrito"];
+            try
+            {
+
+            }
+            catch (SqlException e)
+            {
+
+            }
+            finally
+            {
+                Session["carrito"] = null;
+            }
+            return View();
+        }
+        /*--------------------------------------------------------*/
+        /*----------------------ADMIN------------------------------*/
+
     }
 }
