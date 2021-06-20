@@ -962,7 +962,10 @@ as
 	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
 	inner join  tb_categoria c
 	on p.id_categ=c.id_categ
-	order by calidad
+	order by calidad desc
+go
+
+exec sp_listado_producto_calidad
 go
 
 create or alter proc sp_listado_producto_cat

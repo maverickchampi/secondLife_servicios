@@ -223,10 +223,6 @@ namespace SecondLife.Controllers
             dr.Close(); cn.Close();
             return reg;
         }
-
-        /*--------------metodos de actionresult--------------------*/
-        /*--------------------------------------------------------*/
-        /*----------------------ADMIN------------------------------*/
         public List<Producto> producto_carrito()
         {
             List<Producto> producto = new List<Producto>();
@@ -245,6 +241,9 @@ namespace SecondLife.Controllers
             }
             return producto;
         }
+        /*--------------metodos de actionresult--------------------*/
+        /*--------------------------------------------------------*/
+        /*----------------------ADMIN------------------------------*/
         public ActionResult Index(string mensaje=null)
         {
             //validamos la existencia de la sesion
@@ -263,6 +262,7 @@ namespace SecondLife.Controllers
                 ViewBag.mensaje = mensaje;
             }
 
+            TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
             ViewBag.categoria = lista_categoria().ToList();
             return View();
         }
@@ -270,7 +270,7 @@ namespace SecondLife.Controllers
         public ActionResult Index(string id = null, int stock = 0, int cant = 0)
         {
             string mensaje = null;
-            if (cant >= stock)
+            if (cant > stock)
             {
                 mensaje = "Ingrese una cantidad menor al stock";
             }
@@ -295,7 +295,7 @@ namespace SecondLife.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string user, string pass)
+        public ActionResult Login(string user, string pass,Boolean pay= false)
         {
             Usuario reg = buscar_usuario(user, pass);
             if (reg == null)
@@ -306,7 +306,14 @@ namespace SecondLife.Controllers
             else
             {
                 Session["login"] = reg;
-                return RedirectToAction("Product", new { mensaje= "Ha iniciado sesion" });
+                if (pay)
+                {
+                    return RedirectToAction("Pay_Data");
+                }
+                else
+                {
+                    return RedirectToAction("Index", new { mensaje = "Ha iniciado sesion" });
+                }
             }
         }
         public ActionResult RegisterUser(string mensaje=null)
@@ -384,7 +391,6 @@ namespace SecondLife.Controllers
             }
             else
             {
-                ViewBag.mensaje = producto_carrito().Count();
                 temporal = producto_carrito().ToList();
             }
 
@@ -442,7 +448,7 @@ namespace SecondLife.Controllers
         public ActionResult Product(string id = null, int stock = 0, int cant = 0)
         {
             string mensaje = null;
-            if (cant >= stock)
+            if (cant>stock )
             {
                 mensaje = "Ingrese una cantidad menor al stock";
             }
@@ -487,7 +493,7 @@ namespace SecondLife.Controllers
         {
 
             string mensaje = null;
-            if (cant >= stock)
+            if (cant > stock)
             {
                 mensaje = "Ingrese una cantidad menor al stock";
             }
@@ -541,7 +547,7 @@ namespace SecondLife.Controllers
         {         
             if (InicioSesion()==null)
             {
-                return RedirectToAction("Login", new { pay=false });
+                return RedirectToAction("Login", new { pay=true });
             }
             else
             {
