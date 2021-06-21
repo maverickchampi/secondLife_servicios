@@ -127,6 +127,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Direccion.cs" />
+    <Compile Include="Models\Distrito.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Project.cs" />
@@ -178,6 +180,8 @@
     <Content Include="Views\SecondLife\Shopping_cart.cshtml" />
     <Content Include="Views\SecondLife\RegisterUser.cshtml" />
     <Content Include="Views\SecondLife\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialAddress.cshtml" />
+    <Content Include="Views\SecondLife\_PartialCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

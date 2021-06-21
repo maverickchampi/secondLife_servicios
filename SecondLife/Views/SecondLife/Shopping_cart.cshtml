@@ -5,10 +5,10 @@
 }
 
 <div style="min-height: calc(100vh - 130px);">
+
     <h2>Carrito de compra</h2>
 
-
-    <div class="alert alert-warning alert-dismissible  show" role="alert">
+    <div class="alert alert-warning alert-dismissible  show fade " role="alert">
         @if (@ViewBag.mensaje == null) { 
         <span> Bienvenido a tu carrito</span>
         }else{
@@ -18,9 +18,6 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-
-    <br />
-    <br />
 
     <table class="table">
         <tr>
@@ -66,12 +63,14 @@
                         @Html.ActionLink("X", "Delete", new { id = item.id_prod, nombre = item.nom_prod }, new { @class = "btn btn-danger" })
                     </td>
                 </tr>
+                ViewBag.id = item.id_prod;
+                ViewBag.nombre = item.nom_prod;
             }
         }
         else
         {
             <tr>
-                <td>
+                <td colspan="6">
                     <p>No ha registrado ningun producto</p>
                 </td>
             </tr>
@@ -86,6 +85,6 @@
 
     <div>
         @Html.ActionLink("< Continuar comprando", "Product", new {/* id = item.id_prod, nombre = item.nom_prod*/ }, new { @class = "btn btn-info pd-20" })
-        @Html.ActionLink("Realizar pago >", "Pay_Data", new { /*id = item.id_prod, nombre = item.nom_prod*/  }, new { @class = "btn btn-success pd-20" })
+        @Html.ActionLink("Realizar pago >", "Pay_Data", new { id = (string)@ViewBag.id , nombre = (string)@ViewBag.nombre, total=@ViewBag.total }, new { @class = "btn btn-success pd-20" })
     </div>
 </div>

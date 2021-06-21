@@ -122,6 +122,7 @@ namespace SecondLife.Controllers
             dr.Close(); cn.Close();
             return temporal;
         }
+        
         Usuario InicioSesion()
         {
             if (Session["login"] == null)
@@ -322,6 +323,7 @@ namespace SecondLife.Controllers
             }
             return View();
         }
+
         [HttpPost]
         public ActionResult RegisterUser(Usuario reg)
         {
@@ -357,11 +359,13 @@ namespace SecondLife.Controllers
             }
             return RedirectToAction("RegisterUser", new { mensaje=ViewBag.mensaje});
         }
+
         public ActionResult CloseSession()
         {
             Session["login"] = null;
             return RedirectToAction("Product", new { mensaje = "La sesión fue cerrada" });
         }
+
         //perfil
         public ActionResult Profile(string id = null)
         {
@@ -370,6 +374,7 @@ namespace SecondLife.Controllers
             Usuario reg = buscar_usuario_id(id);
             return View(reg);
         }
+
         /*---------------PROCESO DE PRODUCTO------------------------------------*/
         public ActionResult Product(string mensaje=null, int p =0, int id_categ=0,string marca="", string flecha = "")
         {
@@ -381,7 +386,6 @@ namespace SecondLife.Controllers
             }
 
             IEnumerable<Producto> temporal = producto();
-
             //validamos la existencia de la sesion
             if (Session["carrito"] == null)
             {
@@ -391,7 +395,6 @@ namespace SecondLife.Controllers
             {
                 temporal = producto_carrito(producto().ToList()).ToList();
             }
-
 
             ViewBag.categoria = lista_categoria().ToList();
 
@@ -405,7 +408,6 @@ namespace SecondLife.Controllers
                 temporal=temporal.Where(m => m.marca.StartsWith(marca,
                     StringComparison.CurrentCultureIgnoreCase)).ToList();
             }
-
 
             int f = 12;
             int c = temporal.Count();
@@ -500,6 +502,7 @@ namespace SecondLife.Controllers
 
             return RedirectToAction("Detail_Product", new { mensaje = mensaje });
         }
+
         public ActionResult Shopping_cart(string mensaje=null)
         {
             if (mensaje != null)
@@ -508,14 +511,14 @@ namespace SecondLife.Controllers
             }
             TempData["usuario"] = InicioSesion() as Usuario;
             List<Item> temporal = (List<Item>)Session["carrito"];
-            Decimal total_prod = 0;
-            Decimal descuento = 0;
-            Decimal total = 0;
+            double total_prod = 0.0;
+            double descuento = 0.0;
+            double total = 0.0;
             if (temporal!=null)
             {
                 foreach (Item t in temporal)
                 {
-                    total_prod += t.sub_total;
+                    total_prod +=(double)t.sub_total;
                 }
                 if (total_prod > 10)
                 {
@@ -523,22 +526,29 @@ namespace SecondLife.Controllers
                     total = total_prod - descuento;
                 }
             }
-
             ViewBag.subtotal = total_prod;
             ViewBag.descuento = descuento;
             ViewBag.total = total;
             return View(temporal);
         }
+
         public ActionResult Delete(string id=null, string nombre=null)
         {
-            List<Item> temporal = (List<Item>)Session["carrito"];
-            Item reg = temporal.Find(i => i.id_prod == id);
-            temporal.Remove(reg);
+            if (Session["carrito"] != null)
+            {
+                List<Item> temporal = (List<Item>)Session["carrito"];
+                Item reg = temporal.Find(i => i.id_prod == id);
+                temporal.Remove(reg);
 
-            return RedirectToAction("Shopping_cart", new { mensaje = "Producto (" + nombre + ") fue eliminado" });
+                return RedirectToAction("Shopping_cart", new { mensaje = "Producto (" + nombre + ") fue eliminado" });
+            }
+            else
+            {
+                return RedirectToAction("Shopping_cart");
+            }
         }
         /*--------------------Proceso de pago---------------------*/
-        public ActionResult Pay_Data()
+        public ActionResult Pay_Data(string id=null, string nombre=null, double total=0)
         {         
             if (InicioSesion()==null)
             {
@@ -546,11 +556,17 @@ namespace SecondLife.Controllers
             }
             else
             {
+                ViewBag.total = total;
+                Usuario reg = InicioSesion() as Usuario;
+                ViewBag.usuario = reg.nom_usua + " " + reg.ape_usua;
+                ViewBag.actual = DateTime.Now;
 
                 TempData["usuario"] = InicioSesion() as Usuario;
+
                 return View();
             }
         }
+
         public ActionResult Payment_Methods()
         {
             TempData["usuario"] = InicioSesion() as Usuario;

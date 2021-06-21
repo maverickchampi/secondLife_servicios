@@ -192,8 +192,8 @@ go
 /*----------------tabla direccion----------------*/
 create table tb_direccion(
 	id_direc char(5) not null,
-    latitud decimal not null,
-    longitud decimal not null,
+    /*latitud decimal not null,
+    longitud decimal not null,*/
     desc_direc varchar(256) not null,
     etiqueta varchar(15) not null,
     id_dist  int not null,
