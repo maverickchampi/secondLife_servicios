@@ -223,12 +223,11 @@ namespace SecondLife.Controllers
             dr.Close(); cn.Close();
             return reg;
         }
-        public List<Producto> producto_carrito()
+        public List<Producto> producto_carrito( List<Producto> producto)
         {
-            List<Producto> producto = new List<Producto>();
             List<Item> temporal = (List<Item>)Session["carrito"];
 
-            foreach (Producto p in producto_calidad().ToList())
+            foreach (Producto p in producto.ToList())
             {
                 foreach (Item i in temporal)
                 {
@@ -254,7 +253,7 @@ namespace SecondLife.Controllers
             }
             else
             {
-                ViewBag.producto = producto_carrito().ToList();
+                ViewBag.producto = producto_carrito(producto_calidad().ToList()).ToList();
             }              
            
             if (mensaje != null)
@@ -391,7 +390,7 @@ namespace SecondLife.Controllers
             }
             else
             {
-                temporal = producto_carrito().ToList();
+                temporal = producto_carrito(producto().ToList()).ToList();
             }
 
 
@@ -548,6 +547,7 @@ namespace SecondLife.Controllers
             }
             else
             {
+
                 TempData["usuario"] = InicioSesion() as Usuario;
                 return View();
             }
