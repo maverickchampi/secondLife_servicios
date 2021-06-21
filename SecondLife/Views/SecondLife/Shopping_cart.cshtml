@@ -7,7 +7,18 @@
 <div style="min-height: calc(100vh - 130px);">
     <h2>Carrito de compra</h2>
 
-    @ViewBag.mensaje
+
+    <div class="alert alert-warning alert-dismissible  show" role="alert">
+        @if (@ViewBag.mensaje == null) { 
+        <span> Bienvenido a tu carrito</span>
+        }else{
+            @ViewBag.mensaje
+        }
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
     <br />
     <br />
 
@@ -75,6 +86,6 @@
 
     <div>
         @Html.ActionLink("< Continuar comprando", "Product", new {/* id = item.id_prod, nombre = item.nom_prod*/ }, new { @class = "btn btn-info pd-20" })
-        @Html.ActionLink("Realizar pago >", "Pay_Data", new { /*id = item.id_prod, nombre = item.nom_prod*/ }, new { @class = "btn btn-success pd-20" })
+        @Html.ActionLink("Realizar pago >", "Pay_Data", new { /*id = item.id_prod, nombre = item.nom_prod*/  }, new { @class = "btn btn-success pd-20" })
     </div>
 </div>
