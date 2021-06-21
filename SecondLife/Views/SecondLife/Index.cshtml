@@ -6,7 +6,7 @@
 
 
 <h1>
-   Bienvenido a SecondLife!
+   SecondLife
 </h1>
 <div class="container">
     <div class="navbar-collapse collapse show menu">
@@ -20,7 +20,20 @@
         </ul>
     </div>
 
-    <p>@ViewBag.mensaje</p>
+    <div class="alert alert-info alert-dismissible show" role="alert">
+        @if (@ViewBag.mensaje == null)
+        {
+            <span> Bienvenido a SecondLife</span>
+        }
+        else
+        {
+            @ViewBag.mensaje
+        }
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
     <div class="row row-cols-1 row-cols-md-3 ">
         @foreach (var item in ViewBag.producto as List<Producto>)
         {
@@ -32,13 +45,13 @@
                             @Html.ActionLink(item.marca + item.modelo, "Detail_Product", new { id = item.id_prod }, new { @class = "card-title" })
                         </p>
                         <p class="card-text" style="height:90px">@Html.DisplayFor(modelItem => item.descripcion)</p>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.precio)</p>
+                        <p class="card-text">PEN @Html.DisplayFor(modelItem => item.precio)</p>
                         @using (Html.BeginForm("Index", "SecondLife", FormMethod.Post))
                         {
                             @Html.Hidden("id", item.id_prod)
                             @Html.Hidden("stock", item.stock)
-                            @Html.TextBox("cant", item.stock)
-                            <input type="submit" value="Procesar" class="btn btn-primary" style="margin-bottom:10px" />
+                            @Html.TextBox("cant",0, new { type = "number", min="0",max=item.stock })
+                            <input type="submit" value="Agregar" class="btn btn-primary" style="margin-bottom:10px" />
                         }
                     </div>
                 </div>
@@ -46,3 +59,10 @@
         }
     </div>
 </div>
+
+<script>
+    setTimeout(() => {
+        document.querySelector('.alert').classList.add('fade');
+        document.querySelector('.alert').classList.add('hidden');
+    },3000)
+</script>

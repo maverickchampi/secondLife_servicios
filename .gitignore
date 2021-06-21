@@ -2,3 +2,5 @@
 /.vs
 /.vs/SecondLife
 /.vs/*
+SecondLife/bin
+SecondLife/obj

@@ -8,7 +8,8 @@
 
     <h2>Carrito de compra</h2>
 
-    <div class="alert alert-warning alert-dismissible  show fade " role="alert">
+    <div class="alert alert-info alert-dismissible  show" role="alert">
+
         @if (@ViewBag.mensaje == null) { 
         <span> Bienvenido a tu carrito</span>
         }else{
@@ -88,3 +89,10 @@
         @Html.ActionLink("Realizar pago >", "Pay_Data", new { id = (string)@ViewBag.id , nombre = (string)@ViewBag.nombre, total=@ViewBag.total }, new { @class = "btn btn-success pd-20" })
     </div>
 </div>
+
+<script>
+    setTimeout(() => {
+        document.querySelector('.alert').classList.add('fade');
+        document.querySelector('.alert').classList.add('hidden');
+    },3000)
+</script>
