@@ -5,16 +5,13 @@
 }
 
 
-<h1>
-   SecondLife
-</h1>
 <div class="container">
-    <div class="navbar-collapse collapse show menu">
-        <ul class="navbar-nav" style="display: flex;padding: 0;margin-left: -35px;padding-bottom: 20px;">
+    <div class="navbar-collapse fondo-menu text-white collapse show menu">
+        <ul class="navbar-nav" style="display: flex;padding: 14px 0 10px;margin-bottom: 10px;width: 100%;justify-content: center;">
             @foreach (var item in ViewBag.categoria as List<Categoria>)
             {
                 <li class="nav-item" style="list-style: none;">
-                    @Html.ActionLink(item.nombre, "Product", new { id_categ = item.id_categ }, new { @class = "color-link" })
+                    @Html.ActionLink(item.nombre, "Product", new { id_categ = item.id_categ }, new { @class = "color-link", @style = "text-decoration: none;" })
                 </li>
             }
         </ul>
@@ -34,23 +31,25 @@
         </button>
     </div>
 
+    <img class="img-fluid banner-principal" style="width:100%;margin-bottom:20px" src="https://www.crushpixel.com/big-static17/preview4/big-sale-banner-sale-discounts-2572521.jpg" />
+
     <div class="row row-cols-1 row-cols-md-3 ">
         @foreach (var item in ViewBag.producto as List<Producto>)
         {
-            <div class="col col-sm-4 mb-4 product rounded" style="height: 450px;">
+            <div class="col col-sm-4 mb-4 product rounded" style="height: 500px;">
                 <div class="card card-sm-3 h-100  b-card" style="text-align: center;">
                     <img class="card-img-top img-index" src="@Url.Content(item.imagen)" />
                     <div class="card-body">
                         <p class="h-link">
                             @Html.ActionLink(item.marca + item.modelo, "Detail_Product", new { id = item.id_prod }, new { @class = "card-title" })
                         </p>
-                        <p class="card-text" style="height:90px">@Html.DisplayFor(modelItem => item.descripcion)</p>
+                        <p class="card-text" style="height:100px">@Html.DisplayFor(modelItem => item.descripcion)</p>
                         <p class="card-text">PEN @Html.DisplayFor(modelItem => item.precio)</p>
                         @using (Html.BeginForm("Index", "SecondLife", FormMethod.Post))
                         {
                             @Html.Hidden("id", item.id_prod)
                             @Html.Hidden("stock", item.stock)
-                            @Html.TextBox("cant",0, new { type = "number", min="0",max=item.stock })
+                            @Html.TextBox("cant", 0, new { type = "number", min = "0", max = item.stock })
                             <input type="submit" value="Agregar" class="btn btn-primary" style="margin-bottom:10px" />
                         }
                     </div>

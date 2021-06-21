@@ -4,25 +4,25 @@
     ViewBag.Title = "Login";
 }
 
-<h2>Iniciar sesión</h2>
-
 
 @using (Html.BeginForm()) 
 { 
-<div style="display:flex;justify-content:center;align-items:center;height:calc(100vh - 173px);">
-    <div style="margin-top:-40px">
+<div style="display:flex;justify-content:center;align-items:center;height:calc(100vh - 110px);">
+    <div style="padding: 40px;border: 1px solid rgba(0,0,0,.125);">
 
-        <div style="height: 50px;">
+        <h2 class="card-title" style="margin:0;margin-bottom:25px">Iniciar sesión</h2>
+
+        <div style="height: 50px;width:250px">
             <p style="margin-top:10px;margin-right:10px">Usuario</p>
-            @Html.TextBox("user", "")
+            @Html.TextBox("user", "", new { @class = "form-control", @placeholder = "Ingrese usuario" })
         </div>
-        <div style="height: 75px;">
-            <p style="margin-top:10px;margin-right:10px">Contraseña</p>
-            @Html.TextBox("pass", "", new { @type = "password" })
+        <div style="height: 75px;width:250px">
+            <p style="margin-top:25px;margin-right:10px">Contraseña</p>
+            @Html.TextBox("pass", "", new { @type = "password", @class = "form-control", @placeholder = "Ingrese contraseña" })
         </div>
-        <div>
-            <input type="submit" value="Ingresar" class="btn btn-primary" /> |
-            @Html.ActionLink("Registrar", "RegisterUser", null, new { @class = "btn btn-info" })
+        <div style="margin-top:25px">
+            <input type="submit" value="Ingresar" class="btn btn-primary w-50" />
+            @Html.ActionLink("Registrar", "RegisterUser", null, new { @class = "btn btn-info w-50" })
         </div>
         @ViewBag.mensaje
     </div>

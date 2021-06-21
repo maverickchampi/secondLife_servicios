@@ -2,9 +2,9 @@
     background-color: #1E2940;
 }
 .color-link {
-    color: #05AFF2;
+    color: rgba(0,0,0,0.4);
     margin : 0 10px;
-    font-size:18px;
+    font-size:16px;
 }
 .h-link{
     height:30px;
@@ -30,6 +30,10 @@
 .pd-20{
     margin-bottom:20px;
 }
+.fondo-menu{
+    background-color:rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
 .img-index {
     width: 200px;
     height: 200px;
@@ -43,4 +47,28 @@
 }
 .contenedor-producto{
     display:flex
+}
+.search {
+    outline: none;
+    padding:5px
+}
+.card {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+    padding:15px
+}
+.card-title2{
+    padding-bottom:5px;
+    width:100%;
+    font-weight:normal;
+    font-size:18px;
+    background-color:rgba(0,0,0,0.1);
+    padding:10px;
+}
+.w-50{
+    width:120px;
+}
+.label-form {
+    display: inline;
+    width: 100%;
+    text-align: left !important;
 }

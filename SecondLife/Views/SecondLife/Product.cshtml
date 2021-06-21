@@ -5,105 +5,115 @@
     ViewBag.Title = "Product";
 }
 
-<h2>Productos</h2>
-<style>
-    .product {
-        height: 400px;
-    }
-</style>
-
-<!--Inicio de sesión-->
-<div class="alert alert-info alert-dismissible show" role="alert">
-    @if (@ViewBag.mensaje == null)
-    {
-        <span>Escoge tus productos</span>
-    }
-    else
-    {
-        @ViewBag.mensaje
-    }
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
-<div class="contenedor-producto">
-    <div class="">
-        @using (Html.BeginForm("Product", "SecondLife", FormMethod.Get))
-        {
-
-            <label>Busque por marca</label>
-            <br />
-            @Html.TextBox("marca")
-            <br />
-            <br />
-            <label>Busque por categoría</label>
-            <br />
-            @Html.RadioButton("id_categ", 0, "Todos los productos")<span>Todos los productos</span><br />
-            if (ViewBag.categoria != null)
-            {
-                foreach (var lista in ViewBag.categoria as List<Categoria>)
-                {
-                    @Html.RadioButton("id_categ", lista.id_categ, lista.nombre)
-                    @lista.nombre
-                    <br />
-                }
-            }
-            <button class="btn btn-primary" style="margin-top:10px">Buscar</button>
+<div style=" min-height: calc(100vh - 130px);">
+    <h2>Productos</h2>
+    <ol class="breadcrumb text-white">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Inicio", "Index")
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Productos</li>
+    </ol>
+    <style>
+        .product {
+            height: 400px;
         }
+    </style>
+
+    <!--Inicio de sesión-->
+    <div class="alert alert-info alert-dismissible show" role="alert">
+        @if (@ViewBag.mensaje == null)
+        {
+            <span>Escoge tus productos</span>
+        }
+        else
+        {
+            @ViewBag.mensaje
+        }
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 ">
-            @foreach (var item in Model)
+    <div class="contenedor-producto">
+        <div class="">
+            @using (Html.BeginForm("Product", "SecondLife", FormMethod.Get, new { @class = "card" }))
             {
-                <div class="col col-sm-4 mb-4 product rounded" style="height: 450px;">
-                    <div class="card card-sm-3 h-100  b-card" style="text-align: center;">
-                        <img class="card-img-top img-index" src="@Url.Content(item.imagen)" />
-                        <div class="card-body">
-                            <p class="h-link">
-                                @Html.ActionLink(item.marca + item.modelo, "Detail_Product", new { id = item.id_prod }, new { @class = "card-title" })
-                            </p>
-                            <p class="card-text" style="height:90px">@Html.DisplayFor(modelItem => item.descripcion)</p>
-                            <p class="card-text">PEN @Html.DisplayFor(modelItem => item.precio)</p>
-                            @using (Html.BeginForm("Product", "SecondLife", FormMethod.Post))
-                            {
-                                @Html.Hidden("id", item.id_prod)
-                                @Html.Hidden("stock", item.stock)
-                                @Html.TextBox("cant", 0, new { type = "number", min = "0", max = item.stock })
-                                <input type="submit" value="Agregar" class="btn btn-primary" style="margin-bottom:10px" />
-                            }
-                        </div>
-                    </div>
-                </div>
+
+                <label class="card-title2">Buscar</label>
+                <br />
+                <label>·Marca:</label>
+                <br />
+                @Html.TextBox("marca", "", new { @class = "search" })
+                <br />
+                <br />
+                <label>·Categoría:</label>
+                <br />
+                @Html.RadioButton("id_categ", 0, "Todos los productos")<span style="margin-left:5px;display:inline">Todos los productos</span><br />
+                if (ViewBag.categoria != null)
+                {
+                    foreach (var lista in ViewBag.categoria as List<Categoria>)
+                    {
+                        @Html.RadioButton("id_categ", lista.id_categ, lista.nombre)
+                        <p style="margin-left:5px;display:inline">@lista.nombre</p>
+                        <br />
+                    }
+                }
+                <button class="btn btn-primary" style="margin-top:10px">Buscar</button>
             }
         </div>
 
-        <div style="margin: 15px auto;text-align:center;">
-            @if (Model.Count() > 0)
-            {
-                @Html.ActionLink("|<",
-                "Product", "SecondLife",
-                new { p = (int)ViewBag.p, id_categ = (int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "ini" },
-                new { @class = "btn btn-primary" })
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 ">
+                @foreach (var item in Model)
+                {
+                    <div class="col col-sm-4 mb-4 product rounded" style="height: 500px;">
+                        <div class="card card-sm-3 h-100  b-card" style="text-align: center;">
+                            <img class="card-img-top img-index" src="@Url.Content(item.imagen)" />
+                            <div class="card-body">
+                                <p class="h-link">
+                                    @Html.ActionLink(item.marca + item.modelo, "Detail_Product", new { id = item.id_prod }, new { @class = "card-title" })
+                                </p>
+                                <p class="card-text" style="height:135px">@Html.DisplayFor(modelItem => item.descripcion)</p>
+                                <p class="card-text">PEN @Html.DisplayFor(modelItem => item.precio)</p>
+                                @using (Html.BeginForm("Product", "SecondLife", FormMethod.Post))
+                                {
+                                    @Html.Hidden("id", item.id_prod)
+                                    @Html.Hidden("stock", item.stock)
+                                    @Html.TextBox("cant", 0, new { type = "number", min = "0", max = item.stock })
+                                    <input type="submit" value="Agregar" class="btn btn-primary" style="margin-bottom:10px" />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
 
-                @Html.ActionLink("<<",
+            <div style="margin: 15px auto;text-align:center;">
+                @if (Model.Count() > 0)
+                {
+                    @Html.ActionLink("|<",
                     "Product", "SecondLife",
-                  new { p = (int)ViewBag.p, id_categ = (int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "i" },
-                  new { @class = "btn btn-primary" })
+                    new { p = (int)ViewBag.p, id_categ = (int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "ini" },
+                    new { @class = "btn btn-primary" })
 
-                @Html.Label(((int)ViewBag.p + 1).ToString())
+                    @Html.ActionLink("<<",
+                        "Product", "SecondLife",
+                      new { p = (int)ViewBag.p, id_categ = (int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "i" },
+                      new { @class = "btn btn-primary" })
 
-                @Html.ActionLink(">>",
-                    "Product", "SecondLife",
-                  new { p = (int)ViewBag.p, id_categ = (int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "d" },
-                  new { @class = "btn btn-primary" })
+                    @Html.Label(((int)ViewBag.p + 1).ToString())
 
-                @Html.ActionLink(">|",
-                    "Product", "SecondLife",
-                  new { p = (int)ViewBag.p, id_categ = (int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "fin" },
-                  new { @class = "btn btn-primary" })
-            }
+                    @Html.ActionLink(">>",
+                        "Product", "SecondLife",
+                      new { p = (int)ViewBag.p, id_categ = (int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "d" },
+                      new { @class = "btn btn-primary" })
+
+                    @Html.ActionLink(">|",
+                        "Product", "SecondLife",
+                      new { p = (int)ViewBag.p, id_categ = (int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "fin" },
+                      new { @class = "btn btn-primary" })
+                }
+            </div>
         </div>
     </div>
 </div>
