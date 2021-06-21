@@ -125,8 +125,8 @@
     {
         @Html.Hidden("id", Model.id_prod)
         @Html.Hidden("stock", Model.stock)
-        @Html.TextBox("cant", Model.stock)
-        <input type="submit" value="Procesar" class="btn btn-primary" />
+        @Html.TextBox("cant", 0, new { type = "number", min = "0", max = Model.stock })
+        <input type="submit" value="Agregar" class="btn btn-primary" />
     }
 </div>
 

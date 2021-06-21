@@ -269,9 +269,9 @@ namespace SecondLife.Controllers
         public ActionResult Index(string id = null, int stock = 0, int cant = 0)
         {
             string mensaje = null;
-            if (cant > stock)
+            if (cant > stock || cant < 1)
             {
-                mensaje = "Ingrese una cantidad menor al stock";
+                mensaje = "Ingrese cantidad válida";
             }
             else
             {
@@ -443,9 +443,9 @@ namespace SecondLife.Controllers
         public ActionResult Product(string id = null, int stock = 0, int cant = 0)
         {
             string mensaje = null;
-            if (cant>stock )
+            if (cant>stock || cant <1)
             {
-                mensaje = "Ingrese una cantidad menor al stock";
+                mensaje = "Ingrese cantidad válida";
             }
             else
             {
@@ -488,9 +488,9 @@ namespace SecondLife.Controllers
         {
 
             string mensaje = null;
-            if (cant > stock)
+            if (cant > stock || cant < 1)
             {
-                mensaje = "Ingrese una cantidad menor al stock";
+                mensaje = "Ingrese cantidad válida";
             }
             else
             {

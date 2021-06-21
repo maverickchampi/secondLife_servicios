@@ -35,3 +35,12 @@
     height: 200px;
     object-fit: contain;
 }
+.hidden {
+    display: none;
+}
+.btn{
+    margin: 0 3px
+}
+.contenedor-producto{
+    display:flex
+}
