@@ -5,7 +5,7 @@
     ViewBag.Title = "Product";
 }
 
-<h2>Producto</h2>
+<h2>Productos</h2>
 <style>
     .product {
         height: 400px;
@@ -37,19 +37,21 @@
     <div class="row row-cols-1 row-cols-md-3 ">
         @foreach (var item in Model)
         {
-            <div class="col col-sm-4 mb-4 bg-danger product rounded">
-                <div class="card card-sm-3 h-100">
-                    <img class="card-img-top" src="@Url.Content(item.imagen)" width="200px" />
+            <div class="col col-sm-4 mb-4 product rounded" style="height: 450px;">
+                <div class="card card-sm-3 h-100  b-card" style="text-align: center;">
+                    <img class="card-img-top img-index" src="@Url.Content(item.imagen)" />
                     <div class="card-body">
-                        @Html.ActionLink(item.marca + item.modelo, "Detail_Product", new { id = item.id_prod }, new { @class = "card-title" })
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.descripcion)</p>
+                        <p class="h-link">
+                            @Html.ActionLink(item.marca + item.modelo, "Detail_Product", new { id = item.id_prod }, new { @class = "card-title" })
+                        </p>
+                        <p class="card-text" style="height:90px">@Html.DisplayFor(modelItem => item.descripcion)</p>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.precio)</p>
                         @using (Html.BeginForm("Product", "SecondLife", FormMethod.Post))
                         {
                             @Html.Hidden("id", item.id_prod)
                             @Html.Hidden("stock", item.stock)
                             @Html.TextBox("cant", item.stock)
-                            <input type="submit" value="Procesar" class="btn btn-primary" />
+                    <input type="submit" value="Procesar" class="btn btn-primary" style="margin-bottom:10px" />
                         }
                     </div>
                 </div>
@@ -70,7 +72,7 @@
       new { p = (int)ViewBag.p, id_categ=(int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "i" },
       new { @class = "btn btn-primary" })
 
-    @Html.Label(((int)ViewBag.p + 1).ToString())
+    @Html.Label(    ((int)ViewBag.p + 1).ToString() )
 
     @Html.ActionLink(">>",
         "Product", "SecondLife",

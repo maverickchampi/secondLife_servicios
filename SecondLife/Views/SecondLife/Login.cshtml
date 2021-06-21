@@ -9,31 +9,26 @@
 
 @using (Html.BeginForm()) 
 { 
-<table style="margin:0 auto">
-    <tr>
-        <td>Login</td>
-        <td>@Html.TextBox("user", "")</td>
-    </tr>
-    <tr>
-        <td>Clave</td>
-        <td>@Html.TextBox("pass", "", new { @type = "password" })</td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <input type="submit" value="Aceptar" class="btn btn-default" /> |
-            @Html.ActionLink("Retornar", "Product", null, new { @class = "btn btn-default" })
-        </td>
-    </tr>
-    @ViewBag.mensaje
-</table>
+<div style="display:flex;justify-content:center;align-items:center;height:calc(100vh - 173px);">
+    <div style="margin-top:-40px">
+
+        <div style="height: 50px;">
+            <p style="margin-top:10px;margin-right:10px">Usuario</p>
+            @Html.TextBox("user", "")
+        </div>
+        <div style="height: 75px;">
+            <p style="margin-top:10px;margin-right:10px">Contraseña</p>
+            @Html.TextBox("pass", "", new { @type = "password" })
+        </div>
+        <div>
+            <input type="submit" value="Ingresar" class="btn btn-primary" /> |
+            @Html.ActionLink("Registrar", "RegisterUser", null, new { @class = "btn btn-info" })
+        </div>
+        @ViewBag.mensaje
+    </div>
+</div>
 }
 
-<div>
-    @Html.ActionLink("Regresar", "Product")
-</div>
-<div>
-    @Html.ActionLink("Registrar", "RegisterUser")
-</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

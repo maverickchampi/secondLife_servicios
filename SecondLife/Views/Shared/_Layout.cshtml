@@ -4,13 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title>SecondLife</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/secondlife.css")" rel="stylesheet" type="text/css" />
     @using SecondLife.Models
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top bg1-color">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -18,12 +19,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
                 @Html.ActionLink("SL", "Index", "SecondLife", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" style="padding:0">
                     <li>@Html.ActionLink("Inicio", "Index", "SecondLife")</li>
-                    <li>@Html.ActionLink("Producto", "Product", "SecondLife")</li>
+                    <li>@Html.ActionLink("Productos", "Product", "SecondLife")</li>
 
                     <!--en esta seccion visualizamos al usuario-->
                     @{
@@ -31,21 +33,21 @@
 
                     }
 
-                <li> @Html.ActionLink("Carrito de compra", "Shopping_Cart", "SecondLife")</li>
+                    <li> @Html.ActionLink("Carrito de compra", "Shopping_Cart", "SecondLife")</li>
 
                     @if (@u == null)
                     {
-                <li> @Html.ActionLink("Inicio de Sesion", "Login", "SecondLife")</li>
+                        <li> @Html.ActionLink("Inicio de Sesion", "Login", "SecondLife")</li>
                     }
                     else
                     {
-                <li style="display:flex">
-                    <em style="padding-top: 15px; padding-bottom: 15px; color:#fff">Bienvenido @u.usuario</em>
-                    @Html.ActionLink("Ver perfil", "Profile", "SecondLife", new { id = u.id_usua }, null)
-                    @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife")
-                </li>
+                        <li style="display:flex">
+                            <em style="padding-top: 15px; padding-bottom: 15px; color:#fff">Bienvenido @u.usuario</em>
+                            @Html.ActionLink("Ver perfil", "Profile", "SecondLife", new { id = u.id_usua }, null)
+                            @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife")
+                        </li>
                     }
-                </ul>             
+                </ul>
             </div>
         </div>
     </div>
@@ -53,9 +55,8 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
+        <footer class="footer">
+            © Copyright 2021 Todos los derechos reservados
         </footer>
     </div>
 
