@@ -753,7 +753,7 @@ namespace SecondLife.Controllers
         public ActionResult Payment_Methods(Tarjeta reg, double subtotal = 0, double total = 0,
             double descuento = 0, string id_direc = null)
         {
-            int num_tip = int.Parse(reg.num_tarj.Substring(0));
+            int num_tip = int.Parse(reg.num_tarj.Substring(0,1));
             if (num_tip == 4)
             {
                 reg.tip_tarj = "Visa";
