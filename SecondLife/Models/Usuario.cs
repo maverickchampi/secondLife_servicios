@@ -26,7 +26,8 @@ namespace SecondLife.Models
         public string tel_usua { get; set; }
 
         [Display(Name = "fecha de nacimiento")]
-        [Required]
+        [DataType(DataType.Date)]
+        [Required,DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime fec_nac_usua { get; set; }
 
         [Display(Name = "usuario")]

@@ -84,7 +84,7 @@
         <p><strong>Total : PEN @ViewBag.total</strong></p>
     </div>
 
-    <div>
+    <div style="margin-bottom:20px">
         @Html.ActionLink("< Continuar comprando", "Product", new {/* id = item.id_prod, nombre = item.nom_prod*/ }, new { @class = "btn btn-info pd-20" })
         @Html.ActionLink("Realizar pago >", "Pay_Data", new { id = (string)@ViewBag.id , nombre = (string)@ViewBag.nombre, subtotal= @ViewBag.subtotal,  descuento =@ViewBag.descuento, total=@ViewBag.total }, new { @class = "btn btn-success pd-20" })
     </div>

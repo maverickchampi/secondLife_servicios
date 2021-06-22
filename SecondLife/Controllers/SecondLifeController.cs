@@ -545,6 +545,7 @@ namespace SecondLife.Controllers
                 TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
 
                 Usuario reg = buscar_usuario_id(id);
+                ViewBag.nombreCompleto = reg.nom_usua + ' ' + reg.ape_usua;
                 return View(reg);
             }
             else

@@ -4,98 +4,138 @@
     ViewBag.Title = "Profile";
 }
 
-<h2>Profile</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Usuario</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        @Html.Hidden("id_usua", Model.id_usua)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.dni_usua, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dni_usua, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dni_usua, "", new { @class = "text-danger" })
+<div class="row p-3 m-1  border rounded" style="margin-top:20px">
+    <div class="col-md-12 col-lg-12 col-sm-12 order-md-1">
+        <div class="row">
+            <div class="col-3 col-lg-1 col-md-2 col-sm-2 order-md-1 text-md-right p-0">
+                <i class="bi bi-person-circle" style="font-size:40px"></i>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nom_usua, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nom_usua, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nom_usua, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ape_usua, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ape_usua, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ape_usua, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.tel_usua, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tel_usua, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tel_usua, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.fec_nac_usua, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fec_nac_usua, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fec_nac_usua, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.pass, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.pass, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.pass, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.email_log, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.email_log, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.email_log, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Guardar" class="btn btn-default" />
+            <div class="col-9 col-lg-11 col-md-10 col-sm-10 order-md-2 text-md-left pt-3" style="margin-top:8px">
+                <span>Hola</span>
+                <p>@ViewBag.nombreCompleto</p>
             </div>
         </div>
     </div>
-}
+</div>
 
-<div>
-    @Html.ActionLink("Datos Personales", "Profile") <br />
-    @Html.ActionLink("Mis direcciones", "Address")<br />
-    @Html.ActionLink("Mis compras", "Purchases")<br />
-    @Html.ActionLink("Medios de pago", "Card")<br />
-    @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife")
+<hr />
+
+<div style="display:flex">
+
+    <div style="margin-top:20px;margin-right:50px">
+        <button class="btn btn-primary m-5">
+            <i class="bi bi-person" style="margin-right:5px"></i>
+            @Html.ActionLink("Datos Personales", "Profile", null, new { @style = "text-decoration:none;color:#fff;" })
+        </button>
+        <br />
+
+        <button class="btn btn-info m-5">
+            <i class="bi bi-signpost" style="margin-right:5px"></i>
+            @Html.ActionLink("Mis direcciones", "Address", null, new { @style = "text-decoration:none;color:#fff;" })
+        </button>
+        <br />
+
+        <button class="btn btn-success m-5">
+            <i class="bi bi-bag" style="margin-right:5px"></i>
+            @Html.ActionLink("Mis compras", "Purchases", null, new { @style = "text-decoration:none;color:#fff;" })
+        </button>
+        <br />
+
+        <button class="btn btn-warning m-5">
+            <i class="bi bi-credit-card" style="margin-right:5px"></i>
+            @Html.ActionLink("Medios de pago", "Card", null, new { @style = "text-decoration:none;color:#fff;" })
+        </button>
+        <br />
+
+        <button class="btn btn-danger m-5">
+            <i class="bi bi-power" style="margin-right:5px"></i>
+            @Html.ActionLink("Cerrar Sesion", "CloseSession", null, new { @style = "text-decoration:none;color:#fff;" })
+        </button>
+    </div>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.Hidden("id_usua", Model.id_usua)
+
+            <div class="form-group">
+
+                <label class="control-label col-md-2 label-form">Dni</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.dni_usua, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                    @Html.ValidationMessageFor(model => model.dni_usua, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Nombre</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nom_usua, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.nom_usua, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Apellido</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ape_usua, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ape_usua, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Teléfono</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tel_usua, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                    @Html.ValidationMessageFor(model => model.tel_usua, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Fecha nac.</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fec_nac_usua, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.fec_nac_usua, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Usuario</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Password</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.pass, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.pass, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Correo</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.email_log, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                    @Html.ValidationMessageFor(model => model.email_log, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Actualizar" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
 </div>
 
 @section Scripts {
