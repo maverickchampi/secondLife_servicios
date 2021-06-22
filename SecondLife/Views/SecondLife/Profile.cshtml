@@ -6,100 +6,98 @@
 
 <h2>Profile</h2>
 
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Usuario</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.Hidden("id_usua", Model.id_usua)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.dni_usua, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dni_usua, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.dni_usua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nom_usua, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom_usua, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom_usua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ape_usua, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ape_usua, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ape_usua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tel_usua, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tel_usua, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tel_usua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fec_nac_usua, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fec_nac_usua, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fec_nac_usua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pass, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pass, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.pass, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.email_log, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email_log, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.email_log, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
 <div>
-    <h4>Usuario</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.id_usua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.id_usua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dni_usua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dni_usua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.id_rol)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.id_rol)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nom_usua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nom_usua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ape_usua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ape_usua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tel_usua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tel_usua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fec_nac_usua)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fec_nac_usua)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.usuario)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.pass)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.pass)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.email_log)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.email_log)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-    </dl>
+    @Html.ActionLink("Datos Personales", "Profile") <br />
+    @Html.ActionLink("Mis direcciones", "Address")<br />
+    @Html.ActionLink("Mis compras", "Purchases")<br />
+    @Html.ActionLink("Medios de pago", "Card")<br />
+    @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife")
 </div>
-<p>
-    @Html.ActionLink("Retornar a producto", "Product")
-</p>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

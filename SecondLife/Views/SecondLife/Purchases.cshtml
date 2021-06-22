@@ -1,0 +1,92 @@
+﻿@model IEnumerable<SecondLife.Models.Boleta>
+@using SecondLife.Models
+
+@{
+    ViewBag.Title = "Purchases";
+}
+
+<h2>Mis compras</h2>
+
+<link id="detail_purchase" , href="~/Views/SecondLife/Detail_Purchases.cshtml" rel="import" />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fec_bol)
+        </th>
+        <th>
+            Direccion
+        </th>
+        <th>
+            Tarjeta
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.desc_bol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.impo_bol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.envio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_bol)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fec_bol)
+            </td>
+            <td>
+                <p>@((ViewBag.direccion as List<Direccion>).Where(x=>x.id_direc==item.id_direc).FirstOrDefault().desc_direc)</p>
+            </td>
+            <td>
+                <p>@((ViewBag.tarjeta as List<Tarjeta>).Where(x=>x.id_tarj==item.id_tarj).FirstOrDefault().num_tarj)</p>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.desc_bol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.impo_bol)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.envio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total_bol)
+            </td>
+            <td>
+   
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#@item.num_bol">
+                    ver más
+                </button>
+                <div class="modal fade" id="@item.num_bol" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Detalle de la venta</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                @Html.Partial("_PartialPurchases", ((List<DetalleBoleta>)ViewBag.detalle).Where(x => x.num_bol == item.num_bol))
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+

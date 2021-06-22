@@ -109,7 +109,8 @@ create table tb_tarjeta (
     num_tarj char(16) not null,
     fec_venc char(5) not null,
     cvv int not null,
-    id_usua char(5) not null
+    id_usua char(5) not null,
+	estado int default 1
 )
 go
 alter table tb_tarjeta
@@ -198,7 +199,8 @@ create table tb_direccion(
 	referencia varchar(100) not null,
     etiqueta varchar(15) not null,
     id_dist  int not null,
-	id_usua char(5) not null
+	id_usua char(5) not null,
+	estado int default 1
 )
 go
 alter table tb_direccion
@@ -944,6 +946,7 @@ as
 	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
 	inner join  tb_categoria c
 	on p.id_categ=c.id_categ
+	where stock>0
 	order by mar_prod
 go
 
@@ -956,7 +959,7 @@ as
 	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
 	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
 	inner join  tb_categoria c
-	on p.id_categ=c.id_categ
+	on p.id_categ=c.id_categ and stock>0
 	where p.id_prod=@id
 go
 
@@ -965,7 +968,7 @@ as
 	select top 6 id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
 	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
 	inner join  tb_categoria c
-	on p.id_categ=c.id_categ
+	on p.id_categ=c.id_categ and stock>0
 	order by calidad desc
 go
 
@@ -979,7 +982,7 @@ as
 	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
 	inner join  tb_categoria c
 	on p.id_categ=c.id_categ
-	where p.id_categ=@cat
+	where p.id_categ=@cat and stock>0
 go
 
 exec sp_listado_producto_cat 1
@@ -1018,7 +1021,7 @@ create or alter proc sp_insertar_direccion
 @id_dist  int,
 @id_usua char(5)
 as
-	insert into tb_direccion values (dbo.sigIdDirec() , @desc, @referencia, @etiqueta, @id_dist, @id_usua)
+	insert into tb_direccion values (dbo.sigIdDirec() , @desc, @referencia, @etiqueta, @id_dist, @id_usua, 1)
 go
 
 exec sp_insertar_direccion 'los solsitos', 'a mis casa', 'casa', 1, 'us001'
@@ -1032,7 +1035,7 @@ create or alter proc sp_insertar_tarjeta
 @id_usua char(5)
 as
 	insert into tb_tarjeta values (dbo.sigIdTarj(), @tip_tarj, @num_tarj,
-								@fec_venc, @cvv, @id_usua)
+								@fec_venc, @cvv, @id_usua, 1)
 go
 
 exec sp_insertar_tarjeta 'visa', '4234567891234565', '23/04', 123, 'us001'
@@ -1083,7 +1086,7 @@ create or alter proc sp_lista_tarjeta
 @id char(5)
 as
 	select*from tb_tarjeta
-	where id_usua=@id
+	where id_usua=@id 
 go
 
 exec sp_lista_tarjeta 'us001'
@@ -1096,7 +1099,60 @@ as
 	where id_usua=@id
 go
 
-exec sp_lista_direccion 'us001'
+
+create or alter proc sp_lista_boleta
+@id char(5)
+as
+	select*from tb_boleta
+	where id_usua=@id
+go
+
+create or alter proc sp_lista_detalle_boleta
+as
+	select*from tb_detalle_boleta
+go
+
+
+create or alter proc sp_eliminar_direccion
+@id_direc char(5)
+as
+	declare @dir int=0
+	set @dir=(select count(*) from tb_direccion d
+				inner join tb_boleta b
+				on b.id_direc=d.id_direc
+				where d.id_direc=@id_direc)
+	if(@dir=0) 
+		begin
+			delete from tb_direccion
+			where id_direc=@id_direc
+		end
+	else
+		begin
+			update tb_direccion
+			set estado=2
+			where id_direc=@id_direc
+		end
+go
+
+create or alter proc sp_eliminar_tarjeta
+@id_tarj char(5)
+as
+	declare @tarj int=0
+	set @tarj=(select count(*) from tb_tarjeta t
+				inner join tb_boleta b
+				on b.id_tarj=t.id_tarj
+				where t.id_tarj=@id_tarj)
+	if(@tarj=0) 
+		begin
+			delete from tb_tarjeta
+			where id_tarj=@id_tarj
+		end
+	else
+		begin
+			update tb_tarjeta
+			set estado=2
+			where id_tarj=@id_tarj
+		end
 go
 /*-------------------------------------------------------------------------------*/
 /*
@@ -1108,6 +1164,7 @@ select*from tb_boleta;
 select*from tb_distrito;
 select*from tb_direccion;
 select*from tb_usuario;
+select*from tb_Tarjeta;
 select*from tb_producto;
 select*from tb_provincia;
 select*from tb_registro;

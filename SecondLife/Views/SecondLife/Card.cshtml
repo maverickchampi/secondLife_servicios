@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SecondLife.Models.Tarjeta>
+@using SecondLife.Models
+
+@{
+    ViewBag.Title = "Card";
+}
+
+<h2>Tarjetas</h2>
+<p> @ViewBag.mensaje</p>
+<!--agregar una nueva direccion-->
+
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        @Html.Partial("_PartialCard", new Tarjeta())
+    </div>
+</div>
+<p>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Nueva tarjeta
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tip_tarj)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.num_tarj)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fec_venc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cvv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count() > 0) {
+    foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tip_tarj)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.num_tarj)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fec_venc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cvv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit_Card", new { id = item.id_tarj }) |
+            @Html.ActionLink("Eliminar", "Delete_Card", new { id = item.id_tarj })
+        </td>
+    </tr>
+    }
+
+    }else{
+    <tr>
+        <td>
+            No tienes registrada ninguna tarjeta
+        </td>
+    </tr>
+    }
+</table>

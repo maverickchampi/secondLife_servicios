@@ -120,20 +120,17 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\SecondLifeController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Boleta.cs" />
     <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\DetalleBoleta.cs" />
     <Compile Include="Models\Direccion.cs" />
     <Compile Include="Models\Distrito.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Producto.cs" />
-    <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\Registro.cs" />
-    <Compile Include="Models\Rol.cs" />
     <Compile Include="Models\Tarjeta.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -171,12 +168,10 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\SecondLife\Product.cshtml" />
     <Content Include="Views\SecondLife\Detail_Product.cshtml" />
     <Content Include="Views\SecondLife\Login.cshtml" />
-    <Content Include="Views\SecondLife\Profile.cshtml" />
     <Content Include="Views\SecondLife\Shopping_cart.cshtml" />
     <Content Include="Views\SecondLife\RegisterUser.cshtml" />
     <Content Include="Views\SecondLife\Index.cshtml" />
@@ -186,6 +181,12 @@
     <Content Include="Views\Shared\_PartialCard.cshtml" />
     <Content Include="Views\Shared\_PartialShoppingCart.cshtml" />
     <Content Include="Views\SecondLife\Confirm_Payment.cshtml" />
+    <Content Include="Views\SecondLife\Error.cshtml" />
+    <Content Include="Views\SecondLife\Profile.cshtml" />
+    <Content Include="Views\SecondLife\Address.cshtml" />
+    <Content Include="Views\SecondLife\Purchases.cshtml" />
+    <Content Include="Views\SecondLife\Card.cshtml" />
+    <Content Include="Views\Shared\_PartialPurchases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

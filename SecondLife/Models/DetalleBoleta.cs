@@ -13,6 +13,6 @@ namespace SecondLife.Models
         public int cant_prod { get; set; }
         public decimal precio { get; set; }
         public decimal sub_tot { get; set; }
-        public string boleta_num_bol { set; get; }
+
     }
 }

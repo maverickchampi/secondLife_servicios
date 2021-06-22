@@ -39,14 +39,14 @@
             @using (Html.BeginForm("Product", "SecondLife", FormMethod.Get, new { @class = "card" }))
             {
 
-                <label class="card-title2">Buscar</label>
+                <h3 style="padding:0;margin:0">Búsqueda</h3>
                 <br />
-                <label>·Marca:</label>
+                <label>Marca:</label>
                 <br />
                 @Html.TextBox("marca", "", new { @class = "search" })
                 <br />
                 <br />
-                <label>·Categoría:</label>
+                <label>Categoría:</label>
                 <br />
                 @Html.RadioButton("id_categ", 0, "Todos los productos")<span style="margin-left:5px;display:inline">Todos los productos</span><br />
                 if (ViewBag.categoria != null)

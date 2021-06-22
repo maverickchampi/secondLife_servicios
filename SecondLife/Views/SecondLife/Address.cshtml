@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SecondLife.Models.Direccion>
+@using SecondLife.Models
+
+@{
+    ViewBag.Title = "Address";
+}
+
+<h2>Address</h2>
+<p> @ViewBag.mensaje</p>
+<!--agregar una nueva direccion-->
+
+<div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        @Html.Partial("_PartialAddress", new Direccion())
+    </div>
+</div>
+<p>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Nueva direccion
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.desc_direc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.referencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.etiqueta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.id_dist)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc_direc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.referencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.etiqueta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id_dist)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.id_dist }) |
+                    @Html.ActionLink("Eliminar", "Delete_Address", new { id = item.id_direc })
+                </td>
+            </tr>
+        }
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        No existe ninguna direccion
+                    </td>
+                </tr>
+            }
+
+</table>

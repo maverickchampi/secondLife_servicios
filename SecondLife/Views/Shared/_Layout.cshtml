@@ -43,7 +43,7 @@
                     {
                         <li style="display:flex">
                             <em style="padding-top: 15px; padding-bottom: 15px; color:#fff">Bienvenido @u.usuario</em>
-                            @Html.ActionLink("Ver perfil", "Profile", "SecondLife", new { id = u.id_usua }, null)
+                            @Html.ActionLink("Ver perfil", "Profile", "SecondLife", new { id = u.id_usua, estado=true }, null)
                             @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife")
                         </li>
                     }

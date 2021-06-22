@@ -13,5 +13,6 @@ namespace SecondLife.Models
         public string fec_venc { get; set; }
         public int cvv { get; set; }
         public string id_usua { get; set; }
+        public int estado { get; set; }
     }
 }

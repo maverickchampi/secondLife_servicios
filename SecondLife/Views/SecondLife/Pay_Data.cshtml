@@ -26,6 +26,7 @@
                 @Html.Hidden("subtotal", (double)@ViewBag.subtotal)
                 @Html.Hidden("descuento", (double)@ViewBag.descuento)
                 @Html.Hidden("total", (double)@ViewBag.total)
+                @Html.Hidden("estado", true)
                 @Html.DropDownList("id_direc", ViewBag.direccion as SelectList, new { @class = "btn btn-default" })
             </div>
             <button class="btn btn-primary">Siguiente</button>

@@ -24,6 +24,7 @@
     @Html.Hidden("descuento", (double)@ViewBag.descuento)
     @Html.Hidden("total", (double)@ViewBag.total)
     @Html.Hidden("id_direc", (string)ViewBag.id_direc)
+    @Html.Hidden("estado", true)
     <div>
         <p>Escoja su numero de tarjeta</p>
         @Html.DropDownList("id_tarj", ViewBag.tarjeta as SelectList, new { @class = "btn btn-default" })

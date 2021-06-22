@@ -13,5 +13,6 @@ namespace SecondLife.Models
         public string etiqueta { get; set; }
         public int id_dist { get; set; }
         public string id_usua { get;set; }
+        public int estado { get; set; }
     }
 }

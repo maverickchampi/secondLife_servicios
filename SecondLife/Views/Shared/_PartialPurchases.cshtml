@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SecondLife.Models.DetalleBoleta>
+@using SecondLife.Models
+
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                producto
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cant_prod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sub_tot)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@((ViewBag.producto as List<Producto>).Where(x=>x.id_prod==item.id_prod).FirstOrDefault().imagen)" width="80px" />
+                    <p>@((ViewBag.producto as List<Producto>).Where(x=>x.id_prod==item.id_prod).FirstOrDefault().modelo)</p>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cant_prod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sub_tot)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div style="text-align:right">
+        <p>Total de producto @Model.Count()</p>
+        <p>Total: @Model.Sum(x => x.sub_tot)</p>
+    </div>
+</div>

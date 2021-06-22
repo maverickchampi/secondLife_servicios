@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SecondLife.Models.DetalleBoleta>
+
+@{
+    ViewBag.Title = "Detail_Purchases";
+}
+
+
+<div class="modal" tabindex="2" style="display: block; background: rgb(0 0 0 / 60%);" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+   
+            </div>
+            <div class="modal-body">
+                <div class="" style="width: 100%;">
+                    <table class="table" style="width:100%">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.num_det_bol)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.num_bol)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.id_prod)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.cant_prod)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.precio)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.sub_tot)
+                            </th>
+                        </tr>
+
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.num_det_bol)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.num_bol)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.id_prod)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.cant_prod)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.precio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.sub_tot)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    No hay ningun detalle de boleta
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:history.back()" class="btn btn-default">Regresar</a>
+            </div>
+        </div>
+    </div>
+</div>
