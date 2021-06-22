@@ -9,6 +9,7 @@ namespace SecondLife.Models
     {
         public string id_direc { get; set; }
         public string desc_direc { get; set; }
+        public string referencia { get; set; }
         public string etiqueta { get; set; }
         public int id_dist { get; set; }
         public string id_usua { get;set; }

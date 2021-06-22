@@ -7,6 +7,7 @@ using System.Data;
 using System.Configuration;
 using System.Data.SqlClient;
 using SecondLife.Models;
+using System.Globalization;
 
 namespace SecondLife.Controllers
 {
@@ -122,7 +123,71 @@ namespace SecondLife.Controllers
             dr.Close(); cn.Close();
             return temporal;
         }
-        
+        IEnumerable<Tarjeta> lista_tarjeta(string id)
+        {
+            List<Tarjeta> temporal = new List<Tarjeta>();
+            SqlConnection cn = new SqlConnection(cadena);
+            SqlCommand cmd = new SqlCommand("sp_lista_tarjeta", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                Tarjeta reg = new Tarjeta();
+                reg.id_tarj = dr.GetString(0);
+                reg.tip_tarj = dr.GetString(1);
+                reg.num_tarj = dr.GetString(2);
+                reg.fec_venc = dr.GetString(3);
+                reg.cvv = dr.GetInt32(4);
+                reg.id_usua = dr.GetString(5);
+                temporal.Add(reg);
+            }
+            dr.Close(); cn.Close();
+            return temporal;
+        }
+        IEnumerable<Direccion> lista_direccion(string id)
+        {
+            List<Direccion> temporal = new List<Direccion>();
+            SqlConnection cn = new SqlConnection(cadena);
+            SqlCommand cmd = new SqlCommand("sp_lista_direccion", cn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@id", id);
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                Direccion reg = new Direccion();
+                reg.id_direc = dr.GetString(0);
+                reg.desc_direc = dr.GetString(1);
+                reg.referencia = dr.GetString(2);
+                reg.etiqueta = dr.GetString(3);
+                reg.id_dist = dr.GetInt32(4);
+                reg.id_usua = dr.GetString(5);
+                temporal.Add(reg);
+            }
+            dr.Close(); cn.Close();
+            return temporal;
+        }
+
+        IEnumerable<Distrito> lista_distrito()
+        {
+            List<Distrito> temporal = new List<Distrito>();
+            SqlConnection cn = new SqlConnection(cadena);
+            SqlCommand cmd = new SqlCommand("select*from tb_distrito", cn);
+            cn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                Distrito reg = new Distrito();
+                reg.id_dist = dr.GetInt32(0);
+                reg.id_prov = dr.GetInt32(1);
+                reg.nom_dist = dr.GetString(2);
+                temporal.Add(reg);
+            }
+            dr.Close(); cn.Close();
+            return temporal;
+        }
         Usuario InicioSesion()
         {
             if (Session["login"] == null)
@@ -294,7 +359,8 @@ namespace SecondLife.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string user, string pass,Boolean pay= false)
+        public ActionResult Login(string user, string pass,Boolean pay= false, double subtotal=0,
+            double descuento=0, double total=0)
         {
             Usuario reg = buscar_usuario(user, pass);
             if (reg == null)
@@ -307,7 +373,7 @@ namespace SecondLife.Controllers
                 Session["login"] = reg;
                 if (pay)
                 {
-                    return RedirectToAction("Pay_Data");
+                    return RedirectToAction("Pay_Data", new { subtotal=subtotal, descuento=descuento, total=total});
                 }
                 else
                 {
@@ -510,7 +576,11 @@ namespace SecondLife.Controllers
                 ViewBag.mensaje = mensaje;
             }
             TempData["usuario"] = InicioSesion() as Usuario;
-            List<Item> temporal = (List<Item>)Session["carrito"];
+            List<Item> temporal = null;
+            if (Session["carrito"] != null)
+            {
+                temporal= (List<Item>)Session["carrito"]; 
+            }
             double total_prod = 0.0;
             double descuento = 0.0;
             double total = 0.0;
@@ -534,6 +604,7 @@ namespace SecondLife.Controllers
 
         public ActionResult Delete(string id=null, string nombre=null)
         {
+
             if (Session["carrito"] != null)
             {
                 List<Item> temporal = (List<Item>)Session["carrito"];
@@ -547,48 +618,258 @@ namespace SecondLife.Controllers
                 return RedirectToAction("Shopping_cart");
             }
         }
-        /*--------------------Proceso de pago---------------------*/
-        public ActionResult Pay_Data(string id=null, string nombre=null, double total=0)
-        {         
-            if (InicioSesion()==null)
-            {
-                return RedirectToAction("Login", new { pay=true });
-            }
-            else
-            {
-                ViewBag.total = total;
-                Usuario reg = InicioSesion() as Usuario;
-                ViewBag.usuario = reg.nom_usua + " " + reg.ape_usua;
-                ViewBag.actual = DateTime.Now;
-
-                TempData["usuario"] = InicioSesion() as Usuario;
-
-                return View();
-            }
-        }
-
-        public ActionResult Payment_Methods()
+        /*----------direccion y tarjeta-------------*/
+        public ActionResult Address()
         {
-            TempData["usuario"] = InicioSesion() as Usuario;
             return View();
         }
-        public ActionResult Make_Payment()
+        [HttpPost]
+        public ActionResult Address(Direccion reg)
         {
-            TempData["usuario"] = InicioSesion() as Usuario;
-            List<Item> temporal = (List<Item>)Session["carrito"];
+            SqlConnection cn = new SqlConnection(cadena);
+            cn.Open();
             try
             {
+                SqlCommand cmd = new SqlCommand("sp_insertar_direccion", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@desc", reg.desc_direc);
+                cmd.Parameters.AddWithValue("@referencia", reg.referencia);
+                cmd.Parameters.AddWithValue("@etiqueta", reg.etiqueta);
+                cmd.Parameters.AddWithValue("@id_dist", reg.id_dist);
+                cmd.Parameters.AddWithValue("@id_usua", reg.id_usua);
 
+                int i = 0;
+                i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    ViewBag.mensaje = "Direccion agregada";
+                }
             }
             catch (SqlException e)
             {
-
+                ViewBag.mensaje = "Error al agregar direccion, vuelve a intentarlo";
             }
             finally
             {
-                Session["carrito"] = null;
+                cn.Close();
             }
+            ViewBag.mensaje = reg.desc_direc+ "hola";
+            return RedirectToAction("Pay_Data", new { mensaje=ViewBag.mensaje});
+        }
+        /*--------------------Proceso de pago---------------------*/
+        public ActionResult Pay_Data(string id=null, string nombre=null, double subtotal = 0, double total=0, 
+            string mensaje = null, double descuento = 0)
+        {
+            if (mensaje != null)
+            {
+                ViewBag.mensaje = mensaje;
+            }
+            if (((List<Item>)Session["carrito"]).Count() <1)
+            {
+                return RedirectToAction("Shopping_cart", new { mensaje = "Escoja al menos un producto" });
+            }
+            else
+            {
+                if (InicioSesion() == null)
+                {
+                    return RedirectToAction("Login", new { pay = true, subtotal=subtotal, descuento=descuento, total=total });
+                }
+                else
+                {
+                    ViewBag.subtotal = subtotal;
+                    ViewBag.descuento = descuento;
+                    ViewBag.total = total;
+                    Usuario reg = InicioSesion() as Usuario;
+                    ViewBag.usuario = reg.nom_usua + " " + reg.ape_usua;
+                    ViewBag.actual = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(DateTime.Now.ToString("dddd, dd MMMM yyyy"));
+                    TempData["usuario"] = InicioSesion() as Usuario;
+
+                    ViewBag.usua = reg.id_usua;
+                    ViewBag.direccion = new SelectList(lista_direccion(reg.id_usua), "id_direc", "etiqueta");
+                    ViewBag.distrito = new SelectList(lista_distrito(), "id_dist", "nom_dist");
+                    return View();
+                }
+            }           
+        }
+        [HttpPost]
+        public ActionResult Pay_Data(Direccion reg, double subtotal = 0, double total = 0, double descuento = 0)
+        {
+            Usuario u= InicioSesion() as Usuario;
+            SqlConnection cn = new SqlConnection(cadena);
+            cn.Open();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_insertar_direccion", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@desc", reg.desc_direc);
+                cmd.Parameters.AddWithValue("@referencia", reg.referencia);
+                cmd.Parameters.AddWithValue("@etiqueta", reg.etiqueta);
+                cmd.Parameters.AddWithValue("@id_dist", reg.id_dist);
+                cmd.Parameters.AddWithValue("@id_usua", u.id_usua);
+
+                int i = 0;
+                i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    ViewBag.mensaje = "Direccion agregada";
+                }
+            }
+            catch (SqlException e)
+            {
+                ViewBag.mensaje = "Error al agregar direccion, vuelve a intentarlo";
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return RedirectToAction("Pay_Data", new { mensaje = ViewBag.mensaje, subtotal= subtotal ,
+                descuento= descuento,  total= total });
+        }
+        public ActionResult Payment_Methods(double subtotal = 0, double total = 0, 
+            double descuento = 0, string id_direc=null, string mensaje=null)
+        {
+            if (mensaje != null)
+            {
+                ViewBag.mensaje = mensaje;
+            }
+
+            TempData["usuario"] = InicioSesion() as Usuario;
+            Usuario reg = InicioSesion() as Usuario;
+            ViewBag.usuario = reg.nom_usua + " " + reg.ape_usua;
+            ViewBag.subtotal = subtotal;
+            ViewBag.descuento = descuento;
+            ViewBag.total = total;        
+            ViewBag.usua = reg.id_usua;
+            if (id_direc != null)
+            {
+                ViewBag.direccion = lista_direccion(reg.id_usua).Where(d => d.id_direc == id_direc).FirstOrDefault().desc_direc;
+                ViewBag.id_direc = id_direc;
+            }
+            ViewBag.tarjeta = new SelectList(lista_tarjeta(reg.id_usua), "id_tarj", "num_tarj");
             return View();
+        }
+        [HttpPost]
+        public ActionResult Payment_Methods(Tarjeta reg, double subtotal = 0, double total = 0,
+            double descuento = 0, string id_direc = null)
+        {
+            int num_tip = int.Parse(reg.num_tarj.Substring(0));
+            if (num_tip == 4)
+            {
+                reg.tip_tarj = "Visa";
+            }else if (num_tip == 5)
+            {
+                reg.tip_tarj = "Mastercad";
+            }
+            else
+            {
+                reg.tip_tarj = "Desconocido";
+            }
+            /*---agregar tarjeta--------*/
+            Usuario u = InicioSesion() as Usuario;
+            SqlConnection cn = new SqlConnection(cadena);
+            cn.Open();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_insertar_tarjeta", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@tip_tarj", reg.tip_tarj);
+                cmd.Parameters.AddWithValue("@num_tarj", reg.num_tarj);
+                cmd.Parameters.AddWithValue("@fec_venc", reg.fec_venc);
+                cmd.Parameters.AddWithValue("@cvv", reg.cvv);
+                cmd.Parameters.AddWithValue("@id_usua", u.id_usua);
+                int i = 0;
+                i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    ViewBag.mensaje = "Tarjeta agregada";
+                }
+            }
+            catch (SqlException e)
+            {
+                ViewBag.mensaje = "Error al agregar tarjeta, vuelve a intentarlo";
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return RedirectToAction("Payment_Methods", new { mensaje = ViewBag.mensaje,
+                subtotal = subtotal,
+                descuento = descuento,
+                total = total,
+                id_direc=id_direc
+            });
+        }
+
+        public ActionResult Confirm_Payment(double subtotal = 0, double descuento = 0, double total = 0,
+            string id_direc = null, string id_tarj = null)
+        {
+            TempData["usuario"] = InicioSesion() as Usuario;
+            Usuario u = InicioSesion() as Usuario;
+            ViewBag.subtotal = subtotal;
+            ViewBag.descuento = descuento;
+            ViewBag.total = total;
+            ViewBag.id_direc = id_direc;
+            ViewBag.id_tarj = id_tarj;
+        
+            Direccion dc = lista_direccion(u.id_usua).Where(d => d.id_direc == id_direc).FirstOrDefault();
+            Tarjeta tj = lista_tarjeta(u.id_usua).Where(t => t.id_tarj == id_tarj).FirstOrDefault();
+            ViewBag.direccion = dc.desc_direc + " "+lista_distrito().Where(di=>di.id_dist==dc.id_dist).FirstOrDefault().nom_dist+
+                " ("+ dc.etiqueta+") ";
+            ViewBag.tarjeta = tj.num_tarj + " (" + tj.tip_tarj + ")";
+
+            ViewBag.carrito= (List<Item>)Session["carrito"];
+            return View();
+        }
+
+        public ActionResult Make_Pagament(double subtotal = 0, double descuento = 0, double total = 0,
+            string id_direc = null, string id_tarj = null)
+        {
+            Usuario reg = Session["login"] as Usuario;
+            List<Item> temporal = (List<Item>)Session["carrito"];
+            string mensaje = null;
+            SqlConnection cn = new SqlConnection(cadena);
+            cn.Open();
+            SqlTransaction tr = cn.BeginTransaction(IsolationLevel.Serializable);
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_insertar_boleta", cn, tr);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_usua", reg.id_usua);
+                cmd.Parameters.AddWithValue("@id_direc", id_direc);
+                cmd.Parameters.AddWithValue("@id_tarj", id_tarj);
+                cmd.Parameters.AddWithValue("@impo_bol", subtotal);
+                cmd.Parameters.AddWithValue("@desc_bol", descuento);
+                cmd.Parameters.AddWithValue("@envio", 0);
+                cmd.Parameters.AddWithValue("@total_bol", total);
+                cmd.ExecuteNonQuery();
+
+
+                foreach (Item item in temporal)
+                {
+                    cmd = new SqlCommand("sp_insertar_detalle_boleta", cn, tr);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@id_prod", item.id_prod);
+                    cmd.Parameters.AddWithValue("@cant_prod", item.cant);
+                    cmd.Parameters.AddWithValue("@precio_prod", item.precio);
+                    cmd.Parameters.AddWithValue("@sub_tot", item.sub_total);
+                    cmd.ExecuteNonQuery();
+                }
+
+                tr.Commit(); //actualiza
+                mensaje = "Se ha realizado correctamente la transacción, gracias por tu compra";
+            }
+            catch (SqlException ex)
+            {
+                mensaje = "No se puede realizar proceso, vuelva a intentarlo";
+                tr.Rollback();
+            }
+            finally
+            {
+                Session["carrito"] = new List<Item>();
+            }
+            return RedirectToAction("Shopping_Cart", new { mensaje = mensaje });
         }
 
     }

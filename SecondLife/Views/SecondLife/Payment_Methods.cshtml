@@ -1,0 +1,40 @@
+﻿@model SecondLife.BundleConfig
+
+@{
+    ViewBag.Title = "Payment_Methods";
+}
+
+<h2>Método de pago</h2>
+<p>@ViewBag.mensaje</p>
+
+<div>
+    <h5>Total a pagar</h5>
+    <p>Envio : S/.0 (GRATIS)</p>
+    <p>Subtotal: S/. @ViewBag.subtotal </p>
+    <p>Descuento: S/. @ViewBag.descuento</p>
+    <p>Total: S/. @ViewBag.total</p>
+    <p>@ViewBag.usuario</p>
+    <p>Direccion: @ViewBag.direccion</p>
+
+</div>
+
+@using (Html.BeginForm("Confirm_Payment", "SecondLife", FormMethod.Get))
+{
+    @Html.Hidden("subtotal", (double)@ViewBag.subtotal)
+    @Html.Hidden("descuento", (double)@ViewBag.descuento)
+    @Html.Hidden("total", (double)@ViewBag.total)
+    @Html.Hidden("id_direc", (string)ViewBag.id_direc)
+    <div>
+        <p>Escoja su numero de tarjeta</p>
+        @Html.DropDownList("id_tarj", ViewBag.tarjeta as SelectList, new { @class = "btn btn-default" })
+    </div>
+    <div>
+        <a href="javascript:history.back()" class="btn btn-default">Regresar</a>
+        <button class="btn btn-primary">Pagar</button>
+    </div>
+}
+<div style="width:300px; border:1px solid black;">
+    @Html.Partial("_PartialCard")
+</div>
+
+

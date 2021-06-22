@@ -7,6 +7,7 @@ namespace SecondLife.Models
 {
     public class Usuario
     {
+        
         public string id_usua { get; set; }
         public string dni_usua { get; set; }
         public int id_rol { get; set; }

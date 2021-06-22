@@ -1,0 +1,43 @@
+﻿@model SecondLife.Models.Usuario
+
+@{
+    ViewBag.Title = "Pay_Data";
+}
+
+<h2>Datos del titular</h2>
+<hr />
+<p>@ViewBag.mensaje</p>
+
+    <div>
+        <h5>Total a pagar</h5>
+        <p>Envio : S/.0 (GRATIS)</p>
+        <p>Subtotal: S/. @ViewBag.subtotal </p>
+        <p>Descuento: S/. @ViewBag.descuento</p>
+        <p>Total: S/. @ViewBag.total</p>
+        <p>@ViewBag.usuario</p>
+        <p>@ViewBag.actual</p>
+    </div>
+
+    <div>
+        @using (Html.BeginForm("Payment_Methods", "SecondLife", FormMethod.Get))
+        {
+            <div>
+                <p>Escoja su direccion de envio</p>
+                @Html.Hidden("subtotal", (double)@ViewBag.subtotal)
+                @Html.Hidden("descuento", (double)@ViewBag.descuento)
+                @Html.Hidden("total", (double)@ViewBag.total)
+                @Html.DropDownList("id_direc", ViewBag.direccion as SelectList, new { @class = "btn btn-default" })
+            </div>
+            <button class="btn btn-primary">Siguiente</button>
+        }
+        <a href="javascript:history.back()" class="btn btn-default">Regresar</a>
+    </div>
+
+<div style="width:300px; border:1px solid black;">
+    @Html.Partial("_PartialAddress")
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

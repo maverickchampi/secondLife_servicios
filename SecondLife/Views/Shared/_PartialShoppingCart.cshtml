@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SecondLife.Models.Item>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.imagen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nom_prod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sub_total)
+        </th>
+        <th></th>
+    </tr>
+
+    @if(Model.Count()>0){
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img class="card-img-top img-index" src="@Url.Content(item.imagen)" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom_prod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sub_total)
+            </td>
+        </tr>
+    }
+    }
+
+</table>

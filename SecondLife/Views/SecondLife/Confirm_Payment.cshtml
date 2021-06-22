@@ -1,0 +1,31 @@
+﻿@using SecondLife.Models
+
+@{
+    ViewBag.Title = "Confirm_Payment";
+}
+
+<h2>Confirmacion</h2>
+
+<div style="display:flex">
+    <div>
+        @Html.Partial("_PartialShoppingCart", ViewBag.carrito as List<Item>)
+    </div>
+
+    <div>
+        @using (Html.BeginForm())
+        {
+            <p>Subtotal: S/. @ViewBag.subtotal</p>
+            <p>Descuento: S/. @ViewBag.descuento</p>
+            <p>Envio:  S/. 0 (Gratis)</p>
+            <p>Total: S/. @ViewBag.total </p>
+            <p>Direccion de envio: @ViewBag.direccion</p>
+            <p>Tarjeta: @ViewBag.tarjeta</p>
+            <a href="javascript:history.back()" class="btn btn-default">Regresar</a>
+            @Html.ActionLink("Confirmar", "Make_Pagament", new { subtotal=(double)@ViewBag.subtotal,
+           descuento=(double)@ViewBag.descuento, total= (double)@ViewBag.total,
+           id_direc= @ViewBag.id_direc, id_tarj=@ViewBag.id_tarj}, new { @class= "btn btn-default" })
+        }
+
+    </div>
+</div>
+

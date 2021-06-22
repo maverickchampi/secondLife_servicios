@@ -107,7 +107,7 @@ create table tb_tarjeta (
 	id_tarj char(5) not null,
     tip_tarj varchar(25) not null,
     num_tarj char(16) not null,
-    fec_venc date not null,
+    fec_venc char(5) not null,
     cvv int not null,
     id_usua char(5) not null
 )
@@ -195,6 +195,7 @@ create table tb_direccion(
     /*latitud decimal not null,
     longitud decimal not null,*/
     desc_direc varchar(256) not null,
+	referencia varchar(100) not null,
     etiqueta varchar(15) not null,
     id_dist  int not null,
 	id_usua char(5) not null
@@ -354,11 +355,11 @@ go
 create table tb_boleta (
 	num_bol char(8) not null,
 	id_usua char(5) not null,
-	tipo_pago int not null,
-    descrip_pago varchar(30) not null,
+	id_tarj char(5) not null,
     id_direc char(5) not null,
-	fec_bol  datetime not null default current_timestamp,
+	fec_bol  datetime default current_timestamp,
 	impo_bol decimal(8,2) not null,
+	desc_bol decimal(8,2) not null,
 	envio decimal(8,2) not null,
 	total_bol  decimal(8,2) not null
 )
@@ -369,6 +370,11 @@ go
 alter table tb_boleta
 add constraint FKbol_usua foreign key (id_usua) references tb_usuario(id_usua)
 go
+
+alter table tb_boleta
+add constraint FKbol_tarj foreign key (id_tarj) references tb_tarjeta(id_tarj)
+go
+
 alter table tb_boleta
 add constraint FKbol_direc foreign key (id_direc) references tb_direccion(id_direc)
 go
@@ -376,14 +382,12 @@ alter table tb_boleta
 add constraint CKbol_impo check (impo_bol>=1.0)
 go
 alter table tb_boleta
-add constraint CKbol_envio check (envio>=1.0)
+add constraint CKbol_envio check (envio>=0)
 go
 alter table tb_boleta
 add constraint CKbol_total check (total_bol>=5.0)
 go
-alter table tb_boleta
-add constraint CKtip_pago check (tipo_pago in (1, 2))
-go
+
     
 /*
 	1 - tarjeta
@@ -423,10 +427,10 @@ alter table tb_detalle_boleta
 add constraint FKdetalbol_prod foreign key (id_prod) references tb_producto(id_prod)
 go
 alter table tb_detalle_boleta
-add constraint CKdetalbol_cant check (cant_prod>=1 and cant_prod<=5)
+add constraint CKdetalbol_cant check (cant_prod>=1)
 go
 alter table tb_detalle_boleta
-add constraint CKdetalbol_sub check (sub_tot>=5.0 and sub_tot<=5000)
+add constraint CKdetalbol_sub check (sub_tot>=0)
 go
 
 create function sigNumDetBol() 
@@ -1007,6 +1011,65 @@ as
 	@dni, 4, @nom, @apel,@tel,@fec_nac_usua, @usuario, @pass, @email_log)
 go
 
+create or alter proc sp_insertar_direccion
+@desc varchar(256),
+@referencia varchar(100),
+@etiqueta varchar(15),
+@id_dist  int,
+@id_usua char(5)
+as
+	insert into tb_direccion values (dbo.sigIdDirec() , @desc, @referencia, @etiqueta, @id_dist, @id_usua)
+go
+
+exec sp_insertar_direccion 'los solsitos', 'a mis casa', 'casa', 1, 'us001'
+go
+
+create or alter proc sp_insertar_tarjeta
+@tip_tarj varchar(25),
+@num_tarj char(16),
+@fec_venc char(5),
+@cvv int,
+@id_usua char(5)
+as
+	insert into tb_tarjeta values (dbo.sigIdTarj(), @tip_tarj, @num_tarj,
+								@fec_venc, @cvv, @id_usua)
+go
+
+exec sp_insertar_tarjeta 'visa', '4234567891234565', '23/04', 123, 'us001'
+go
+
+create or alter proc sp_insertar_boleta
+@id_usua char(5),
+@id_direc char(5),
+@id_tarj char(5),
+@impo_bol decimal(8,2),
+@desc_bol decimal(8,2),
+@envio decimal(8,2),
+@total_bol  decimal(8,2)
+as
+	insert into tb_boleta(num_bol, id_usua, id_tarj, id_direc, 
+	impo_bol, desc_bol, envio, total_bol) values (dbo.sigNumBol(),@id_usua, @id_tarj, @id_direc,
+	@impo_bol ,@desc_bol, @envio, @total_bol )
+go
+
+exec sp_insertar_boleta 'us001', 'dc001', 'tj001', 2000.00, 0, 2.0,  2000.00
+go
+
+create or alter proc sp_insertar_detalle_boleta
+@id_prod char(5) ,
+@cant_prod  int,
+@precio_prod decimal(10,2),
+@sub_tot   decimal(8,2) 
+as
+	insert into tb_detalle_boleta values (dbo.sigNumDetBol(), (select top 1 num_bol from tb_boleta order by num_bol desc), @id_prod,
+	@cant_prod, @precio_prod, @sub_tot )
+	update tb_producto
+	set stock=stock-@cant_prod
+	where id_prod=@id_prod
+go
+
+exec sp_insertar_detalle_boleta 'pd001', 2, 1500.00, 3000.00
+go
 
 create or alter proc sp_lista_usuario
 as
@@ -1016,14 +1079,34 @@ go
 exec sp_lista_usuario
 go
 
+create or alter proc sp_lista_tarjeta
+@id char(5)
+as
+	select*from tb_tarjeta
+	where id_usua=@id
+go
 
+exec sp_lista_tarjeta 'us001'
+go
+
+create or alter proc sp_lista_direccion
+@id char(5)
+as
+	select*from tb_direccion
+	where id_usua=@id
+go
+
+exec sp_lista_direccion 'us001'
+go
 /*-------------------------------------------------------------------------------*/
 /*
 select*from tb_boleta;
 select*from tb_categoria;
 select*from tb_departamento;
 select*from tb_detalle_boleta;
-select*from distrito;
+select*from tb_boleta;
+select*from tb_distrito;
+select*from tb_direccion;
 select*from tb_usuario;
 select*from tb_producto;
 select*from tb_provincia;
