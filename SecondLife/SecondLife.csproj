@@ -187,6 +187,8 @@
     <Content Include="Views\SecondLife\Purchases.cshtml" />
     <Content Include="Views\SecondLife\Card.cshtml" />
     <Content Include="Views\SecondLife\_PartialPurchases.cshtml" />
+    <Content Include="Views\SecondLife\Edit_Card.cshtml" />
+    <Content Include="Views\SecondLife\Edit_Address.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

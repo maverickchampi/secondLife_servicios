@@ -409,9 +409,9 @@ namespace SecondLife.Controllers
             }
             return lista;
         }
-        /*--------------metodos de actionresult--------------------*/
-        /*--------------------------------------------------------*/
-
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
         public ActionResult Index(string mensaje = null)
         {
             //validamos la existencia de la sesion
@@ -455,8 +455,9 @@ namespace SecondLife.Controllers
             //return null;
         }
 
-        /*--------------------------------------------------------*/
-        /*-----------------PROCESO DE CLIENTE------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        /*---------------------------------------INGRESO AL SISTEMA----------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
         public ActionResult Login()
         {
             return View();
@@ -535,11 +536,20 @@ namespace SecondLife.Controllers
             Session["login"] = null;
             return RedirectToAction("Product", new { mensaje = "La sesión fue cerrada" });
         }
-        /*---------------------------------------------------------*/
-        /*---------------------perfil------------------------------*/
-        /*---------------------------------------------------------*/
-        public ActionResult Profile(string id = null, Boolean estado = false)
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+
+
+        /*-------------------------------------------------------------------------------------------------*/
+        /*--------------------------------------------PERFIL-----------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        public ActionResult Profile(string id = null, Boolean estado = false, string mensaje=null)
         {
+            if (mensaje != null)
+            {
+                ViewBag.mensaje = mensaje;
+            }
             if (estado)
             {
                 TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
@@ -552,7 +562,45 @@ namespace SecondLife.Controllers
                 return RedirectToAction("Error");
             }
         }
-        /*----------direccion y tarjeta-------------*/
+        [HttpPost]
+        public ActionResult Profile(Usuario reg)
+        {
+            Usuario u = InicioSesion() as Usuario;
+            string mensaje = null;
+            SqlConnection cn = new SqlConnection(cadena);
+            cn.Open();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_modificar_usuario", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_usua", reg.id_usua);
+                cmd.Parameters.AddWithValue("@dni", reg.dni_usua);
+                cmd.Parameters.AddWithValue("@nom", reg.nom_usua);
+                cmd.Parameters.AddWithValue("@apel", reg.ape_usua);
+                cmd.Parameters.AddWithValue("@tel", reg.tel_usua);
+                cmd.Parameters.AddWithValue("@fec_nac_usua", reg.fec_nac_usua);
+                cmd.Parameters.AddWithValue("@usuario", reg.usuario);
+                cmd.Parameters.AddWithValue("@pass", reg.pass);
+                cmd.Parameters.AddWithValue("@email_log", reg.email_log);
+                int i = 0;
+                i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    mensaje = "Usuario modificada";
+                }
+            }
+            catch (SqlException e)
+            {
+                mensaje = "Error al modificar usuario, vuelve a intentarlo";
+                mensaje = e.Message;
+            }
+            finally
+            {
+                cn.Close();
+            }
+            return RedirectToAction("Profile", new { mensaje=mensaje, id=u.id_usua, estado=true });
+        }
+
         public ActionResult Address(string mensaje = null)
         {
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
@@ -597,6 +645,46 @@ namespace SecondLife.Controllers
                 cn.Close();
             }
 
+            return RedirectToAction("Address", new { mensaje = ViewBag.mensaje });
+        }
+
+        public ActionResult Edit_Address(string id=null)
+        {
+            Usuario u = InicioSesion() as Usuario;
+            Direccion reg = lista_direccion(u.id_usua).Where(x => x.id_direc == id).FirstOrDefault();
+            ViewBag.distrito = new SelectList(lista_distrito().ToList(), "id_dist", "nom_dist");
+            return View(reg);
+        }
+        
+        [HttpPost]
+        public ActionResult Edit_Address(Direccion reg)
+        {
+            SqlConnection cn = new SqlConnection(cadena);
+            cn.Open();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_modificar_direccion", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", reg.id_direc);
+                cmd.Parameters.AddWithValue("@desc", reg.desc_direc);
+                cmd.Parameters.AddWithValue("@referencia", reg.referencia);
+                cmd.Parameters.AddWithValue("@etiqueta", reg.etiqueta);
+                cmd.Parameters.AddWithValue("@id_dist", reg.id_dist);
+                int i = 0;
+                i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    ViewBag.mensaje = "Dirección modificada";
+                }
+            }
+            catch (SqlException e)
+            {
+                ViewBag.mensaje = "Error al modificar la dirección, vuelve a intentarlo";
+            }
+            finally
+            {
+                cn.Close();
+            }
             return RedirectToAction("Address", new { mensaje = ViewBag.mensaje });
         }
         public ActionResult Delete_Address(string id = null)
@@ -688,7 +776,6 @@ namespace SecondLife.Controllers
             catch (SqlException e)
             {
                 ViewBag.mensaje = "Error al agregar tarjeta, vuelve a intentarlo";
-                ViewBag.mensaje = e.Message;
             }
             finally
             {
@@ -702,11 +789,50 @@ namespace SecondLife.Controllers
             Tarjeta reg = lista_tarjeta(u.id_usua).Where(x => x.id_tarj == id).FirstOrDefault();
             return View(reg);
         }
+        [HttpPost]
         public ActionResult Edit_Card(Tarjeta reg)
         {
             Usuario u = InicioSesion() as Usuario;
-
-            return RedirectToAction("Card");
+            int num_tip = int.Parse(reg.num_tarj.Substring(0, 1));
+            if (num_tip == 4)
+            {
+                reg.tip_tarj = "Visa";
+            }
+            else if (num_tip == 5)
+            {
+                reg.tip_tarj = "Mastercad";
+            }
+            else
+            {
+                reg.tip_tarj = "Desconocido";
+            }
+            SqlConnection cn = new SqlConnection(cadena);
+            cn.Open();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("sp_modificar_tarjeta", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id_tarj", reg.id_tarj);
+                cmd.Parameters.AddWithValue("@tip_tarj", reg.tip_tarj);
+                cmd.Parameters.AddWithValue("@num_tarj", reg.num_tarj);
+                cmd.Parameters.AddWithValue("@fec_venc", reg.fec_venc);
+                cmd.Parameters.AddWithValue("@cvv", reg.cvv);
+                int i = 0;
+                i = cmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    ViewBag.mensaje = "Tarjeta modificada";
+                }
+            }
+            catch (SqlException e)
+            {
+                ViewBag.mensaje = "Error al modificar tarjeta, vuelve a intentarlo";
+            }
+            finally
+            {
+                cn.Close();
+            }
+            return RedirectToAction("Card", new { mensaje = ViewBag.mensaje });
         }
         public ActionResult Delete_Card(string id = null)
         {
@@ -736,7 +862,15 @@ namespace SecondLife.Controllers
 
             return RedirectToAction("Card", new { mensaje = ViewBag.mensaje });
         }
-        /*---------------PROCESO DE PRODUCTO------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+
+
+        /*-------------------------------------------------------------------------------------------------*/
+        /*------------------------------------------------PRODUCTO------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+
         public ActionResult Product(string mensaje = null, int p = 0, int id_categ = 0, string marca = "", string flecha = "")
         {
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
@@ -864,6 +998,15 @@ namespace SecondLife.Controllers
             return RedirectToAction("Detail_Product", new { mensaje = mensaje });
         }
 
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+
+
+        /*-------------------------------------------------------------------------------------------------*/
+        /*--------------------------------Carrito de compra----------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+
         public ActionResult Shopping_cart(string mensaje = null)
         {
             if (mensaje != null)
@@ -917,7 +1060,15 @@ namespace SecondLife.Controllers
                 return RedirectToAction("Shopping_cart");
             }
         }
-        /*--------------------Proceso de pago---------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+
+
+        /*-------------------------------------------------------------------------------------------------*/
+        /*------------------------------------Proceso de pago-------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+
         public ActionResult Pay_Data(string id = null, string nombre = null, double subtotal = 0, double total = 0,
             string mensaje = null, double descuento = 0)
         {
@@ -1163,6 +1314,14 @@ namespace SecondLife.Controllers
                 return RedirectToAction("Error");
             }
         }
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+
+        /*-------------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------Mensaje de error------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------------*/
+
         public ActionResult Error()
         {
             TempData["usuario"] = InicioSesion() as Usuario;

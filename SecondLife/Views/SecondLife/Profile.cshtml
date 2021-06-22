@@ -6,7 +6,7 @@
 
 <h2>Profile</h2>
 
-
+<p> @ViewBag.mensaje</p>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -91,7 +91,7 @@
 }
 
 <div>
-    @Html.ActionLink("Datos Personales", "Profile") <br />
+    @Html.ActionLink("Datos Personales", "Profile", new { id=Model.id_usua, estado=true}) <br />
     @Html.ActionLink("Mis direcciones", "Address")<br />
     @Html.ActionLink("Mis compras", "Purchases")<br />
     @Html.ActionLink("Medios de pago", "Card")<br />
