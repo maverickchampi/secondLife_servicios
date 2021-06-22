@@ -176,17 +176,17 @@
     <Content Include="Views\SecondLife\RegisterUser.cshtml" />
     <Content Include="Views\SecondLife\Index.cshtml" />
     <Content Include="Views\SecondLife\Pay_Data.cshtml" />
-    <Content Include="Views\Shared\_PartialAddress.cshtml" />
+    <Content Include="Views\SecondLife\_PartialAddress.cshtml" />
     <Content Include="Views\SecondLife\Payment_Methods.cshtml" />
-    <Content Include="Views\Shared\_PartialCard.cshtml" />
-    <Content Include="Views\Shared\_PartialShoppingCart.cshtml" />
+    <Content Include="Views\SecondLife\_PartialCard.cshtml" />
+    <Content Include="Views\SecondLife\_PartialShoppingCart.cshtml" />
     <Content Include="Views\SecondLife\Confirm_Payment.cshtml" />
     <Content Include="Views\SecondLife\Error.cshtml" />
     <Content Include="Views\SecondLife\Profile.cshtml" />
     <Content Include="Views\SecondLife\Address.cshtml" />
     <Content Include="Views\SecondLife\Purchases.cshtml" />
     <Content Include="Views\SecondLife\Card.cshtml" />
-    <Content Include="Views\Shared\_PartialPurchases.cshtml" />
+    <Content Include="Views\SecondLife\_PartialPurchases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SecondLife.Models
+﻿namespace SecondLife.Models
 {
     public class Direccion
     {
@@ -12,7 +7,7 @@ namespace SecondLife.Models
         public string referencia { get; set; }
         public string etiqueta { get; set; }
         public int id_dist { get; set; }
-        public string id_usua { get;set; }
+        public string id_usua { get; set; }
         public int estado { get; set; }
     }
 }

@@ -1,11 +1,16 @@
 ﻿@model SecondLife.Models.Direccion
 
 
-
-@using (Html.BeginForm("Pay_Data", "SecondLife", FormMethod.Post))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.Hidden("id_usua", (string)@ViewBag.usua)
+    if (@ViewBag.subtotal != null)
+    {
+        @Html.Hidden("subtotal", (double)@ViewBag.subtotal)
+        @Html.Hidden("descuento", (double)@ViewBag.descuento)
+        @Html.Hidden("total", (double)@ViewBag.total)
+        @Html.Hidden("estado", true)
+    }
     <div class="form-horizontal">
         <h4>Direccion</h4>
         <hr />
@@ -49,7 +54,6 @@
         </div>
     </div>
 }
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

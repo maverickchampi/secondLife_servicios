@@ -1,13 +1,12 @@
-﻿using System;
+﻿using SecondLife.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Data;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
-using SecondLife.Models;
 using System.Globalization;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace SecondLife.Controllers
 {
@@ -96,7 +95,7 @@ namespace SecondLife.Controllers
             dr.Close(); cn.Close();
             return temporal;
         }
-        IEnumerable<Boleta> lista_boleta(string id_usua=null)
+        IEnumerable<Boleta> lista_boleta(string id_usua = null)
         {
             List<Boleta> temporal = new List<Boleta>();
             SqlConnection cn = new SqlConnection(cadena);
@@ -122,7 +121,7 @@ namespace SecondLife.Controllers
             dr.Close(); cn.Close();
             return temporal;
         }
-        IEnumerable<DetalleBoleta> lista_detalle_boleta(string num_bol= null)
+        IEnumerable<DetalleBoleta> lista_detalle_boleta(string num_bol = null)
         {
             List<DetalleBoleta> temporal = new List<DetalleBoleta>();
             SqlConnection cn = new SqlConnection(cadena);
@@ -393,7 +392,7 @@ namespace SecondLife.Controllers
             dr.Close(); cn.Close();
             return reg;
         }
-        public List<Producto> producto_carrito( List<Producto> producto)
+        public List<Producto> producto_carrito(List<Producto> producto)
         {
             List<Item> temporal = (List<Item>)Session["carrito"];
             List<Producto> lista = new List<Producto>();
@@ -413,7 +412,7 @@ namespace SecondLife.Controllers
         /*--------------metodos de actionresult--------------------*/
         /*--------------------------------------------------------*/
 
-        public ActionResult Index(string mensaje=null)
+        public ActionResult Index(string mensaje = null)
         {
             //validamos la existencia de la sesion
             if (Session["carrito"] == null)
@@ -424,8 +423,8 @@ namespace SecondLife.Controllers
             else
             {
                 ViewBag.producto = producto_carrito(producto_calidad().ToList());
-            }              
-           
+            }
+
             if (mensaje != null)
             {
                 ViewBag.mensaje = mensaje;
@@ -463,8 +462,8 @@ namespace SecondLife.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(string user, string pass,Boolean pay= false, double subtotal=0,
-            double descuento=0, double total=0)
+        public ActionResult Login(string user, string pass, Boolean pay = false, double subtotal = 0,
+            double descuento = 0, double total = 0)
         {
             Usuario reg = buscar_usuario(user, pass);
             if (reg == null)
@@ -477,7 +476,7 @@ namespace SecondLife.Controllers
                 Session["login"] = reg;
                 if (pay)
                 {
-                    return RedirectToAction("Pay_Data", new { subtotal=subtotal, descuento=descuento, total=total});
+                    return RedirectToAction("Pay_Data", new { subtotal = subtotal, descuento = descuento, total = total });
                 }
                 else
                 {
@@ -485,7 +484,7 @@ namespace SecondLife.Controllers
                 }
             }
         }
-        public ActionResult RegisterUser(string mensaje=null)
+        public ActionResult RegisterUser(string mensaje = null)
         {
             if (mensaje != null)
             {
@@ -501,8 +500,8 @@ namespace SecondLife.Controllers
             SqlConnection cn = new SqlConnection(cadena);
             cn.Open();
             try
-            {           
-                SqlCommand cmd = new SqlCommand("sp_insertar_usuario", cn);            
+            {
+                SqlCommand cmd = new SqlCommand("sp_insertar_usuario", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@dni", reg.dni_usua);
                 cmd.Parameters.AddWithValue("@nom", reg.nom_usua);
@@ -514,12 +513,13 @@ namespace SecondLife.Controllers
                 cmd.Parameters.AddWithValue("@email_log", reg.email_log);
 
                 int i = 0;
-                i=cmd.ExecuteNonQuery();
+                i = cmd.ExecuteNonQuery();
                 if (i > 0)
                 {
                     ViewBag.mensaje = "Te has registrado";
                 }
-            }catch(SqlException e)
+            }
+            catch (SqlException e)
             {
                 ViewBag.mensaje = "Error al registrarse, vuelve a intentarlo";
             }
@@ -527,7 +527,7 @@ namespace SecondLife.Controllers
             {
                 cn.Close();
             }
-            return RedirectToAction("RegisterUser", new { mensaje=ViewBag.mensaje});
+            return RedirectToAction("RegisterUser", new { mensaje = ViewBag.mensaje });
         }
 
         public ActionResult CloseSession()
@@ -538,7 +538,7 @@ namespace SecondLife.Controllers
         /*---------------------------------------------------------*/
         /*---------------------perfil------------------------------*/
         /*---------------------------------------------------------*/
-        public ActionResult Profile(string id = null, Boolean estado=false)
+        public ActionResult Profile(string id = null, Boolean estado = false)
         {
             if (estado)
             {
@@ -553,7 +553,7 @@ namespace SecondLife.Controllers
             }
         }
         /*----------direccion y tarjeta-------------*/
-        public ActionResult Address(string mensaje=null)
+        public ActionResult Address(string mensaje = null)
         {
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
             Usuario u = InicioSesion() as Usuario;
@@ -561,7 +561,7 @@ namespace SecondLife.Controllers
             {
                 ViewBag.mensaje = mensaje;
             }
-           
+
             ViewBag.distrito = new SelectList(lista_distrito().ToList(), "id_dist", "nom_dist");
             return View(lista_direccion(u.id_usua));
         }
@@ -596,7 +596,7 @@ namespace SecondLife.Controllers
             {
                 cn.Close();
             }
-  
+
             return RedirectToAction("Address", new { mensaje = ViewBag.mensaje });
         }
         public ActionResult Delete_Address(string id = null)
@@ -631,15 +631,15 @@ namespace SecondLife.Controllers
         {
             Usuario u = InicioSesion() as Usuario;
             ViewBag.detalle = (List<DetalleBoleta>)lista_detalle_boleta();
-            ViewBag.direccion= (List<Direccion>)lista_direccion_total(u.id_usua).ToList();
+            ViewBag.direccion = (List<Direccion>)lista_direccion_total(u.id_usua).ToList();
             ViewBag.tarjeta = (List<Tarjeta>)lista_tarjeta_total(u.id_usua);
             ViewBag.producto = (List<Producto>)producto();
 
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
-           
+
             return View(lista_boleta(u.id_usua));
         }
-        public ActionResult Card(string mensaje=null)
+        public ActionResult Card(string mensaje = null)
         {
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
             Usuario u = InicioSesion() as Usuario;
@@ -708,7 +708,7 @@ namespace SecondLife.Controllers
 
             return RedirectToAction("Card");
         }
-        public ActionResult Delete_Card( string id=null)
+        public ActionResult Delete_Card(string id = null)
         {
             SqlConnection cn = new SqlConnection(cadena);
             try
@@ -737,7 +737,7 @@ namespace SecondLife.Controllers
             return RedirectToAction("Card", new { mensaje = ViewBag.mensaje });
         }
         /*---------------PROCESO DE PRODUCTO------------------------------------*/
-        public ActionResult Product(string mensaje=null, int p =0, int id_categ=0,string marca="", string flecha = "")
+        public ActionResult Product(string mensaje = null, int p = 0, int id_categ = 0, string marca = "", string flecha = "")
         {
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
 
@@ -766,15 +766,15 @@ namespace SecondLife.Controllers
 
             if (marca != "")
             {
-                temporal=temporal.Where(m => m.marca.StartsWith(marca,
-                    StringComparison.CurrentCultureIgnoreCase)).ToList();
+                temporal = temporal.Where(m => m.marca.StartsWith(marca,
+                      StringComparison.CurrentCultureIgnoreCase)).ToList();
             }
 
             int f = 12;
             int c = temporal.Count();
             int npags = c % f == 0 ? c / f : c / f + 1;
             if (temporal.Count() > 0)
-            {            
+            {
                 if (flecha == "ini")
                 {
                     p = 0;
@@ -802,11 +802,11 @@ namespace SecondLife.Controllers
             return View(temporal.Skip(f * p).Take(f));
         }
 
-       [HttpPost]
+        [HttpPost]
         public ActionResult Product(string id = null, int stock = 0, int cant = 0)
         {
             string mensaje = null;
-            if (cant>stock || cant <1)
+            if (cant > stock || cant < 1)
             {
                 mensaje = "Ingrese cantidad válida";
             }
@@ -819,10 +819,10 @@ namespace SecondLife.Controllers
             TempData["usuario"] = InicioSesion() as Usuario; //datos del usuario
             ViewBag.categoria = lista_categoria().ToList();
 
-            return RedirectToAction("Product", new { mensaje = mensaje});
+            return RedirectToAction("Product", new { mensaje = mensaje });
             //return null;
         }
-       
+
         public ActionResult Detail_Product(string mensaje, string id)
         {
             TempData["usuario"] = InicioSesion() as Usuario;
@@ -835,7 +835,7 @@ namespace SecondLife.Controllers
             if (Session["carrito"] != null)
             {
                 List<Item> temporal = (List<Item>)Session["carrito"];
-                foreach(Item i in temporal)
+                foreach (Item i in temporal)
                 {
                     if (reg.id_prod == i.id_prod)
                     {
@@ -843,9 +843,9 @@ namespace SecondLife.Controllers
                     }
                 }
             }
-            return View(reg); 
+            return View(reg);
         }
- 
+
         [HttpPost]
         public ActionResult Detail_Product(string id = null, int stock = 0, int cant = 0)
         {
@@ -864,7 +864,7 @@ namespace SecondLife.Controllers
             return RedirectToAction("Detail_Product", new { mensaje = mensaje });
         }
 
-        public ActionResult Shopping_cart(string mensaje=null)
+        public ActionResult Shopping_cart(string mensaje = null)
         {
             if (mensaje != null)
             {
@@ -874,7 +874,7 @@ namespace SecondLife.Controllers
             List<Item> temporal = null;
             if (Session["carrito"] != null)
             {
-                temporal= (List<Item>)Session["carrito"];
+                temporal = (List<Item>)Session["carrito"];
             }
             else
             {
@@ -883,11 +883,11 @@ namespace SecondLife.Controllers
             double total_prod = 0.0;
             double descuento = 0.0;
             double total = 0.0;
-            if (temporal!=null)
+            if (temporal != null)
             {
                 foreach (Item t in temporal)
                 {
-                    total_prod +=(double)t.sub_total;
+                    total_prod += (double)t.sub_total;
                 }
                 if (total_prod > 10)
                 {
@@ -901,7 +901,7 @@ namespace SecondLife.Controllers
             return View(temporal);
         }
 
-        public ActionResult Delete(string id=null, string nombre=null)
+        public ActionResult Delete(string id = null, string nombre = null)
         {
 
             if (Session["carrito"] != null)
@@ -918,14 +918,14 @@ namespace SecondLife.Controllers
             }
         }
         /*--------------------Proceso de pago---------------------*/
-        public ActionResult Pay_Data(string id=null, string nombre=null, double subtotal = 0, double total=0, 
+        public ActionResult Pay_Data(string id = null, string nombre = null, double subtotal = 0, double total = 0,
             string mensaje = null, double descuento = 0)
         {
             if (mensaje != null)
             {
                 ViewBag.mensaje = mensaje;
             }
-            if (((List<Item>)Session["carrito"]).Count() <1)
+            if (((List<Item>)Session["carrito"]).Count() < 1)
             {
                 return RedirectToAction("Shopping_cart", new { mensaje = "Escoja al menos un producto" });
             }
@@ -933,7 +933,7 @@ namespace SecondLife.Controllers
             {
                 if (InicioSesion() == null)
                 {
-                    return RedirectToAction("Login", new { pay = true, subtotal=subtotal, descuento=descuento, total=total });
+                    return RedirectToAction("Login", new { pay = true, subtotal = subtotal, descuento = descuento, total = total });
                 }
                 else
                 {
@@ -950,12 +950,12 @@ namespace SecondLife.Controllers
                     ViewBag.distrito = new SelectList(lista_distrito(), "id_dist", "nom_dist");
                     return View();
                 }
-            }           
+            }
         }
         [HttpPost]
         public ActionResult Pay_Data(Direccion reg, double subtotal = 0, double total = 0, double descuento = 0)
         {
-            Usuario u= InicioSesion() as Usuario;
+            Usuario u = InicioSesion() as Usuario;
             SqlConnection cn = new SqlConnection(cadena);
             cn.Open();
             try
@@ -984,11 +984,16 @@ namespace SecondLife.Controllers
                 cn.Close();
             }
 
-            return RedirectToAction("Pay_Data", new { mensaje = ViewBag.mensaje, subtotal= subtotal ,
-                descuento= descuento,  total= total });
+            return RedirectToAction("Pay_Data", new
+            {
+                mensaje = ViewBag.mensaje,
+                subtotal = subtotal,
+                descuento = descuento,
+                total = total
+            });
         }
-        public ActionResult Payment_Methods(double subtotal = 0, double total = 0, 
-            double descuento = 0, string id_direc=null, string mensaje=null, Boolean estado=false)
+        public ActionResult Payment_Methods(double subtotal = 0, double total = 0,
+            double descuento = 0, string id_direc = null, string mensaje = null, Boolean estado = false)
         {
 
             if (estado)
@@ -1020,13 +1025,14 @@ namespace SecondLife.Controllers
         }
         [HttpPost]
         public ActionResult Payment_Methods(Tarjeta reg, double subtotal = 0, double total = 0,
-            double descuento = 0, string id_direc = null)
+            double descuento = 0, string id_direc = null, bool estado=false)
         {
-            int num_tip = int.Parse(reg.num_tarj.Substring(0,1));
+            int num_tip = int.Parse(reg.num_tarj.Substring(0, 1));
             if (num_tip == 4)
             {
                 reg.tip_tarj = "Visa";
-            }else if (num_tip == 5)
+            }
+            else if (num_tip == 5)
             {
                 reg.tip_tarj = "Mastercad";
             }
@@ -1063,16 +1069,19 @@ namespace SecondLife.Controllers
                 cn.Close();
             }
 
-            return RedirectToAction("Payment_Methods", new { mensaje = ViewBag.mensaje,
+            return RedirectToAction("Payment_Methods", new
+            {
+                mensaje = ViewBag.mensaje,
                 subtotal = subtotal,
                 descuento = descuento,
                 total = total,
-                id_direc=id_direc
+                id_direc = id_direc,
+                estado=estado
             });
         }
 
         public ActionResult Confirm_Payment(double subtotal = 0, double descuento = 0, double total = 0,
-            string id_direc = null, string id_tarj = null, Boolean estado=false)
+            string id_direc = null, string id_tarj = null, Boolean estado = false)
         {
             if (estado)
             {
@@ -1100,7 +1109,7 @@ namespace SecondLife.Controllers
         }
 
         public ActionResult Make_Pagament(double subtotal = 0, double descuento = 0, double total = 0,
-            string id_direc = null, string id_tarj = null, Boolean estado=false)
+            string id_direc = null, string id_tarj = null, Boolean estado = false)
         {
             if (estado)
             {

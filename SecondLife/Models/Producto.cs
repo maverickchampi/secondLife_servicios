@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace SecondLife.Models
 {
     public class Producto
     {
-        
+
         public string id_prod { get; set; }
         public string codigo { get; set; }
         public int id_categ { get; set; }

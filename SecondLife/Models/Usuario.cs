@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace SecondLife.Models
 {
     public class Usuario
     {
-        
+
         public string id_usua { get; set; }
 
         [Display(Name = "dni")]
@@ -26,7 +23,7 @@ namespace SecondLife.Models
 
         [Display(Name = "teléfono")]
         [Required, RegularExpression("^[0-9]{9}$")]
-        public string  tel_usua { get; set; }
+        public string tel_usua { get; set; }
 
         [Display(Name = "fecha de nacimiento")]
         [Required]

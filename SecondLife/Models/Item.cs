@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SecondLife.Models
+﻿namespace SecondLife.Models
 {
     public class Item
     {
