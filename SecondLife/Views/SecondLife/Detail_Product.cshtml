@@ -4,129 +4,95 @@
     ViewBag.Title = "Detail_Product";
 }
 
-<h2>Detail_Product</h2>
+<div style="min-height: calc(100vh - 130px);">
+    <h2>Detalle de producto</h2>
 
-<!--mensaje-->
-<p>@ViewBag.mensaje</p>
+    <!--mensaje-->
+    <p>@ViewBag.mensaje</p>
 
-<div>
-    <p> @Html.ActionLink("Regresar", "Product")</p>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.id_prod)
-        </dt>
+    <div style="display:flex;">
+        <img class="card-img-top img-index" style="width:225px;height:225px;object-fit:contain;margin-left:100px;margin-right:40px; " src="@Url.Content(Model.imagen)" />
 
-        <dd>
-            @Html.DisplayFor(model => model.id_prod)
-        </dd>
+        <dl class="dl-horizontal" style="margin-top:25px">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.codigo)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.codigo)
-        </dd>
+            <dt style="text-align: left;">
+                Codigo
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.id_categ)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.codigo)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.id_categ)
-        </dd>
+            <dt style="text-align: left;">
+                Marca
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.marca)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.marca)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.marca)
-        </dd>
+            <dt style="text-align: left;">
+                Modelo
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.modelo)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.modelo)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.modelo)
-        </dd>
+            <dt style="text-align: left;">
+                Descripción
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.descripcion)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.descripcion)
-        </dd>
+            <dt style="text-align: left;">
+                Observación
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.observacion)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.observacion)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.observacion)
-        </dd>
+            <dt style="text-align: left;">
+                @Html.DisplayNameFor(model => model.stock)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fec_compra)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.stock)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.fec_compra)
-        </dd>
+            <dt style="text-align: left;">
+                @Html.DisplayNameFor(model => model.precio)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.stock)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.precio)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.stock)
-        </dd>
+            <dt style="text-align: left;">
+                @Html.DisplayNameFor(model => model.calidad)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.precio)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.calidad)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.precio)
-        </dd>
+        </dl>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.imagen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.imagen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.calidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.calidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-    </dl>
-</div>
-<div>
-
-    @using (Html.BeginForm("Detail_Product", "SecondLife", FormMethod.Post))
-    {
-        @Html.Hidden("id", Model.id_prod)
-        @Html.Hidden("stock", Model.stock)
-        @Html.TextBox("cant", 0, new { type = "number", min = "0", max = Model.stock })
-        <input type="submit" value="Agregar" class="btn btn-primary" />
-    }
-</div>
+    <div style="margin-top:75px;margin-left:75px">
+        @using (Html.BeginForm("Detail_Product", "SecondLife", FormMethod.Post))
+        {
+            @Html.Hidden("id", Model.id_prod)
+            @Html.Hidden("stock", Model.stock)
+            @Html.ActionLink("Regresar", "Product", null, new { @class = "btn btn-info" })
+            @Html.TextBox("cant", 0, new { type = "number", min = "0", max = Model.stock })
+            <input type="submit" value="Agregar" class="btn btn-primary" />
+        }
+    </div>
+    </div>
 

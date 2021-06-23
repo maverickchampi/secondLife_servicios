@@ -21,10 +21,11 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                @Html.ActionLink("SL", "Index", "SecondLife", new { area = "" }, new { @class = "navbar-brand" })
+                <img class="card-img-top img-index" style="width:50px;height:50px;" src="https://i.ibb.co/NCTjMms/logo-icon.png" />
+
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav" style="padding:0">
+                <ul class="nav navbar-nav" style="padding:0;float:right !important;">
                     <li>@Html.ActionLink("Inicio", "Index", "SecondLife")</li>
                     <li>@Html.ActionLink("Productos", "Product", "SecondLife")</li>
 
@@ -34,8 +35,6 @@
 
                     }
 
-                    <li> @Html.ActionLink("Carrito de compra", "Shopping_Cart", "SecondLife")</li>
-
                     @if (@u == null)
                     {
                         <li> @Html.ActionLink("Inicio de Sesion", "Login", "SecondLife")</li>
@@ -43,11 +42,16 @@
                     else
                     {
                         <li style="display:flex">
-                            <em style="padding-top: 15px; padding-bottom: 15px; color:#fff">Bienvenido @u.nom_usua @u.ape_usua </em>
-                            @Html.ActionLink("Ver perfil", "Profile", "SecondLife", new { id = u.id_usua, estado=true }, null)
-                            @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife")
+                            @Html.ActionLink(" Perfil", "Profile", "SecondLife", new { id = u.id_usua, estado = true },
+                             new { @class = "bi bi-person", @title = "Perfil de " + @u.nom_usua, @style =" font-size:16px" })
                         </li>
                     }
+
+                <li style=" display: flex; align-items: center; color: #9d9d9d;">
+                    @Html.ActionLink(" ", "Shopping_Cart", "SecondLife", new { /*Id = item.IDPROJECT */}, 
+                   new { @class = "bi bi-cart3 icon-car", @title = "Carrito",@style =" font-size:16px" })
+                    <span class="num-car" style="font-size:16px">(0)</span>
+                </li>
                 </ul>
             </div>
         </div>

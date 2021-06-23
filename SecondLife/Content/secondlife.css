@@ -75,6 +75,7 @@
 .m-5{
     margin:5px 0;
 }
+
 /*-------------------------*/
 .pay_container {
     width:400px;
@@ -101,4 +102,14 @@ input{
 label{
     text-align:left;
     margin-left:50px;
+
+.num-car:hover {
+    cursor:pointer;
+    color: #fff
+}
+.num-car:hover ~ .icon-car {
+    color: #fff !important
+}
+.icon-car:hover ~ .num-car{
+    color:#fff
 }
