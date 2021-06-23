@@ -1,0 +1,64 @@
+﻿@model SecondLife.Models.Direccion
+
+@{
+    ViewBag.Title = "Edit_Address";
+}
+
+<div style="margin-top: 60px; min-height: calc(100vh - 170px)">
+    <h2 style="display:inline">Actualizar dirección</h2>
+    <i class="bi bi-signpost" style="font-size:35px"></i>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.Hidden("id_direc", Model.id_direc)
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Descripción</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.desc_direc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.desc_direc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Referencia</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.referencia, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.referencia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Etiqueta</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.etiqueta, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.etiqueta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Distrito</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("id_dist", ViewBag.distrito as SelectList)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div style="margin-left:15px">
+
+                    <input type="submit" value="Actualizar" class="btn btn-success" />
+                    <a href="javascript:history.back()" class="btn btn-info">Regresar</a>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

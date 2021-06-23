@@ -1,0 +1,61 @@
+﻿@model SecondLife.Models.Tarjeta
+
+@{
+    ViewBag.Title = "Edit_Card";
+}
+
+<div style="margin-top: 60px; min-height: calc(100vh - 170px)">
+    <h2 style="display:inline">Actualizar tarjeta</h2>
+    <i class="bi bi-signpost" style="font-size:35px"></i>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Tarjeta</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.Hidden("id_tarj", Model.id_tarj)
+
+        <div class="form-group">
+            <label class="control-label col-md-2 label-form">Número</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.num_tarj, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.num_tarj, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Fecha venc.</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fec_venc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fec_venc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2 label-form">Cvv</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.cvv, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.cvv, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div style="margin-left:15px">
+                    <input type="submit" value="Actualizar" class="btn btn-success" />
+                    <a href="javascript:history.back()" class="btn btn-info">Regresar</a>
+                </div>
+            </div>
+        </div>
+    }
+ 
+</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    

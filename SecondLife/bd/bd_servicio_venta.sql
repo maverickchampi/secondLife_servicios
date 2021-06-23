@@ -940,53 +940,6 @@ insert into tb_producto values (dbo.sigIdProd(), '840188-010', 7, 'LOGITECH', 'G
 /*-------------------------------------------------------------------------------*/
 /*---------------------------procedimiento almacenado----------------------------*/
 /*-------------------------------------------------------------------------------*/
-create or alter proc sp_listado_producto
-as
-	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
-	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
-	inner join  tb_categoria c
-	on p.id_categ=c.id_categ
-	where stock>0
-	order by mar_prod
-go
-
-exec sp_listado_producto
-go
-
-create or alter proc sp_listado_producto_id
-@id varchar(5)
-as
-	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
-	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
-	inner join  tb_categoria c
-	on p.id_categ=c.id_categ and stock>0
-	where p.id_prod=@id
-go
-
-create or alter proc sp_listado_producto_calidad
-as
-	select top 6 id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
-	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
-	inner join  tb_categoria c
-	on p.id_categ=c.id_categ and stock>0
-	order by calidad desc
-go
-
-exec sp_listado_producto_calidad
-go
-
-create or alter proc sp_listado_producto_cat
-@cat int
-as
-	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
-	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
-	inner join  tb_categoria c
-	on p.id_categ=c.id_categ
-	where p.id_categ=@cat and stock>0
-go
-
-exec sp_listado_producto_cat 1
-go
 
 create or alter proc sp_buscar_user
 @user varchar(15),
@@ -999,6 +952,9 @@ go
 exec sp_buscar_user 'clientealex', '12345678'
 go
 
+/*------------------------------------------------------------------------------*/
+/*-----------------------------INSERTAR-----------------------------------------*/
+/*------------------------------------------------------------------------------*/
 create or alter proc sp_insertar_usuario
 @dni char(8),
 @nom varchar(100),
@@ -1074,6 +1030,57 @@ go
 exec sp_insertar_detalle_boleta 'pd001', 2, 1500.00, 3000.00
 go
 
+/*------------------------------------------------------------------------------*/
+/*-----------------------------LISTA-----------------------------------------*/
+/*------------------------------------------------------------------------------*/
+create or alter proc sp_listado_producto
+as
+	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
+	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
+	inner join  tb_categoria c
+	on p.id_categ=c.id_categ
+	where stock>0
+	order by mar_prod
+go
+
+exec sp_listado_producto
+go
+
+create or alter proc sp_listado_producto_id
+@id varchar(5)
+as
+	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
+	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
+	inner join  tb_categoria c
+	on p.id_categ=c.id_categ and stock>0
+	where p.id_prod=@id
+go
+
+create or alter proc sp_listado_producto_calidad
+as
+	select top 6 id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
+	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
+	inner join  tb_categoria c
+	on p.id_categ=c.id_categ and stock>0
+	order by calidad desc
+go
+
+exec sp_listado_producto_calidad
+go
+
+create or alter proc sp_listado_producto_cat
+@cat int
+as
+	select id_prod, cod_prod, p.id_categ, mar_prod, mod_prod, descrip_prod, observacion,
+	fec_comp_prod, stock, precio, p.imagen, calidad, p.estado from tb_producto p
+	inner join  tb_categoria c
+	on p.id_categ=c.id_categ
+	where p.id_categ=@cat and stock>0
+go
+
+exec sp_listado_producto_cat 1
+go
+
 create or alter proc sp_lista_usuario
 as
 	select*from tb_usuario
@@ -1112,7 +1119,54 @@ as
 	select*from tb_detalle_boleta
 go
 
+/*------------------------------------------------------------------------------*/
+/*-----------------------------MODIFICAR-----------------------------------------*/
+/*------------------------------------------------------------------------------*/
+create or alter proc sp_modificar_tarjeta
+@tip_tarj varchar(25),
+@id_tarj char(5),
+@num_tarj char(16),
+@fec_venc char(5),
+@cvv int
+as
+	update tb_tarjeta
+	set num_tarj=@num_tarj, fec_venc=@fec_venc, cvv=@cvv, tip_tarj=@tip_tarj
+	where id_tarj=@id_tarj
+go
 
+create or alter proc sp_modificar_usuario
+@id_usua char(5),
+@dni char(8),
+@nom varchar(100),
+@apel varchar(100),
+@fec_nac_usua date,
+@usuario varchar(15),
+@tel char(9),
+@pass varchar(100),
+@email_log varchar(100)
+as
+	update tb_usuario
+	set dni_usua=@dni, nom_usua=@nom, ape_usua=@apel, 
+		fec_nac_usua=@fec_nac_usua, usuario=@usuario, tel_usua=@tel, pass=@pass,
+		email_log=@email_log
+	where id_usua=@id_usua
+go
+
+create or alter proc sp_modificar_direccion
+@id char(5),
+@desc varchar(256),
+@referencia varchar(100),
+@etiqueta varchar(15),
+@id_dist  int
+as
+	update tb_direccion
+	set desc_direc=@desc, referencia=@referencia, etiqueta=@etiqueta, id_dist=@id_dist
+	where id_direc=@id
+go
+
+/*------------------------------------------------------------------------------*/
+/*-----------------------------ELIMINAR-----------------------------------------*/
+/*------------------------------------------------------------------------------*/
 create or alter proc sp_eliminar_direccion
 @id_direc char(5)
 as

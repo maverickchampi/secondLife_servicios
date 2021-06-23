@@ -5,71 +5,98 @@
     ViewBag.Title = "Card";
 }
 
-<h2>Tarjetas</h2>
-<p> @ViewBag.mensaje</p>
-<!--agregar una nueva direccion-->
+<div style="margin-top: 60px; min-height: calc(100vh - 170px)">
+    <h2 style="display:inline">Mis tarjetas </h2>
+    <i class="bi bi-credit-card" style="font-size:35px"></i>
 
-<div class="collapse" id="collapseExample">
-    <div class="card card-body">
-        @Html.Partial("_PartialCard", new Tarjeta())
+    <div class="alert alert-info alert-dismissible show" role="alert">
+        @if (@ViewBag.mensaje == null)
+        {
+            <span>Gestiona tus tarjetas</span>
+        }
+        else
+        {
+            @ViewBag.mensaje
+        }
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
-<p>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Nueva tarjeta
-    </button>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tip_tarj)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.num_tarj)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fec_venc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cvv)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th></th>
-    </tr>
+    <!--agregar una nueva direccion-->
 
-    @if (Model.Count() > 0) {
-    foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tip_tarj)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.num_tarj)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fec_venc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cvv)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit_Card", new { id = item.id_tarj }) |
-            @Html.ActionLink("Eliminar", "Delete_Card", new { id = item.id_tarj })
-        </td>
-    </tr>
-    }
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            @Html.Partial("_PartialCard", new Tarjeta())
+        </div>
+    </div>
+    <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Nueva tarjeta
+        </button>
+        <a href="javascript:history.back()" class="btn btn-info">Regresar</a>
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Tipo
+            </th>
+            <th>
+                Número
+            </th>
+            <th>
+                Fecha Venc.
+            </th>
+            <th>
+                Cvv
+            </th>
+            <th>
+                Estado
+            </th>
+            <th></th>
+        </tr>
 
-    }else{
-    <tr>
-        <td>
-            No tienes registrada ninguna tarjeta
-        </td>
-    </tr>
-    }
-</table>
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tip_tarj)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.num_tarj)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fec_venc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cvv)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.estado)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit_Card", new { id = item.id_tarj }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("X", "Delete_Card", new { id = item.id_tarj }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td>
+                    No tienes registrada ninguna tarjeta
+                </td>
+            </tr>
+        }
+    </table>
+    </div>
+
+<script>
+    setTimeout(() => {
+        document.querySelector('.alert').classList.add('fade');
+        document.querySelector('.alert').classList.add('hidden');
+    },3000)
+</script>

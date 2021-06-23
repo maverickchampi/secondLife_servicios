@@ -3,19 +3,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.imagen)
+            
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.nom_prod)
+           Producto
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.precio)
+           Precio
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cant)
+           Cantidad
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sub_total)
+            Sub total
         </th>
         <th></th>
     </tr>
@@ -24,19 +24,19 @@
     foreach (var item in Model)
     {
         <tr>
-            <td>
-                <img class="card-img-top img-index" src="@Url.Content(item.imagen)" />
+            <td style="vertical-align:middle">
+                <img class="card-img-top img-index" style="width:125px" src="@Url.Content(item.imagen)" />
             </td>
-            <td>
+            <td style="vertical-align:middle">
                 @Html.DisplayFor(modelItem => item.nom_prod)
             </td>
-            <td>
+            <td style="vertical-align:middle">
                 @Html.DisplayFor(modelItem => item.precio)
             </td>
-            <td>
+            <td style="vertical-align:middle">
                 @Html.DisplayFor(modelItem => item.cant)
             </td>
-            <td>
+            <td style="vertical-align:middle">
                 @Html.DisplayFor(modelItem => item.sub_total)
             </td>
         </tr>

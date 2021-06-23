@@ -5,68 +5,93 @@
     ViewBag.Title = "Address";
 }
 
-<h2>Address</h2>
-<p> @ViewBag.mensaje</p>
-<!--agregar una nueva direccion-->
+<div style="margin-top: 60px; min-height: calc(100vh - 170px)">
+    <h2 style="display:inline">Mis direcciones</h2>
+    <i class="bi bi-signpost" style="font-size:35px"></i>
 
-<div class="collapse" id="collapseExample">
-    <div class="card card-body">
-        @Html.Partial("_PartialAddress", new Direccion())
-    </div>
-</div>
-<p>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Nueva direccion
-    </button>
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.desc_direc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.referencia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.etiqueta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.id_dist)
-        </th>
-        <th></th>
-    </tr>
-
-    @if (Model.Count() > 0)
-    {
-        foreach (var item in Model)
+    <div class="alert alert-info alert-dismissible show" role="alert">
+        @if (@ViewBag.mensaje == null)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.desc_direc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.referencia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.etiqueta)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id_dist)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id_dist }) |
-                    @Html.ActionLink("Eliminar", "Delete_Address", new { id = item.id_direc })
-                </td>
-            </tr>
+            <span>Gestiona tus direcciones</span>
         }
-            }
-            else
+        else
+        {
+            @ViewBag.mensaje
+        }
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!--agregar una nueva direccion-->
+
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            @Html.Partial("_PartialAddress", new Direccion())
+        </div>
+    </div>
+    <p>
+        <button class="btn btn-primary" id="button-direccion"
+                e="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Nueva direccion
+        </button>
+        <a href="javascript:history.back()" class="btn btn-info">Regresar</a>
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Descripción
+            </th>
+            <th>
+                Referencia
+            </th>
+            <th>
+                Etiqueta
+            </th>
+            <th>
+                Id Distrito
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model.Count() > 0)
+        {
+            foreach (var item in Model)
             {
                 <tr>
                     <td>
-                        No existe ninguna direccion
+                        @Html.DisplayFor(modelItem => item.desc_direc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.referencia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.etiqueta)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id_dist)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit_Address", new { id = item.id_direc }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("X", "Delete_Address", new { id = item.id_direc },new { @class="btn btn-danger"})
                     </td>
                 </tr>
             }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    No existe ninguna direccion
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
+
+<script>
+    setTimeout(() => {
+        document.querySelector('.alert').classList.add('fade');
+        document.querySelector('.alert').classList.add('hidden');
+    },3000)
+</script>

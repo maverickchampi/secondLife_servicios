@@ -16,7 +16,7 @@
         <hr />
 
         <div class="form-group">
-            @Html.LabelFor(model => model.desc_direc, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2 label-form">Descripción</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.desc_direc, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.desc_direc, "", new { @class = "text-danger" })
@@ -24,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.referencia, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2 label-form">Referencia</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.referencia, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.referencia, "", new { @class = "text-danger" })
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.etiqueta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2 label-form">Etiqueta</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.etiqueta, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.etiqueta, "", new { @class = "text-danger" })
@@ -40,16 +40,16 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.id_dist, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2 label-form">Distrito</label>
             <div class="col-md-10">
                 @Html.DropDownList("id_dist", ViewBag.distrito as SelectList)
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div style="margin-left:15px">
 
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Agregar" class="btn btn-success" />
             </div>
         </div>
     </div>

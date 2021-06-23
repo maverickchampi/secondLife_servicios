@@ -4,6 +4,7 @@
     ViewBag.Title = "Profile";
 }
 
+
 <div class="row p-3 m-1  border rounded" style="margin-top:20px">
     <div class="col-md-12 col-lg-12 col-sm-12 order-md-1">
         <div class="row">
@@ -19,125 +20,184 @@
 </div>
 
 <hr />
+<div class="alert alert-info alert-dismissible show" role="alert">
+    @if (@ViewBag.mensaje == null)
+    {
+        <span>Que tengas buen día @ViewBag.nombreCompleto!</span>
+    }
+    else
+    {
+        @ViewBag.mensaje
+    }
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 
-<div style="display:flex">
+<div style="display:flex;min-height: calc(100vh - 229px);">
 
     <div style="margin-top:20px;margin-right:50px">
-        <button class="btn btn-primary m-5">
-            <i class="bi bi-person" style="margin-right:5px"></i>
-            @Html.ActionLink("Datos Personales", "Profile", null, new { @style = "text-decoration:none;color:#fff;" })
-        </button>
-        <br />
 
-        <button class="btn btn-info m-5">
-            <i class="bi bi-signpost" style="margin-right:5px"></i>
-            @Html.ActionLink("Mis direcciones", "Address", null, new { @style = "text-decoration:none;color:#fff;" })
+        <button class="list-group-item list-group-item-action" style="padding:20px">
+            <div class="row">
+                <div class="col-3 col-lg-2 col-md-3 col-sm-3">
+                    <i class="bi bi-person" style="margin-right:5px"></i>
+                </div>
+                <div class="col-6 col-lg-8 col-md-7 col-sm-6 p-2">
+                    @Html.ActionLink("Datos Personales", "Profile", new { @style = "text-decoration:none;color:#000;" })
+                </div>
+                <div class="col-3 col-lg-2 col-md-2 col-sm-3">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </div>
+        </button><button class="list-group-item list-group-item-action"style="padding:20px">
+            <div class="row">
+                <div class="col-3 col-lg-2 col-md-3 col-sm-3">
+                    <i class="bi bi-signpost" style="margin-right:5px"></i>
+                </div>
+                <div class="col-6 col-lg-8 col-md-7 col-sm-6 p-2">
+                    @Html.ActionLink("Mis direcciones", "Address", "SecondLife", new { @style = "text-decoration:none;color:#000;" })
+                </div>
+                <div class="col-3 col-lg-2 col-md-2 col-sm-3">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </div>
+        </button><button class="list-group-item list-group-item-action" style="padding:20px">
+            <div class="row">
+                <div class="col-3 col-lg-2 col-md-3 col-sm-3">
+                    <i class="bi bi-bag" style="margin-right:5px"></i>
+                </div>
+                <div class="col-6 col-lg-8 col-md-7 col-sm-6 p-2">
+                    @Html.ActionLink("Mis compras", "Purchases", "SecondLife", new { @style = "text-decoration:none;color:#000;" })
+                </div>
+                <div class="col-3 col-lg-2 col-md-2 col-sm-3">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </div>
         </button>
-        <br />
-
-        <button class="btn btn-success m-5">
-            <i class="bi bi-bag" style="margin-right:5px"></i>
-            @Html.ActionLink("Mis compras", "Purchases", null, new { @style = "text-decoration:none;color:#fff;" })
+        <button class="list-group-item list-group-item-action" style="padding:20px">
+            <div class="row">
+                <div class="col-3 col-lg-2 col-md-3 col-sm-3">
+                    <i class="bi bi-power" style="margin-right:5px"></i>
+                </div>
+                <div class="col-6 col-lg-8 col-md-7 col-sm-6 p-2">
+                    @Html.ActionLink("Medios de pago", "Card", "SecondLife", new { @style = "text-decoration:none;color:#000;" })
+                </div>
+                <div class="col-3 col-lg-2 col-md-2 col-sm-3">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </div>
         </button>
-        <br />
-
-        <button class="btn btn-warning m-5">
-            <i class="bi bi-credit-card" style="margin-right:5px"></i>
-            @Html.ActionLink("Medios de pago", "Card", null, new { @style = "text-decoration:none;color:#fff;" })
-        </button>
-        <br />
-
-        <button class="btn btn-danger m-5">
-            <i class="bi bi-power" style="margin-right:5px"></i>
-            @Html.ActionLink("Cerrar Sesion", "CloseSession", null, new { @style = "text-decoration:none;color:#fff;" })
+        <button class="list-group-item list-group-item-action" style="background-color:#d9534f" style="padding:20px">
+            <div class="row">
+                <div class="col-3 col-lg-2 col-md-3 col-sm-3">
+                    <i class="bi bi-power" style="margin-right:5px"></i>
+                </div>
+                <div class="col-6 col-lg-8 col-md-7 col-sm-6 p-2">
+                    @Html.ActionLink("Cerrar Sesion", "CloseSession", "SecondLife", new { @style = "text-decoration:none;color:#fff;" })
+                </div>
+                <div class="col-3 col-lg-2 col-md-2 col-sm-3">
+                    <i class="bi bi-chevron-right"></i>
+                </div>
+            </div>
         </button>
     </div>
-
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-            @Html.Hidden("id_usua", Model.id_usua)
+    @Html.Hidden("id_usua", Model.id_usua)
 
-            <div class="form-group">
+    <div class="col-md-6">
+        <div class="form-group">
 
-                <label class="control-label col-md-2 label-form">Dni</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.dni_usua, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                    @Html.ValidationMessageFor(model => model.dni_usua, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2 label-form">Nombre</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.nom_usua, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.nom_usua, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2 label-form">Apellido</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ape_usua, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ape_usua, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2 label-form">Teléfono</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.tel_usua, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                    @Html.ValidationMessageFor(model => model.tel_usua, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2 label-form">Fecha nac.</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.fec_nac_usua, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
-                    @Html.ValidationMessageFor(model => model.fec_nac_usua, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2 label-form">Usuario</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2 label-form">Password</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.pass, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
-                    @Html.ValidationMessageFor(model => model.pass, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-2 label-form">Correo</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.email_log, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
-                    @Html.ValidationMessageFor(model => model.email_log, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Actualizar" class="btn btn-primary" />
-                </div>
+            <label class="control-label col-md-2 label-form">Dni</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dni_usua, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                @Html.ValidationMessageFor(model => model.dni_usua, "", new { @class = "text-danger" })
             </div>
         </div>
-    }
 
+        <div class="form-group">
+            <label class="control-label col-md-2 label-form">Nombre</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nom_usua, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nom_usua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2 label-form">Apellido</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ape_usua, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ape_usua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2 label-form">Teléfono</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tel_usua, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                @Html.ValidationMessageFor(model => model.tel_usua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="form-group">
+            <label class="control-label col-md-2 label-form">Fecha nac.</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fec_nac_usua, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                @Html.ValidationMessageFor(model => model.fec_nac_usua, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2 label-form">Usuario</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.usuario, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.usuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2 label-form">Password</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pass, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                @Html.ValidationMessageFor(model => model.pass, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2 label-form">Correo</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email_log, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                @Html.ValidationMessageFor(model => model.email_log, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="" style="padding-left:25px">
+            <input type="submit" value="Actualizar" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+    }
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    setTimeout(() => {
+        document.querySelector('.alert').classList.add('fade');
+        document.querySelector('.alert').classList.add('hidden');
+    },3000)
+</script>
