@@ -1,4 +1,5 @@
 ﻿@model SecondLife.Models.Usuario
+@using SecondLife.Models
 
 @{
     ViewBag.Title = "Profile";
@@ -44,7 +45,10 @@
                     <i class="bi bi-person" style="margin-right:5px"></i>
                 </div>
                 <div class="col-6 col-lg-8 col-md-7 col-sm-6 p-2">
-                    @Html.ActionLink("Datos Personales", "Profile", new { @style = "text-decoration:none;color:#000;" })
+                    @{ 
+                        Usuario u = TempData["usuario"] as Usuario;
+                    }
+                    @Html.ActionLink("Datos Personales", "Profile", new { id=u.id_usua, estado=true }, new { @style = "text-decoration:none;color:#000;" })
                 </div>
                 <div class="col-3 col-lg-2 col-md-2 col-sm-3">
                     <i class="bi bi-chevron-right"></i>

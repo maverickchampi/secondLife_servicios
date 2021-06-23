@@ -32,6 +32,14 @@
                     <!--en esta seccion visualizamos al usuario-->
                     @{
                         Usuario u = TempData["usuario"] as Usuario;
+                        int cant = 0;
+                        if (Session["carrito"] != null)
+                        {
+                            foreach (Item i in (List<Item>)Session["carrito"])
+                            {
+                                cant += i.cant;
+                            }
+                        }
 
                     }
 
@@ -50,7 +58,7 @@
                 <li style=" display: flex; align-items: center; color: #9d9d9d;">
                     @Html.ActionLink(" ", "Shopping_Cart", "SecondLife", new { /*Id = item.IDPROJECT */}, 
                    new { @class = "bi bi-cart3 icon-car", @title = "Carrito",@style =" font-size:16px" })
-                    <span class="num-car" style="font-size:16px">(0)</span>
+                    <span class="num-car" style="font-size:16px">(@cant)</span>
                 </li>
                 </ul>
             </div>

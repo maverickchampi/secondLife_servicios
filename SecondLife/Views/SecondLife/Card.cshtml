@@ -33,7 +33,14 @@
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             Nueva tarjeta
         </button>
-        <a href="javascript:history.back()" class="btn btn-info">Regresar</a>
+        @{
+            Usuario u = TempData["usuario"] as Usuario;
+        }
+        @Html.ActionLink("Regresar", "Profile", new { id = u.id_usua, estado = true }, new
+        {
+            @class = "btn btn-info",
+            @style = "text-decoration:none;"
+        })
     </p>
     <table class="table">
         <tr>

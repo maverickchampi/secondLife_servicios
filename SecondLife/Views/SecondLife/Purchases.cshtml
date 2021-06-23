@@ -11,7 +11,12 @@
     <i class="bi bi-bag" style="font-size:35px"></i>
 
     <br />
-    <a href="javascript:history.back()" class="btn btn-info">Regresar</a>
+    @{
+        Usuario u = TempData["usuario"] as Usuario;
+    }
+    @Html.ActionLink("Regresar", "Profile", new { id = u.id_usua, estado = true }, new { 
+    @class="btn btn-info", @style = "text-decoration:none;" })
+
 
     <link id="detail_purchase" , href="~/Views/SecondLife/Detail_Purchases.cshtml" rel="import" />
 
