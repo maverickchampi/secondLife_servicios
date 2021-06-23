@@ -7,6 +7,19 @@
 <div style="min-height: calc(100vh - 110px);">
     <br />
     <h4 style="text-align:center;margin-left:-50px">Registrar Usuario</h4>
+    <div class="alert alert-info alert-dismissible show" role="alert">
+        @if (@ViewBag.mensaje == null)
+        {
+            <span>Complete sus datos</span>
+        }
+        else
+        {
+            @ViewBag.mensaje
+        }
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <hr />
 
     @using (Html.BeginForm())
@@ -100,12 +113,14 @@
         </div>
     }
 
-    <div>
-        <p>
-            @ViewBag.mensaje
-        </p>
-    </div>
 </div>
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    setTimeout(() => {
+        document.querySelector('.alert').classList.add('fade');
+        document.querySelector('.alert').classList.add('hidden');
+    },3000)
+</script>
