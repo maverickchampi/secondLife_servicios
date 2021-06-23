@@ -7,7 +7,8 @@ create database bd_servicio_venta
 go
 use bd_servicio_venta
 go
-
+set dateformat ymd
+go
 /*----------------categoria----------------*/
 create table tb_categoria ( 
 	id_categ int identity(1,1) not null,
@@ -1056,9 +1057,7 @@ as
 go
 /*-------------------------------------------------------------------------------*/
 /*
-select*from tb_boleta;
 select*from tb_categoria;
-select*from tb_departamento;
 select*from tb_detalle_boleta;
 select*from tb_boleta;
 select*from tb_distrito;
@@ -1066,7 +1065,6 @@ select*from tb_direccion;
 select*from tb_usuario;
 select*from tb_Tarjeta;
 select*from tb_producto;
-select*from tb_provincia;
 select*from tb_registro;
 select*from tb_rol;
 */
