@@ -15,6 +15,7 @@
         <div style="margin-left:75px;padding:10px;">
             @using (Html.BeginForm())
             {
+            <div style=" border: 4px solid rgba(0,0,0,0.1); padding:10px; border-radius: 10px; }">
                 <h5 style="background-color:rgba(0,0,0,0.1);font-size:20px;margin:0;padding:10px">Resumen</h5>
                 <p style="padding:5px">Subtotal: S/. @ViewBag.subtotal</p>
                 <p style="padding:5px">Descuento: S/. @ViewBag.descuento</p>
@@ -22,7 +23,7 @@
                 <p style="padding:5px;font-weight:bold">Total: S/. @ViewBag.total </p>
                 <p style="padding:5px">Direccion de envio: @ViewBag.direccion</p>
                 <p style="padding:5px">Tarjeta: @ViewBag.tarjeta</p>
-                <a href="javascript:history.back()" class="btn btn-danger">Regresar</a>
+                <a href="javascript:history.back()" class="btn btn-info">Regresar</a>
                 @Html.ActionLink("Confirmar", "Make_Pagament", new
                 {
                     subtotal = (double)@ViewBag.subtotal,
@@ -32,6 +33,7 @@
                     id_tarj = @ViewBag.id_tarj,
                     estado = true
                 }, new { @class = "btn btn-success" })
+            </div>
             }
 
         </div>
