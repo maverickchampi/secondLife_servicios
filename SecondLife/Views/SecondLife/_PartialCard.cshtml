@@ -17,6 +17,7 @@
         @Html.Hidden("id_direc", (string)ViewBag.id_direc)
         @Html.Hidden("estado", true)
     }
+
     <div
          style="  
     padding: 10px;
@@ -25,14 +26,15 @@
     display: flex;
     justify-content: center;">
 
-        <div class="form-horizontal" style="text-align:center">
+
+        <div class="form-horizontal">
             <h4>Tarjeta</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="form-group">
                 <label class="control-label col-md-2 label-form">Número</label>
-                <div class="col-md-10">
+                <div class="col-md-10" style="text-align:center;">
 
                     @Html.EditorFor(model => model.num_tarj, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.num_tarj, "", new { @class = "text-danger" })
@@ -41,7 +43,7 @@
 
             <div class="form-group">
                 <label class="control-label col-md-2 label-form">Fecha venc.</label>
-                <div class="col-md-10">
+                <div class="col-md-10" style="text-align:center;">
                     @Html.EditorFor(model => model.fec_venc, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.fec_venc, "", new { @class = "text-danger" })
                 </div>
@@ -49,14 +51,14 @@
 
             <div class="form-group">
                 <label class="control-label col-md-2 label-form">Cvv</label>
-                <div class="col-md-10">
+                <div class="col-md-10" style="text-align:center;">
                     @Html.EditorFor(model => model.cvv, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.cvv, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div style="margin-left:15px">
+                <div style="margin-left:15px;text-align:center;">
                     <input type="submit" value="Agregar" class="btn btn-success" />
                 </div>
             </div>
