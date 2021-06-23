@@ -639,7 +639,7 @@ namespace SecondLife.Controllers
             }
             catch (SqlException e)
             {
-                ViewBag.mensaje = e.Message;
+                ViewBag.mensaje = "Error al agregar direccion, vuelva a intentarlo";
             }
             finally
             {
@@ -1322,7 +1322,6 @@ namespace SecondLife.Controllers
         /*-------------------------------------------------------------------------------------------------*/
         /*-------------------------------------------Mensaje de error------------------------------------------------------*/
         /*-------------------------------------------------------------------------------------------------*/
-
         public ActionResult Error()
         {
             TempData["usuario"] = InicioSesion() as Usuario;
