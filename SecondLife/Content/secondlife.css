@@ -75,3 +75,13 @@
 .m-5{
     margin:5px 0;
 }
+.num-car:hover {
+    cursor:pointer;
+    color: #fff
+}
+.num-car:hover ~ .icon-car {
+    color: #fff !important
+}
+.icon-car:hover ~ .num-car{
+    color:#fff
+}
