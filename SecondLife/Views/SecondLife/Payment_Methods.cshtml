@@ -55,14 +55,14 @@
                         <p style="padding:5px;font-size:14px;font-style:italic;">Escoja su numero de tarjeta</p>
                         @Html.DropDownList("id_tarj", ViewBag.tarjeta as SelectList, new { @class = "btn btn-default", @style = "margin-bottom:5px" })
                     </div>
-                    <div style="margin-bottom:5px">
+                    <div style="margin-bottom:5px; margin-top:15px">
                         <a href="javascript:history.back()" class="btn btn-info">Regresar</a>
                         <button class="btn btn-primary">Pagar</button>
                     </div>
                 }
             </div>
         </div>
-        <div class="">
+        <div class="method_partial">
             @Html.Partial("_PartialCard")
         </div>
     </div>

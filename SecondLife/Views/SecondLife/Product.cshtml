@@ -79,8 +79,10 @@
                                 {
                                     @Html.Hidden("id", item.id_prod)
                                     @Html.Hidden("stock", item.stock)
-                                    @Html.TextBox("cant", 0, new { type = "number", min = "0", max = item.stock })
-                                    <input type="submit" value="Agregar" class="btn btn-primary" style="margin-bottom:10px" />
+                                    @Html.TextBox("cant", 0, new { type = "number", min = "0", max = item.stock,
+                                   style = "padding:5px; outline:none;"
+                               })
+                                    <input type="submit" value="Agregar" class="btn btn-primary" style="margin: 5px 0px;" />
                                 }
                             </div>
                         </div>
@@ -101,7 +103,7 @@
                       new { p = (int)ViewBag.p, id_categ = (int)ViewBag.id_categ, marca = (string)ViewBag.marca, flecha = "i" },
                       new { @class = "btn btn-primary" })
 
-                    @Html.Label(((int)ViewBag.p + 1).ToString())
+                    @Html.Label(((int)ViewBag.p + 1).ToString(), new { @style= "padding:5px; margin: 0;" })
 
                     @Html.ActionLink(">>",
                         "Product", "SecondLife",

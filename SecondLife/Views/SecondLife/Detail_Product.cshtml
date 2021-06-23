@@ -84,13 +84,19 @@
         </dl>
     </div>
 
-    <div style="margin-top:75px;margin-left:75px">
-        @using (Html.BeginForm("Detail_Product", "SecondLife", FormMethod.Post))
+    <div style="margin-top:75px;margin-left:75px;display:flex;  flex-direction:column">
+        @using (Html.BeginForm("Detail_Product", "SecondLife", FormMethod.Post, new { @style = "display:flec;" }))
         {
             @Html.Hidden("id", Model.id_prod)
             @Html.Hidden("stock", Model.stock)
             @Html.ActionLink("Regresar", "Product", null, new { @class = "btn btn-info" })
-            @Html.TextBox("cant", 0, new { type = "number", min = "0", max = Model.stock })
+            @Html.TextBox("cant", 0, new
+       {
+           type = "number",
+           min = "0",
+           max = Model.stock,
+           style = "padding:5px; outline:none; margin-left:70%"
+       }); 
             <input type="submit" value="Agregar" class="btn btn-primary" />
         }
     </div>
