@@ -587,7 +587,7 @@ namespace SecondLife.Controllers
                 i = cmd.ExecuteNonQuery();
                 if (i > 0)
                 {
-                    mensaje = "Usuario modificada";
+                    mensaje = "Usuario modificado";
                 }
             }
             catch (SqlException e)
