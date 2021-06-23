@@ -8,7 +8,19 @@
     <h2>Detalle de producto</h2>
 
     <!--mensaje-->
-    <p>@ViewBag.mensaje</p>
+    <div class="alert alert-info alert-dismissible show" role="alert">
+        @if (@ViewBag.mensaje == null)
+        {
+            <span>Los mejores productos los encuentra aquí</span>
+        }
+        else
+        {
+            @ViewBag.mensaje
+        }
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 
     <hr />
     <div style="display:flex;">
@@ -101,4 +113,11 @@
         }
     </div>
     </div>
+
+<script>
+    setTimeout(() => {
+        document.querySelector('.alert').classList.add('fade');
+        document.querySelector('.alert').classList.add('hidden');
+    },3000)
+</script>
 
