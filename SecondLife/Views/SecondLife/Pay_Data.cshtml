@@ -6,7 +6,8 @@
 }
 
 <div style="margin-top: 52px; min-height: calc(100vh - 162px);">
-    <h2>Datos del titular</h2>
+    <h2 style="text-align:center">Datos del titular</h2>
+    <hr />
     <div class="alert alert-info alert-dismissible show" role="alert">
         @if (@ViewBag.mensaje == null)
         {
@@ -20,30 +21,37 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <hr />
 
-    <div style="display:flex;">
-        <div style="margin-right: 100px;border: 1px solid #000;width:250px;border-radius:5px">
-            <div>
+    <div style="display:flex; flex-direction:row; align-content:center; justify-content:center">
+        <div class="pay_container">
+            <div class="pay_detail">
                 <h5 style="background-color:rgba(0,0,0,0.1);font-size:20px;margin:0;padding:10px">Total a pagar</h5>
-                <p style="padding:10px 5px 5px">Envio : S/.0 (GRATIS)</p>
-                <p style="padding:5px">Subtotal: S/. @ViewBag.subtotal </p>
-                <p style="padding:5px">Descuento: S/. @ViewBag.descuento</p>
+                <p style="padding:10px 5px 5px; margin:0">Envio : S/.0 (GRATIS)</p>
+                <p style="padding: 5px; margin: 0">Subtotal: S/. @ViewBag.subtotal </p>
+                <p style="padding: 5px; margin: 0">Descuento: S/. @ViewBag.descuento</p>
                 <p style="padding:5px;font-weight:bold">Total: S/. @ViewBag.total</p>
-                <p style="padding:5px">Usuario: @ViewBag.usuario</p>
-                <p style="padding:5px">Fecha: @ViewBag.actual</p>
+            </div>
+
+            <div class="pay_user">
+                <h4 style="padding:5px">Datos del usuario</h4>
+                <p style="padding:5px; margin:0">Usuario: @ViewBag.usuario</p>
+                <p style="padding: 5px; margin: 0">Fecha: @ViewBag.actual</p>
             </div>
 
             <div>
                 @using (Html.BeginForm("Payment_Methods", "SecondLife", FormMethod.Get))
                 {
-                    <div>
-                        <p style="padding:5px;font-size:14px;font-style:italic;">Escoja su direccion de envio</p>
+                    <div style="margin-bottom:20px">
+
                         @Html.Hidden("subtotal", (double)@ViewBag.subtotal)
                         @Html.Hidden("descuento", (double)@ViewBag.descuento)
                         @Html.Hidden("total", (double)@ViewBag.total)
                         @Html.Hidden("estado", true)
-                        @Html.DropDownList("id_direc", ViewBag.direccion as SelectList, new { @class = "btn btn-default", @style = "margin-bottom:5px" })
+                        <p style="padding:5px;font-size:14px;font-style:italic;margin:0">
+                            Escoja su direccion de envio
+                            @Html.DropDownList("id_direc", ViewBag.direccion as SelectList, new { @class = "btn btn-default", @style = "margin-bottom:5px" })
+                        </p>
+
                     </div>
                     <a href="javascript:history.back()" class="btn btn-danger">Regresar</a>
                     <button class="btn btn-primary">Siguiente</button>
@@ -51,7 +59,7 @@
             </div>
         </div>
 
-        <div style="width:300px; border:1px solid black;padding:0 10px;border-radius:5px">
+        <div class="pay_partial">
             @Html.Partial("_PartialAddress", new Direccion())
         </div>
     </div>

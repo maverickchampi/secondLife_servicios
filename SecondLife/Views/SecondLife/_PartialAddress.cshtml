@@ -11,48 +11,47 @@
         @Html.Hidden("total", (double)@ViewBag.total)
         @Html.Hidden("estado", true)
     }
-    <div class="form-horizontal">
-        <h4>Direccion</h4>
-        <hr />
+<div class="form-horizontal" style="text-align:center">
+    <h3>Dirección</h3>
+    <hr />
 
-        <div class="form-group">
-            <label class="control-label col-md-2 label-form">Descripción</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.desc_direc, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.desc_direc, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2 label-form">Referencia</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.referencia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.referencia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2 label-form">Etiqueta</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.etiqueta, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.etiqueta, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2 label-form">Distrito</label>
-            <div class="col-md-10">
-                @Html.DropDownList("id_dist", ViewBag.distrito as SelectList)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div style="margin-left:15px">
-
-                <input type="submit" value="Agregar" class="btn btn-success" />
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2 label-form">Descripción</label>
+        <div class="col-md-10 col-lg-12">
+            @Html.EditorFor(model => model.desc_direc, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.desc_direc, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2 label-form">Referencia</label>
+        <div class="col-md-10 col-lg-12 ">
+            @Html.EditorFor(model => model.referencia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.referencia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-12 col-lg-12 label-form">Etiqueta</label>
+        <div class="col-md-10 col-lg-12">
+            @Html.EditorFor(model => model.etiqueta, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.etiqueta, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2 label-form">Distrito</label>
+        <div class="col-md-10 col-lg-12">
+            @Html.DropDownList("id_dist", ViewBag.distrito as SelectList, new { @class = "btn btn-default", style = "width: 100%;" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div style="margin-left:15px">
+            <input style=" padding: 7px 40px;" type="submit" value="Agregar" class="btn btn-success p-5" />
+        </div>
+    </div>
+</div>
 }
 
 @section Scripts {
