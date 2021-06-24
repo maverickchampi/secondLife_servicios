@@ -2,8 +2,9 @@
 
 ![](https://i.ibb.co/F3CCM91/logo-secondlife.png)
 
+[Documentación en carpeta Drive]( https://drive.google.com/drive/folders/1U7ExyxtLCfaWw7kIFszA9udjHHQlsCH-?usp=sharing "Informes y ppt")
+
 El proyecto consiste en una aplicación web para la venta de equipos tecnológicos, en esta aplicación el cliente podrá comprar productos de forma segura y legal.
-Proyecto realizado para la institución Cibertec del curso de Desarrollo de servicios web. Sección T5BB.
 
 ## Objetivos
 
@@ -20,5 +21,7 @@ Proyecto realizado para la institución Cibertec del curso de Desarrollo de serv
 
 # Diagrama Entidad Relación
 ![](https://i.ibb.co/8gwSgYB/bd.png)
+
+
 
 
