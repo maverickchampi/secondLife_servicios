@@ -1,8 +1,6 @@
 # Second Life
 
-![](https://i.ibb.co/F3CCM91/logo-secondlife.png)
-
-[Documentación en carpeta Drive]( https://drive.google.com/drive/folders/1U7ExyxtLCfaWw7kIFszA9udjHHQlsCH-?usp=sharing "Informes y ppt")
+![](https://i.ibb.co/NCTjMms/logo-icon.png)
 
 El proyecto consiste en una aplicación web para la venta de equipos tecnológicos, en esta aplicación el cliente podrá comprar productos de forma segura y legal.
 
