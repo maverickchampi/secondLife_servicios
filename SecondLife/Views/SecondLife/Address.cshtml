@@ -56,7 +56,7 @@
                 Etiqueta
             </th>
             <th>
-                Id Distrito
+                Distrito
             </th>
             <th></th>
         </tr>
@@ -76,7 +76,8 @@
                         @Html.DisplayFor(modelItem => item.etiqueta)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.id_dist)
+                       @((ViewBag.distritos as List<Distrito>).Where(x=>x.id_dist == item.id_dist).FirstOrDefault().nom_dist)
+                       
                     </td>
                     <td>
                         @Html.ActionLink("Editar", "Edit_Address", new { id = item.id_direc }, new { @class = "btn btn-info" })

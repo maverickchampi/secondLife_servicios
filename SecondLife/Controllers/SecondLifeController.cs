@@ -610,7 +610,7 @@ namespace SecondLife.Controllers
             {
                 ViewBag.mensaje = mensaje;
             }
-
+            ViewBag.distritos = lista_distrito().ToList();
             ViewBag.distrito = new SelectList(lista_distrito().ToList(), "id_dist", "nom_dist");
             return View(lista_direccion(u.id_usua));
         }
